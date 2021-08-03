@@ -1,0 +1,186 @@
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.exe.config
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.exe
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.pdb
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\MainWindow.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\App.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM_MarkupCompile.cache
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM_MarkupCompile.lref
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\MainWindow.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.g.resources
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.Properties.Resources.resources
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.GenerateResource.cache
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.CoreCompileInputs.cache
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.exe
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.pdb
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MainView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SaleView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MainView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SaleView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\App.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\ResourceDictionaries\MainResourceDictionary.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignColors.dll
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.dll
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignColors.pdb
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.pdb
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.xml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.CopyComplete
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoadingView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoginView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoadingView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoginView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientAddView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientOrderView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\PaymentView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientAddView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientOrderView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\PaymentView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductResidueView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductResidueView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarQoldiqView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarQoldiqView.baml
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QoldiqSozlamarView.g.cs
+E:\Projects\DomMVVM\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QoldiqSozlamarView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.exe.config
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.exe
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\DomStroyB2C_MVVM.pdb
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\BouncyCastle.Crypto.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Google.Protobuf.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Compression.LZ4.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Compression.LZ4.Streams.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Hash.xxHash.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignColors.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MySql.Data.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Buffers.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Memory.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\wpftoolkit.extended.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Zstandard.Net.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Ubiety.Dns.Core.dll
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Google.Protobuf.pdb
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Google.Protobuf.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Compression.LZ4.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Compression.LZ4.Streams.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\K4os.Hash.xxHash.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignColors.pdb
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Microsoft.Expression.Interactions.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\MySql.Data.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Buffers.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Memory.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\ResourceDictionaries\MainResourceDictionary.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\MainWindow.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\BuyurtmalarTarixiView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\BuyurtmalarView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ChashDeskView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientOrderView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsPayHistoryView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsProductView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtPaymentView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DoingInventoryView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FakturaReportView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FiliallarBazasiView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FReportProductView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\InventoryView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoadingView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\Loading\LoadingWindow.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\Loading\LoadingWindowGif.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoginView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MainView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MissedProductsView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\BasketView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\CliantAddView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\NewProductMovementView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\OrdersView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\PaymentView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductMovementView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductResidueView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductReturnView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QoldiqSozlamarView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueBuyurtmaView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueNavbatlarView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\RecieveFakturaView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportHodimlarView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportMaxsulotView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportOtkazView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportSavdoView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\RepOtkazProductView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SaleView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SeeEmployeeView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SeeFakturaView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SettingsView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarAnalizView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarQoldiqView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\App.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM_MarkupCompile.cache
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM_MarkupCompile.lref
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\App.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\MainWindow.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\BuyurtmalarTarixiView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\BuyurtmalarView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ChashDeskView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ClientOrderView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsPayHistoryView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsProductView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtorsView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DebtPaymentView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\DoingInventoryView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FakturaReportView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FiliallarBazasiView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\FReportProductView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\InventoryView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoadingView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\Loading\LoadingWindow.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\Loading\LoadingWindowGif.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\LoginView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MainView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\MissedProductsView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\BasketView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\CliantAddView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\NewProductMovementView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\OrdersView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\PaymentView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductMovementView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductResidueView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ProductReturnView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QoldiqSozlamarView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueBuyurtmaView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueNavbatlarView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\QueueView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\RecieveFakturaView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportHodimlarView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportMaxsulotView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportOtkazView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportSavdoView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ReportView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\RepOtkazProductView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SaleView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SeeEmployeeView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SeeFakturaView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\SettingsView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarAnalizView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\TovarQoldiqView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.g.resources
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.Properties.Resources.resources
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.GenerateResource.cache
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.CoreCompileInputs.cache
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.CopyComplete
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.exe
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.pdb
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\ComentView.g.cs
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\ComentView.baml
+C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.AssemblyReference.cache

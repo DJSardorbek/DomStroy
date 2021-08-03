@@ -1,0 +1,552 @@
+﻿<Window x:Class="DomStroyB2C_MVVM.Views.DebtPaymentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+        mc:Ignorable="d"
+        Title="PaymentView" Height="700" Width="800" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="btnPavment">
+            <Setter Property="BorderBrush" Value="#283654"/>
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            CornerRadius="10"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="2">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="txtText">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#283654"/>
+            <Setter Property="Background" Value="#FFFFFF"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer>
+        <Border CornerRadius="10" Background="#FFFFFF"
+            BorderBrush="#C0C0C0" BorderThickness="0.5">
+            <Grid>
+                
+                <!--First column for choosing payment type-->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--First row for close button-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                        <Button x:Name="btnMaxsimaze" Click="btnMaxsimaze_Click"
+                                    Margin="695 10 0 0" VerticalAlignment="Center">
+                            <Image Source="../Images/Maximize.png" Width="30" Height="30"/>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="35"/>
+                                    <Setter Property="Height" Value="35"/>
+                                    <Setter Property="Margin" Value="0 15 20 0"/>
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    <Setter Property="BorderBrush" Value="White"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="AntiqueWhite"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button x:Name="btnClose" Click="btnClose_Click" VerticalAlignment="Center"
+                                    Margin="10 10 0 0">
+                            <Image Source="../Images/Close.png" Width="30" Height="30"/>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="35"/>
+                                    <Setter Property="Height" Value="35"/>
+                                    <Setter Property="Margin" Value="0 15 20 0"/>
+                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                    <Setter Property="BorderBrush" Value="White"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="AntiqueWhite"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+
+                    <!--Naqd pul, plastik, nasiya-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button Style="{StaticResource btnPavment}" Margin="30,30,10,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="False" Grid.Row="0" Margin="190 -10 0 0" BorderThickness="2">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="BorderBrush" Value="#283654"/>
+                                            <Setter Property="BorderThickness" Value="1.5"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+
+                                <Image Grid.Row="1" Source="../Images/PavCash.png" Height="50" Width="60" Margin="0 5 0 5"/>
+                                <TextBlock Grid.Row="2" Text="Naqd pul" Foreground="#283654" FontFamily="Segoe UI"
+                                       FontSize="18px" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Margin="0 5 0 0" FontWeight="SemiBold"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Style="{StaticResource btnPavment}" Margin="12,30,10,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="False" Grid.Row="0" Margin="190,-10,0,0" BorderThickness="2">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="BorderBrush" Value="#283654"/>
+                                            <Setter Property="BorderThickness" Value="1.5"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+
+                                <Image Grid.Row="1" Source="../Images/PavCard.png" Height="50" Width="60" Margin="0 5 0 5"/>
+                                <TextBlock Grid.Row="2" Text="Plastik" Foreground="#283654" FontFamily="Segoe UI"
+                                       FontSize="18px" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Margin="0 5 0 0" FontWeight="SemiBold"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Style="{StaticResource btnPavment}" Margin="12,30,10,0" Height="130">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Imtiyozli to'lov" FontFamily="Segoe UI" FontSize="12px" Foreground="#283654"
+                                       Margin="-95 -65 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" TextAlignment="Center"
+                                       Background="White" FontWeight="SemiBold"/>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Width="180">
+                                    <TextBlock Text="Ball" FontFamily="Segoe UI" FontSize="20px" Foreground="#283654" FontWeight="SemiBold"/>
+                                    <CheckBox IsChecked="False"
+                                          Margin="130 0 0 0" VerticalAlignment="Center" BorderThickness="2">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
+                                                <Setter Property="BorderBrush" Value="#283654"/>
+                                                <Setter Property="BorderThickness" Value="1.5"/>
+                                            </Style>
+                                        </CheckBox.Style>
+                                    </CheckBox>
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" Width="180" Margin="0 10 0 0">
+                                    <TextBlock Text="Discount karta" FontFamily="Segoe UI" FontSize="20px" Foreground="#283654" FontWeight="SemiBold"/>
+                                    <CheckBox IsChecked="False"
+                                          Margin="30 0 0 0" VerticalAlignment="Center" BorderThickness="2">
+                                        <CheckBox.Style>
+                                            <Style TargetType="CheckBox">
+                                                <Setter Property="BorderBrush" Value="#283654"/>
+                                                <Setter Property="BorderThickness" Value="1.5"/>
+                                            </Style>
+                                        </CheckBox.Style>
+                                    </CheckBox>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <!--Pul utkazish, valyuta qabul, Chegirma sozlamalari-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="2">
+                        <Button Style="{StaticResource btnPavment}" Margin="30,30,10,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="False" Grid.Row="0" Margin="190,-10,0,0" BorderThickness="2">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="BorderBrush" Value="#283654"/>
+                                            <Setter Property="BorderThickness" Value="1.5"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+
+                                <Image Grid.Row="1" Source="../Images/PavTransfer.png" Height="50" Width="60" Margin="0 5 0 5"/>
+                                <TextBlock Grid.Row="2" Text="Pul o'tkaziash" Foreground="#283654" FontFamily="Segoe UI"
+                                       FontSize="18px" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Margin="0 5 0 0" FontWeight="SemiBold"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Style="{StaticResource btnPavment}" Margin="12,30,10,0">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <CheckBox IsChecked="False" Grid.Row="0" Margin="190,-10,0,0" BorderThickness="2">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="BorderBrush" Value="#283654"/>
+                                            <Setter Property="BorderThickness" Value="1.5"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+
+                                <Image Grid.Row="1" Source="../Images/PavValyuta.png" Height="50" Width="60" Margin="0 5 0 5"/>
+                                <TextBlock Grid.Row="2" Text="Valyuta qabul" Foreground="#283654" FontFamily="Segoe UI"
+                                       FontSize="18px" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                       Margin="0 5 0 0" FontWeight="SemiBold"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Style="{StaticResource btnPavment}" Margin="12,30,10,0" Height="120">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition  Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Text="Qarzdorlik" FontFamily="Segoe UI" FontSize="12px" Foreground="#283654"
+                                       Margin="-120 -75 0 0" VerticalAlignment="Center" HorizontalAlignment="Center" Width="70" TextAlignment="Center"
+                                       Background="White" FontWeight="SemiBold"/>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                    Width="220" Margin="0 20 0 0">
+                                    <TextBlock Style="{StaticResource txtText}" Text="uz" FontSize="20px"
+                                       HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                                    <TextBlock Text="1 000 000 000" Style="{StaticResource txtText}" FontSize="20px" Margin="20 0 0 0"/>
+                                </StackPanel>
+
+                                <!--Third row for display sale dollar-->
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" 
+                                    Width="220" Margin="0 20 0 0">
+                                    <TextBlock Style="{StaticResource txtText}" Text="$ " FontSize="20px"
+                                       HorizontalAlignment="Left" Margin="20 0 0 0"/>
+                                    <TextBlock Text="10" Style="{StaticResource txtText}" FontSize="20px" Margin="20 0 0 0"/>
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+
+                    <!--Skidka %-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,20,0,0">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource txtPavment}" Width="230" Height="50" Margin="30 0 10 0"
+                                 />
+                            <TextBlock Text="Umumiy dollar" FontFamily="Segoe UI" FontSize="12px" Foreground="#283654" FontWeight="SemiBold"
+                                   Margin="-85 -100 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Background="White" Width="90" TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Margin="10 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource txtPavment}" Width="230" Height="50" />
+                            <TextBlock Text="Umumiy so'm" FontFamily="Segoe UI" FontSize="12px" Foreground="#283654" FontWeight="SemiBold"
+                                   Margin="-115 -100 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Background="White" Width="80" TextAlignment="Center"/>
+                        </StackPanel>
+
+                        
+                    </StackPanel>
+
+                    <!--Diskount karta ball-->
+                    <StackPanel Orientation="Horizontal" Grid.Row="4" Margin="0,20,0,0">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource txtPavment}" Width="230" Height="50" Margin="30 0 10 0"
+                                 />
+                            <StackPanel Orientation="Horizontal" Background="White" Width="100" Margin="-70 -100 0 0"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <CheckBox IsChecked="False"
+                                           VerticalAlignment="Center" BorderThickness="2">
+                                    <CheckBox.Style>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="BorderBrush" Value="#283654"/>
+                                            <Setter Property="BorderThickness" Value="1.5"/>
+                                            <Setter Property="Margin" Value="10 0 0 0"/>
+                                        </Style>
+                                    </CheckBox.Style>
+                                </CheckBox>
+                                <TextBlock Text="Ball" Style="{StaticResource txtText}" FontSize="12px" Margin="10 0 0 0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Margin="10 0 10 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource txtPavment}" Width="230" Height="50" />
+                            <TextBlock Text="Uz" FontFamily="Segoe UI" FontSize="12px" Foreground="#283654" FontWeight="SemiBold"
+                                   Margin="-175 -100 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   Background="White" Width="30" TextAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Style="{StaticResource txtPavment}" Width="230" Height="50" Margin="10 0 0 0"/>
+                            <TextBlock Text="$ " Width="30" TextAlignment="Center" Style="{StaticResource txtText}" Margin="-175 -100 0 0"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Grid Grid.Row="5" VerticalAlignment="Center" HorizontalAlignment="Left"
+                      Margin="30 15 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Stack Naqd-->
+                        <StackPanel Grid.Row="0">
+                            <TextBox Style="{StaticResource txtPavment}" Height="55" Width="730"/>
+                            <Image Source="../Images/PavCashs.png" Width="40" Height="30" Margin="650 -55 0 0"/>
+                        </StackPanel>
+
+                        <!--Stack Karta-->
+                        <StackPanel Grid.Row="1" Margin="0 15 0 0">
+                            <TextBox Style="{StaticResource txtPavment}" Height="55" Width="730"/>
+                            <Image Source="../Images/PavCards.png" Width="40" Height="30" Margin="650 -55 0 0"/>
+                        </StackPanel>
+
+                        <!--Stack Pul o'tkazish-->
+                        <StackPanel Grid.Row="2" Margin="0 15 0 0" Visibility="Collapsed">
+                            <TextBox Style="{StaticResource txtPavment}" Height="55" Width="730"/>
+                            <Image Source="../Images/PavTransfers.png" Width="40" Height="30" Margin="650 -55 0 0"/>
+                        </StackPanel>
+
+                        <!--Stack Valyuta qabul-->
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0 15 0 0" x:Name="StackCurrency" Visibility="Visible">
+                            <Button Height="50" Width="730" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="txtValSum" 
+                                     Margin="0 0 10 0" 
+                                     IsReadOnly="True"
+                                     Text="0">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                                <Setter Property="OverridesDefaultStyle"
+                                         Value="True" />
+                                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                                <Setter Property="MinWidth"
+                                         Value="300" />
+                                                <Setter Property="MinHeight"
+                                        Value="40" />
+                                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                <Setter Property="FontSize" Value="16px"/>
+                                                <Setter Property="CaretBrush" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                                            <Border Name="Border"
+                                                    CornerRadius="5"
+                                                    Padding="30 10 10 10"
+                                                    BorderThickness="1">
+                                                                <Border.Background>
+                                                                    <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                                                                </Border.Background>
+                                                                <Border.BorderBrush>
+                                                                    <SolidColorBrush Color="#455A64" />
+                                                                </Border.BorderBrush>
+                                                                <ScrollViewer Margin="0"
+                                                    x:Name="PART_ContentHost" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <TextBlock Width="50" Text="So'mda" Foreground="#283654" Margin="-550 -10 0 0" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="12px" TextAlignment="Center" 
+                                           HorizontalAlignment="Center" Background="#FFFFFF" FontWeight="SemiBold"/>
+                                    <TextBox x:Name="txtKurs">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                                <Setter Property="OverridesDefaultStyle"
+                                         Value="True" />
+                                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                                <Setter Property="MinWidth"
+                                         Value="150" />
+                                                <Setter Property="MinHeight"
+                                        Value="40" />
+                                                <Setter Property="MaxWidth"
+                                                Value="100"/>
+                                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                <Setter Property="FontSize" Value="16px"/>
+                                                <Setter Property="CaretBrush" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                                            <Border Name="Border"
+                                                    CornerRadius="5"
+                                                    Padding="30 10 10 10"
+                                                    BorderThickness="1">
+                                                                <Border.Background>
+                                                                    <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                                                                </Border.Background>
+                                                                <Border.BorderBrush>
+                                                                    <SolidColorBrush Color="#455A64" />
+                                                                </Border.BorderBrush>
+                                                                <ScrollViewer Margin="0"
+                                                    x:Name="PART_ContentHost" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <TextBlock Width="35" Text="Kurs" Foreground="#283654" Margin="-250 -10 0 0" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="12px" TextAlignment="Center" 
+                                           HorizontalAlignment="Center" Background="#FFFFFF" FontWeight="SemiBold"/>
+                                    <TextBox 
+                                x:Name="txtCurrency" 
+                                Width="250" 
+                                Margin="10 0 0 0">
+                                        <TextBox.Style>
+                                            <Style TargetType="{x:Type TextBox}">
+                                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                                <Setter Property="OverridesDefaultStyle"
+                                         Value="True" />
+                                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                                <Setter Property="MinWidth"
+                                         Value="120" />
+                                                <Setter Property="MinHeight"
+                                        Value="40" />
+                                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                                <Setter Property="Foreground" Value="White"/>
+                                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                                <Setter Property="FontSize" Value="16px"/>
+                                                <Setter Property="CaretBrush" Value="White"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                                                            <Border Name="Border"
+                                                    CornerRadius="5"
+                                                    Padding="30 10 10 10"
+                                                    BorderThickness="1">
+                                                                <Border.Background>
+                                                                    <SolidColorBrush Color="{DynamicResource ControlLightColor}" />
+                                                                </Border.Background>
+                                                                <Border.BorderBrush>
+                                                                    <SolidColorBrush Color="#455A64" />
+                                                                </Border.BorderBrush>
+                                                                <ScrollViewer Margin="0"
+                                                    x:Name="PART_ContentHost" />
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </TextBox.Style>
+                                    </TextBox>
+                                    <Image Source="../Images/PavValyutas.png" Width="28" Height="28" Margin="-55 0 13 0"/>
+
+
+                                </StackPanel>
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background" Value="#FFFFFF"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="#283654"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border
+                                            CornerRadius="10"
+                                            BorderThickness="2"
+                                            Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}">
+                                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                                                        </ContentPresenter>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+
+                    <!--To'lov Button row-->
+                    <Grid Grid.Row="6" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="30 15 0 0">
+                        <Button Style="{StaticResource btnSell}" Width="730" Height="60" Margin="0 0 0 30">
+                            <TextBlock Text="To'lov" Background="Transparent" Foreground="White" FontFamily="Segoe UI"
+                                       FontSize="22px" />
+                        </Button>
+                    </Grid>
+
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollViewer>
+</Window>

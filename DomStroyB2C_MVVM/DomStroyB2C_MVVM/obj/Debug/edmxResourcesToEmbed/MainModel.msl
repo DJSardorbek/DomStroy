@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="domstroyModelStoreContainer" CdmEntityContainer="domstroyEntities1">
+    <EntitySetMapping Name="branches">
+      <EntityTypeMapping TypeName="domstroyModel.branch">
+        <MappingFragment StoreEntitySet="branch">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="is_b2b" ColumnName="is_b2b" />
+          <ScalarProperty Name="is_b2c" ColumnName="is_b2c" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="carts">
+      <EntityTypeMapping TypeName="domstroyModel.cart">
+        <MappingFragment StoreEntitySet="cart">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="product" ColumnName="product" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="shop" ColumnName="shop" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="domstroyModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="domstroyModel.client">
+        <MappingFragment StoreEntitySet="client">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="phone_1" ColumnName="phone_1" />
+          <ScalarProperty Name="phone_2" ColumnName="phone_2" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="birth_date" ColumnName="birth_date" />
+          <ScalarProperty Name="discount_card" ColumnName="discount_card" />
+          <ScalarProperty Name="return_date" ColumnName="return_date" />
+          <ScalarProperty Name="loan_sum" ColumnName="loan_sum" />
+          <ScalarProperty Name="loan_dollar" ColumnName="loan_dollar" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="ball" ColumnName="ball" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="currencies">
+      <EntityTypeMapping TypeName="domstroyModel.currency">
+        <MappingFragment StoreEntitySet="currency">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="real_currency" ColumnName="real_currency" />
+          <ScalarProperty Name="ball_price" ColumnName="ball_price" />
+          <ScalarProperty Name="selling_currenry" ColumnName="selling_currenry" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="discountcards">
+      <EntityTypeMapping TypeName="domstroyModel.discountcard">
+        <MappingFragment StoreEntitySet="discountcard">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="card" ColumnName="card" />
+          <ScalarProperty Name="bonus_sum" ColumnName="bonus_sum" />
+          <ScalarProperty Name="bonus_dollar" ColumnName="bonus_dollar" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="masalas">
+      <EntityTypeMapping TypeName="domstroyModel.masala">
+        <MappingFragment StoreEntitySet="masala">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="salary" ColumnName="salary" />
+          <ScalarProperty Name="manager_id" ColumnName="manager_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="domstroyModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="measurement" ColumnName="measurement" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="section" ColumnName="section" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="barcode" ColumnName="barcode" />
+          <ScalarProperty Name="producer" ColumnName="producer" />
+          <ScalarProperty Name="deliver" ColumnName="deliver" />
+          <ScalarProperty Name="currency" ColumnName="currency" />
+          <ScalarProperty Name="cost" ColumnName="cost" />
+          <ScalarProperty Name="selling_price" ColumnName="selling_price" />
+          <ScalarProperty Name="expire_date" ColumnName="expire_date" />
+          <ScalarProperty Name="category" ColumnName="category" />
+          <ScalarProperty Name="ball" ColumnName="ball" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sections">
+      <EntityTypeMapping TypeName="domstroyModel.section">
+        <MappingFragment StoreEntitySet="section">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sends">
+      <EntityTypeMapping TypeName="domstroyModel.send">
+        <MappingFragment StoreEntitySet="send">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shops">
+      <EntityTypeMapping TypeName="domstroyModel.shop">
+        <MappingFragment StoreEntitySet="shop">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="section" ColumnName="section" />
+          <ScalarProperty Name="seller" ColumnName="seller" />
+          <ScalarProperty Name="client" ColumnName="client" />
+          <ScalarProperty Name="card" ColumnName="card" />
+          <ScalarProperty Name="transfer" ColumnName="transfer" />
+          <ScalarProperty Name="cash_sum" ColumnName="cash_sum" />
+          <ScalarProperty Name="cash_dollar" ColumnName="cash_dollar" />
+          <ScalarProperty Name="loan_sum" ColumnName="loan_sum" />
+          <ScalarProperty Name="loan_dollar" ColumnName="loan_dollar" />
+          <ScalarProperty Name="discount_sum" ColumnName="discount_sum" />
+          <ScalarProperty Name="discount_dollar" ColumnName="discount_dollar" />
+          <ScalarProperty Name="traded_at" ColumnName="traded_at" />
+          <ScalarProperty Name="status_server" ColumnName="status_server" />
+          <ScalarProperty Name="status_payment" ColumnName="status_payment" />
+          <ScalarProperty Name="queue" ColumnName="queue" />
+          <ScalarProperty Name="debt" ColumnName="debt" />
+          <ScalarProperty Name="book" ColumnName="book" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shopids">
+      <EntityTypeMapping TypeName="domstroyModel.shopid">
+        <MappingFragment StoreEntitySet="shopid">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="shop" ColumnName="shop" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="staffs">
+      <EntityTypeMapping TypeName="domstroyModel.staff">
+        <MappingFragment StoreEntitySet="staff">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="token" ColumnName="token" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

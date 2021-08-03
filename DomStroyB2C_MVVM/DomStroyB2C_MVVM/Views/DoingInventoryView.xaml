@@ -1,0 +1,752 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.DoingInventoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250">
+    
+    <Grid Background="#EDEDED">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--First row for creating Inventory-->
+        <Grid Grid.Row="0" Background="#4D638C">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--first column for display employee-->
+            <StackPanel Orientation="Horizontal">
+                <Button Command="{Binding UpdateViewCommand}" CommandParameter="Inventory">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="40"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="25 0 0 0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#283654"/>
+                                <Setter Property="BorderBrush" Value="#283654"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="../Images/imageback.png" Width="30" Height="30"/>
+                </Button>
+                <Image Source="../Images/employee.png" Width="27" Height="27" Margin="20 0 0 0"/>
+                <ComboBox SelectedIndex="0" Style="{StaticResource ComboBoxTest1}" Width="180" Height="35" Margin="10 0 0 0">
+                    <ComboBoxItem >
+                        <TextBlock Text="Jahongir Karimov"/>
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <!--second column for search-->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="360"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!--first column for searching from store-->
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBox Tag="Do'kon/Ombordan izlash..." Style="{StaticResource txtSearch}"
+                             MaxWidth="300"
+                     Height="35" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                     Margin="0 0 20 0" Padding="30 5 50 5"/>
+                    <Image Source="../Images/search.png" Height="20" Width="20"
+                       VerticalAlignment="Center" 
+                       Margin="-600 0 0 0"/>
+                    <Button Style="{StaticResource btnNoneBorder}" Width="50" Margin="-10 0 0 0">
+                        <Image Source="../Images/refresh.png" Width="40" Height="40"/>
+                    </Button>
+                </StackPanel>
+
+                <!--second column for searching from list-->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" HorizontalAlignment="Right" Margin="0 0 20 0">
+                        <TextBox Style="{StaticResource txtSearch}" Tag="Ro'yhatdan izlash..." MaxWidth="300"
+                     Height="35" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                 Width="Auto"
+                     Margin="0 0 20 0" Padding="30 5 50 5"/>
+                        <Image Source="../Images/search.png" Height="20" Width="20"
+                       VerticalAlignment="Center" 
+                       Margin="-280 0 0 0"/>
+                    </Grid>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button Style="{StaticResource btnNoneBorder}" Width="50" 
+                                Command="{Binding UpdateViewCommand}" CommandParameter="MissedProducts">
+                            <Image Source="../Images/checkList.png" Width="40" Height="40"/>
+                        </Button>
+
+                        <Button Style="{StaticResource btnNoneBorder}" Width="50" >
+                            <Image Source="../Images/stopInventory.png" Width="40" Height="40"/>
+                        </Button>
+
+                        <Button Style="{StaticResource btnNoneBorder}" Width="50" >
+                            <StackPanel>
+                                <Image Source="../Images/editInventory.png" Width="40" Height="30"/>
+                                <Image Source="../Images/editInventory1.png" Width="40" Height="10"/>
+                            </StackPanel>
+                            
+                        </Button>
+                    </StackPanel>
+                    
+                </Grid>
+
+            </Grid>
+        </Grid>
+
+        <!--Second row for summa-->
+        <Grid Grid.Row="1" Margin="20 13 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--First column for application summa-->
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="5 0 0 0" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Summa so'm" Margin="-150 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="1 000 000">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#009BDE"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#009BDE"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 5 0 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="0 0 0 5" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Summa dollar" Margin="-140 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="100">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#009BDE"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#009BDE"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 0 5 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+            </StackPanel>
+
+            <!--First column for real summa-->
+            <StackPanel Grid.Column="1">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="5 0 0 0" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Omborda so'm" Margin="-150 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="1 000 000">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#92DA71"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#92DA71"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 5 0 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="0 0 0 5" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Omborda dollar" Margin="-140 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="100">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#92DA71"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#92DA71"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 0 5 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+            </StackPanel>
+
+            <!--First column for difference summa-->
+            <StackPanel Grid.Column="2">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="5 0 0 0" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Kamomad so'm" Margin="-150 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="1 000 000">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#F57070"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#F57070"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 5 0 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Border CornerRadius="0 0 0 5" Width="140" Height="36" VerticalAlignment="Center" Background="#4D638C"/>
+                    <TextBlock Text="Kamomad dollar" Margin="-140 -5 0 0" VerticalAlignment="Center" HorizontalAlignment="Center"
+                            FontFamily="Segoe UI" FontSize="18" Foreground="White"/>
+                    <TextBox Width="240" Height="36" Text="100">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="SnapsToDevicePixels"
+                                        Value="True" />
+                                <Setter Property="OverridesDefaultStyle"
+                                        Value="True" />
+                                <Setter Property="KeyboardNavigation.TabNavigation"
+                                        Value="None" />
+                                <Setter Property="FocusVisualStyle"
+                                        Value="{x:Null}" />
+                                <Setter Property="MinWidth"
+                                        Value="130" />
+                                <Setter Property="MinHeight"
+                                        Value="31" />
+                                <Setter Property="AllowDrop"
+                                        Value="true" />
+                                <Setter Property="Foreground" Value="#F57070"/>
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="FontSize" Value="15px"/>
+                                <Setter Property="CaretBrush" Value="#F57070"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type TextBoxBase}">
+
+                                            <Border Name="Border"
+                                                CornerRadius="0 0 5 0"
+                                                Padding="10 5 10 5"
+                                                BorderThickness="1">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="#FFFFFF" />
+                                                </Border.Background>
+                                                <Border.BorderBrush>
+                                                    <SolidColorBrush Color="#C4C4C4" />
+                                                </Border.BorderBrush>
+                                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+                                            </Border>
+
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+        <!--Third row for -->
+        <Grid Grid.Row="2" Margin="0 5 0 0">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridDoingInventory" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                          
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="20 0 20 0">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Chek ID" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Nomi" Binding="{Binding name}" IsReadOnly="True" Width="150*"/>
+
+
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding preparer}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Tekshiruvchi" Binding="{Binding checker}" IsReadOnly="True" Width="150*"/>
+
+
+                        <!--DataTemplate for document-->
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <Grid Width="200">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+
+                                    <!--First row hujjatda-->
+                                    <Border BorderThickness="1" BorderBrush="#909DBA" Height="27">    
+                                    <Grid Grid.Row="0">
+                                            <TextBlock Text="Hujjatda" TextAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <!--Second row for measurement and quantity-->
+                                    <Grid Grid.Row="1" Height="27">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                        <!--first column for measurement-->
+                                        <Border Grid.Column="0" BorderThickness="1 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="O'lchov b." TextAlignment="Center"/>
+                                        </Border>
+                                        
+                                        <!--second column for quantity-->
+                                        <Border Grid.Column="1" BorderThickness="0 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="Miqdori" TextAlignment="Center"/>
+                                        </Border>
+                                            
+                                        </Grid>
+                                    </Grid>
+                                
+                            </DataGridTemplateColumn.Header>
+                            
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--first column for measurement-->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock Text="{Binding measurement}" Foreground="#009BDE" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                        <!--second column for quantity-->
+                                        <Grid Grid.Column="1">
+                                            <TextBlock Text="{Binding app_quan}" Foreground="#009BDE" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                            
+                        </DataGridTemplateColumn>
+
+                        <!--DataTemplate for store-->
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <Grid Width="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!--First row hujjatda-->
+                                    <Border BorderThickness="0 1 1 1" BorderBrush="#909DBA" Height="27">
+                                        <Grid Grid.Row="0">
+                                            <TextBlock Text="Omborda" TextAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <!--Second row for measurement and quantity-->
+                                    <Grid Grid.Row="1" Height="27">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--first column for measurement-->
+                                        <Border Grid.Column="0" BorderThickness="0 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="O'lchov b." TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!--second column for quantity-->
+                                        <Border Grid.Column="1" BorderThickness="0 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="Miqdori" TextAlignment="Center"/>
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+
+                            </DataGridTemplateColumn.Header>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--first column for measurement-->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock Text="{Binding measurement}" Foreground="#92DA71" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                        <!--second column for quantity-->
+                                        <Grid Grid.Column="1">
+                                            <TextBlock Text="{Binding store_quan}" Foreground="#92DA71" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+                        <!--DataTemplate for difference-->
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <Grid Width="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!--First row hujjatda-->
+                                    <Border BorderThickness="0 1 1 1" BorderBrush="#909DBA" Height="27">
+                                        <Grid Grid.Row="0">
+                                            <TextBlock Text="Farqi" TextAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                    <!--Second row for measurement and quantity-->
+                                    <Grid Grid.Row="1" Height="27">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--first column for measurement-->
+                                        <Border Grid.Column="0" BorderThickness="0 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="O'lchov b." TextAlignment="Center"/>
+                                        </Border>
+
+                                        <!--second column for quantity-->
+                                        <Border Grid.Column="1" BorderThickness="0 0 1 1 " BorderBrush="#909DBA" Height="25">
+                                            <TextBlock  Text="Miqdori" TextAlignment="Center"/>
+                                        </Border>
+
+                                    </Grid>
+                                </Grid>
+
+                            </DataGridTemplateColumn.Header>
+
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <!--first column for measurement-->
+                                        <Grid Grid.Column="0">
+                                            <TextBlock Text="{Binding measurement}" Foreground="#F57070" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                        <!--second column for measurement-->
+                                        <Grid Grid.Column="1">
+                                            <TextBlock Text="{Binding diff_quan}" Foreground="#F57070" FontFamily="Segoe UI"
+                                                       FontSize="13px" TextAlignment="Center"/>
+                                        </Grid>
+
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTextColumn Header="Yaroqlilik Muddati" Binding="{Binding last_date}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Farq summa" Binding="{Binding diff_summa}" IsReadOnly="True" Width="150*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

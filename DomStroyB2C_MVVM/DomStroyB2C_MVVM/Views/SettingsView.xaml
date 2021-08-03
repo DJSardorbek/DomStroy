@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250">
+    <UserControl.Resources>
+        
+    </UserControl.Resources>
+    <Grid Background="#E5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--first row for search and return back-->
+        <Grid Grid.Row="0" Background="#4D638C">
+            <TextBox Style="{StaticResource txtSearch}" 
+                     Width="524" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                     Margin="0 0 20 0" Padding="30 5 50 5"/>
+
+            <Image Source="../Images/search.png" Height="20" Width="20"
+                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Margin="0 0 35 0"/>
+        </Grid>
+        
+        <!--second row for buttons-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--First column for setting button-->
+            <Button Grid.Column="0" Style="{StaticResource btnHeader}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/setting.png" Width="56" Height="56"/>
+                    <TextBlock Text="Check sozlamar" VerticalAlignment="Center" Margin="35 0 0 0"/>
+                </StackPanel>
+            </Button>
+
+            <!--Second column for setting button-->
+            <Button Grid.Column="1" Style="{StaticResource btnHeader}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/employeeAdd.png" Width="56" Height="56"/>
+                    <TextBlock Text="Hodim qo'shish" VerticalAlignment="Center" Margin="35 0 0 0"/>
+                </StackPanel>
+            </Button>
+
+            <!--Third column for setting button-->
+            <Button Grid.Column="2" Style="{StaticResource btnHeader}" 
+                    Command="{Binding UpdateViewCommand}" CommandParameter="SeeEmployee">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/employeeList.png" Width="56" Height="56"/>
+                    <TextBlock Text="Hodimlar ro'yhati" VerticalAlignment="Center" Margin="35 0 0 0"/>
+                </StackPanel>
+            </Button>
+            <Image Grid.ColumnSpan="3" Source="../Images/line.png" Margin="30 0 30 0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="2px" />
+        </Grid>
+
+        <!--third row for datagrid-->
+        <Grid Grid.Row="2" Margin="0 5 0 0">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridEmployee" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="25 15 25 0">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="50"/>
+                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Ism" Binding="{Binding first_name}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Familiya" Binding="{Binding last_name}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Lavozim" Binding="{Binding staff}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header >
+                                <TextBlock Text="Olib tashlash" Width="150" Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Style="{StaticResource btnSearch}" Width="60" Height="40" Margin="0" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Image Source="../Images/removeEmployee.png" Width="25" Height="25"/>
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,590 @@
+﻿<Window x:Class="DomStroyB2C_MVVM.Views.PaymentView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+        xmlns:mateilDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="PaymentView" Height="575" Width="966" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="#C0C0C0" BorderThickness="1">
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBlock}" x:Key="txtInformation">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="Foreground" Value="White"/>
+
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}" x:Key="txtClient">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="True" />
+            <Setter Property="CaretBrush" Value="#283654"/>
+            <!---->
+            <Setter Property="Width" Value="235"/>
+            <Setter Property="Height" Value="54"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="BorderBrush" Value="#6783B8"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#6783B8"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="Text" Value="Sodiqjonov Sardorbek"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Grid>
+                            <Border x:Name="Border"
+                            Padding="20 10 5 5"
+                            BorderThickness="1" Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}">
+                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" />
+
+                            </Border>
+
+                            <TextBlock IsHitTestVisible="False"
+                                   Text="{TemplateBinding Tag}"
+                                   Padding="100 10 0 5">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Setter Property="Foreground" Value="#A8A0A0"/>
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                        <Setter Property="FontSize" Value="15px"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="btnClient">
+            <Setter Property="Background" Value="#6783B8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border BorderThickness="0"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Trigger>
+                <Trigger Property="Tag" Value="Valyuta">
+                    <Setter Property="Background" Value="#FFFFEF"/>
+
+                </Trigger>
+            </Style.Triggers>
+
+        </Style>
+
+        <!-- combobox style -->
+        <Style x:Key="ComboBox1" TargetType="{x:Type ComboBox}">
+            <Setter Property="Foreground" Value="#283654"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="20px"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Grid.Column="2" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="5*" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="5 0 0 5" Background="#FFFFFF" BorderBrush="#4D638C" BorderThickness="1" />
+                                            <Border Grid.Column="0" CornerRadius="5,0,0,5"  Margin="1"  Background="#FFFFFF"  BorderBrush="#4D638C" BorderThickness="0,0,0,0" />
+                                            <Path x:Name="Arrow" Grid.Column="1"  Fill="#283654" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="ToggleButton.IsMouseOver" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#FFFFEF" />
+                                            </Trigger>
+                                            <Trigger Property="ToggleButton.IsChecked" Value="true">
+                                                <Setter TargetName="Border" Property="Background" Value="#FFFFEF" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter Name="ContentSite" IsHitTestVisible="False"  Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" Margin="3"  VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <TextBox x:Name="PART_EditableTextBox" Visibility="Hidden" IsReadOnly="{TemplateBinding IsReadOnly}" />
+                            <Popup Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsDropDownOpen}" AllowsTransparency="True"   Focusable="False" PopupAnimation="Slide">
+                                <Grid  Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border x:Name="DropDownBorder" Background="#FFFFEF" 
+                                            />
+                                    <ScrollViewer SnapsToDevicePixels="True">
+                                        <StackPanel IsItemsHost="True" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+            </Style.Triggers>
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="356"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!--First column for display client information-->
+        <Grid Grid.Column="0" Background="#4D638C">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="210"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--First row for client name-->
+            <StackPanel Grid.Row="0">
+                <TextBlock Style="{StaticResource txtInformation}"
+                           Text="Mijoz" Margin="47 47 0 12"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="270"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <TextBox Style="{StaticResource txtClient}" Margin="34 0 0 0" />
+                    </Grid>
+
+                    <Grid Grid.Column="1" Background="#6783B8" Height="54" Margin="0 0 32 0">
+                        <Button Style="{StaticResource btnClient}" Cursor="Hand">
+                            <Image Source="../Images/carbonmenu.png" Width="40" Height="40"/>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </StackPanel>
+
+            <!--second row client information-->
+            <StackPanel Grid.Row="1">
+                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
+                           Margin="47 0 0 20 ">
+                    <Run Text="To'plangan ball: "/>
+                    <Run Text="70"/>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
+                           Margin="47 0 0 20 ">
+                    <Run Text="Diskount karta: "/>
+                    <Run Text="70"/>
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
+                           Margin="47 0 0 20 ">
+                    <Run Text="Qarzdorlik:   Uz:"/>
+                    <Run Text="70"/>
+
+
+                </TextBlock>
+
+                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
+                           Margin="47 0 0 20 ">
+                    <Run Text="                       $:"/>
+                    <Run Text="70"/>
+                </TextBlock>
+            </StackPanel>
+
+            <!--Third row for debt-->
+            <StackPanel Grid.Row="2" Margin="0 10 0 0">
+                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
+                           Margin="47 0 0 0 ">
+                    <Run Text="Nasiya miqdori: "/>
+                    <Run Text="0.0"/>
+                </TextBlock>
+
+                <Border BorderBrush="#4D638C" BorderThickness="1"
+                    Height="40" Margin="47 0 25 0"
+                    CornerRadius="3"
+                    Background="#4D638C">
+                    <DatePicker Grid.Row="1" Width="138"  Height="35"
+                        HorizontalAlignment="Left" Margin="0 10 0 0"
+                                Foreground="White"
+                                >
+
+                    </DatePicker>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!--Second column for doing payment-->
+        <Grid Grid.Column="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--first row title and cancel button-->
+            <Grid Grid.Row="0">
+                <!--title-->
+                <TextBlock Text="To'lov oynasi" FontFamily="Segoe UI"
+                           FontSize="40px" Foreground="#4D638C"
+                           FontWeight="SemiBold" VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+                <!--cancel button-->
+                <Button x:Name="btnClose" Click="btnClose_Click" VerticalAlignment="Top"
+                                    Margin="0 14 14 14" Cursor="Hand">
+                    <Image Source="../Images/Close.png" Width="30" Height="30"/>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Width" Value="35"/>
+                            <Setter Property="Height" Value="35"/>
+                            <Setter Property="Margin" Value="0 15 20 0"/>
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="AntiqueWhite"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+
+            <!--second row for display total shopping sum, and doing payment-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--first row for display total_sum-->
+                <Grid Grid.Row="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="65"/>
+                    </Grid.RowDefinitions>
+
+                    <!--first row for Valyuta and Harid summasi textblock-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="270"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Valyuta"
+                                   Foreground="#283654" FontSize="12px"
+                                   Margin="72 0 0 0" FontWeight="SemiBold"/>
+
+                        <TextBlock Grid.Column="1" Text="Harid summasi:"
+                                   Foreground="#283654" FontSize="12px"
+                                   Margin="0 0 0 0" FontWeight="SemiBold"
+                                   HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <!--second row for Valyuta and Harid summasi textbox-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Border Width="206" Height="52" Margin="53 0 0 0"
+                            CornerRadius="5 0 0 5" BorderThickness="1"
+                            BorderBrush="#283654">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160"/>
+                                    <ColumnDefinition Width="46"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock x:Name="txtCurrencyType" Text="So'm"
+                                           FontFamily="Segoe UI" FontSize="20px"
+                                           VerticalAlignment="Center" Foreground="#283654" HorizontalAlignment="Left"
+                                           Margin="15 0 0 0"/>
+                                    <TextBlock x:Name="txtCurrency" Width="90"
+                                           Visibility="Collapsed"
+                                           FontFamily="Segoe UI" FontSize="14px"
+                                           VerticalAlignment="Bottom" Foreground="#283654" 
+                                           FontWeight="SemiBold"
+                                           Margin="10 0 0 10">
+                                    <Run Text="kursi: "/>
+                                    <Run Text="10700"/>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <Button x:Name="btnChangeCurrency" Click="btnChangeCurrency_Click" Grid.Column="1" Width="46" Tag="Valyuta" 
+                                Style="{StaticResource btnClient}"
+                                Cursor="Hand">
+                                    <Image Source="../Images/changeCurrency.png" Width="19" Height="19"/>
+                                </Button>
+                            </Grid>
+
+                        </Border >
+
+
+                        <Border CornerRadius="0 5 5 0" BorderThickness="0 1 1 1"
+                            BorderBrush="#283654" Width="333" 
+                            Height="52">
+
+                            <TextBlock Text="1 500 000" FontSize="20px"
+                                   FontFamily="Segoe UI" Foreground="#283654"
+                                   VerticalAlignment="Center" Margin="20 0 0 0"/>
+                        </Border>
+
+                    </StackPanel>
+                </Grid>
+
+                <!--second row for doint payment-->
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="65"/>
+                    </Grid.RowDefinitions>
+
+                    <!--first row for Valyuta and Harid summasi textblock-->
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="270"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="To'lov turi"
+                                   Foreground="#283654" FontSize="12px"
+                                   Margin="72 0 0 0" FontWeight="SemiBold"/>
+
+                        <TextBlock Grid.Column="1" Text="To'lov summasi:"
+                                   Foreground="#283654" FontSize="12px"
+                                   Margin="0 0 0 0" FontWeight="SemiBold"
+                                   HorizontalAlignment="Left"/>
+                    </Grid>
+
+                    <!--second row for Valyuta and Harid summasi textbox-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <!--combobox for change payment type-->
+                        <ComboBox x:Name="comboCurrency" Style="{StaticResource ComboBox1}"
+                             Width="207" Height="51" Margin="49 0 0 0">
+                            <!--first item main cash desk-->
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Asosiy kassa"/>
+                                    <Image Source="../Images/PavCash.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+
+                            <!--second item credit card-->
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Plastik karta"/>
+                                    <Image Source="../Images/Pavcard.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+
+                            <!--third item bank account number-->
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="X/R"/>
+                                    <Image Source="../Images/PavTransfer.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+                        </ComboBox>
+
+                        <!--textbox for input money-->
+                        <TextBox Width="281" Height="51" BorderThickness="0 1 1 1"
+                                 BorderBrush="#283654" Text="1 000 000" 
+                                 FontSize="20px" Foreground="#283654"
+                                 Padding="20 10 10 0" CaretBrush="#283654">
+
+                        </TextBox>
+
+                        <!--add button-->
+                        <Button Cursor="Hand">
+                            <Image Source="../Images/+.png" Width="20" Height="20"/>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Width" Value="48"/>
+                                    <Setter Property="Height" Value="51"/>
+                                    <Setter Property="Background" Value="White"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border CornerRadius="0 5 5 0"
+                                                        BorderThickness="0 1 1 1"
+                                                        BorderBrush="#283654"
+                                                        Background="{TemplateBinding Background}">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FFFFEF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+
+            <!--third row for buttons-->
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--first row for 100% the same payment type-->
+                <StackPanel Grid.Row="0" Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <!--100 % cash-->
+                    <Button Style="{StaticResource btnBorder5}"
+                            Width="172" Height="40"  Margin="20 0 10 0">
+                        <TextBlock Text="(F2) Naqd pul 100%" FontFamily="Segoe UI"
+                                   FontSize="16px" Foreground="White"/>
+                    </Button>
+
+                    <!--100 % credit card-->
+                    <Button Style="{StaticResource btnBorder5}"
+                            Width="172" Height="40" Margin="0 0 10 0">
+                        <TextBlock Text="(F3) Plastik karta 100%" FontFamily="Segoe UI"
+                                   FontSize="16px" Foreground="White"/>
+                    </Button>
+
+                    <!--100 % bank account number-->
+                    <Button Style="{StaticResource btnBorder5}"
+                            Width="172" Height="40" >
+                        <TextBlock Text="(F4)  X/R 100%" FontFamily="Segoe UI"
+                                   FontSize="16px" Foreground="White"/>
+                    </Button>
+                </StackPanel>
+
+                <!--second row payment button-->
+                <Grid Grid.Row="1" Margin="45 0 25 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="205"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--first column for to'lov button-->
+                    <Button Grid.Column="0" Click="Button_Click">
+                        <TextBlock Text="To'lov" FontFamily="Segoue UI"
+                                   FontSize="50px" Foreground="White"/>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#4D638C"/>
+                                <Setter Property="Height" Value="104"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border CornerRadius="5 0 0 5"
+                                                    BorderThickness="1"
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}">
+                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Opacity" Value="0.8"/>
+                                        <Setter Property="FontWeight" Value="DemiBold"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!--second column for display payed money-->
+                    <Border Grid.Column="1" CornerRadius="0 5 5 0" 
+                            BorderThickness="0 1 1 1"
+                            BorderBrush="#283654"
+                            Height="104">
+                        <StackPanel VerticalAlignment="Center">
+
+                            <!--first input for main cash desk-->
+                            <Border x:Name="stackNaqd" BorderThickness="0 0 0 1" 
+                                    BorderBrush="#283654" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
+                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                               Padding="20 2 0 0"/>
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                        <Image Source="../Images/x.png" Width="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </Border>
+
+                            <!--second input for credit card-->
+                            <Border x:Name="stackPlastik" BorderThickness="0 0 0 1" 
+                                    BorderBrush="#283654" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
+                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                               Padding="20 2 0 0"/>
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                        <Image Source="../Images/x.png" Width="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </Border>
+
+                            <!--third input for bank account number-->
+                            <Border x:Name="stackXR" BorderThickness="0 0 0 1" 
+                                    BorderBrush="#283654" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
+                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                               Padding="20 2 0 0"/>
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                        <Image Source="../Images/x.png" Width="15"/>
+                                    </Button>
+                                </StackPanel>
+
+                            </Border>
+
+
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

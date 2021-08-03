@@ -1,0 +1,607 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.ReportSavdoView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <UserControl.Resources>
+        <Storyboard x:Key="CalendarOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="332"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="605"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="CalendarClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="605"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="332"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseCalendar">
+            <BeginStoryboard Storyboard="{StaticResource CalendarOpen}"/>
+        </EventTrigger>
+        <!--<EventTrigger RoutedEvent="TabControl.SelectionChanged" SourceName="tab1">
+            <BeginStoryboard Storyboard="{StaticResource CalendarClose}"/>
+        </EventTrigger>-->
+    </UserControl.Triggers>
+
+    <Grid Background="#EDEDED">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="110"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--First row for calendar-->
+        <Grid Grid.Row="0" Margin="0 10 0 0" >
+            <!--332, 605-->
+            <Border x:Name="GridMenu" CornerRadius="25" Width="332" Height="44"
+                    BorderThickness="1" BorderBrush="#FFFFFF" Background="#FFFFFF">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <!--252 , 308-->
+                    <StackPanel Width="252" Height="44" Orientation="Horizontal" HorizontalAlignment="Left"
+                            Margin="22 -2 0 0">
+                        <TabControl x:Name="tab1" SelectionChanged="tab1_SelectionChanged" BorderThickness="0" Background="#FFFFFF">
+                            <TabItem>
+                                <TabItem.Style>
+                                    <Style TargetType="TabItem">
+                                        <Setter Property="Foreground" Value="#302F2F"/>
+                                        <Setter Property="Background" Value="#FFFFFF"/>
+                                        <Setter Property="BorderBrush" Value="#FFFFFF"/>
+                                        <Setter Property="BorderThickness" Value="1"/>
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                        <Setter Property="FontSize" Value="15px"/>
+                                        <Setter Property="Width" Value="62"/>
+                                        <Setter Property="Height" Value="43"/>
+                                        <Setter Property="Margin" Value="0 0 0 0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TabItem">
+                                                    <Border CornerRadius="0" BorderThickness="1"
+                                                BorderBrush="#EDEDED"
+                                                Background="{TemplateBinding Background}"
+                                                >
+                                                        <TextBlock Text="Bugun" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
+
+                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.25" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.5" />
+
+                                                            <GradientStop Color="#79A0E9" Offset="1.0" />
+
+                                                        </LinearGradientBrush>
+
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Foreground" Value="#302F2F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TabItem.Style>
+                            </TabItem>
+
+                            <TabItem>
+                                <TabItem.Style>
+                                    <Style TargetType="TabItem">
+                                        <Setter Property="Foreground" Value="#302F2F"/>
+                                        <Setter Property="Background" Value="#FFFFFF"/>
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="FontSize" Value="15px"/>
+                                        <Setter Property="Width" Value="62"/>
+                                        <Setter Property="Height" Value="43"/>
+                                        <Setter Property="Margin" Value="0 0 0 0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TabItem">
+                                                    <Border CornerRadius="0" BorderThickness="1"
+                                                BorderBrush="#EDEDED"
+                                                Background="{TemplateBinding Background}"
+                                                >
+                                                        <TextBlock Text="Hafta" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
+
+                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.25" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.5" />
+
+                                                            <GradientStop Color="#79A0E9" Offset="1" />
+
+                                                        </LinearGradientBrush>
+
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Foreground" Value="#302F2F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TabItem.Style>
+                            </TabItem>
+
+                            <TabItem>
+                                <TabItem.Style>
+                                    <Style TargetType="TabItem">
+                                        <Setter Property="Foreground" Value="#302F2F"/>
+                                        <Setter Property="Background" Value="#FFFFFF"/>
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                        <Setter Property="FontSize" Value="15px"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Width" Value="62"/>
+                                        <Setter Property="Height" Value="43"/>
+                                        <Setter Property="Margin" Value="0 0 0 0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TabItem">
+                                                    <Border CornerRadius="0" BorderThickness="1"
+                                                BorderBrush="#EDEDED"
+                                                Background="{TemplateBinding Background}"
+                                                >
+                                                        <TextBlock Text="Oy" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
+
+                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.25" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.5" />
+
+                                                            <GradientStop Color="#79A0E9" Offset="1" />
+
+                                                        </LinearGradientBrush>
+
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Foreground" Value="#302F2F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TabItem.Style>
+                            </TabItem>
+
+                            <TabItem>
+                                <TabItem.Style>
+                                    <Style TargetType="TabItem">
+                                        <Setter Property="Foreground" Value="#302F2F"/>
+                                        <Setter Property="Background" Value="#FFFFFF"/>
+                                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="FontSize" Value="15px"/>
+                                        <Setter Property="Width" Value="62"/>
+                                        <Setter Property="Height" Value="43"/>
+                                        <Setter Property="Margin" Value="0 0 0 0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TabItem">
+                                                    <Border CornerRadius="0" BorderThickness="1"
+                                                BorderBrush="#EDEDED"
+                                                Background="{TemplateBinding Background}"
+                                                >
+                                                        <TextBlock Text="Yil" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1" >
+
+                                                            <GradientStop Color="#FFFFFF" Offset="0" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.25" />
+                                                            <GradientStop Color="#FFFFFF" Offset="0.5" />
+
+                                                            <GradientStop Color="#79A0E9" Offset="1" />
+
+                                                        </LinearGradientBrush>
+
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="Foreground" Value="#302F2F"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TabItem.Style>
+                            </TabItem>
+                        </TabControl>
+                    </StackPanel>
+                    <Grid Grid.Column="1" x:Name="GridCalendar">
+                        <Button x:Name="ButtonCloseCalendar" Visibility="Visible"
+                                Click="ButtonCloseCalendar_Click">
+                            <Image Source="../Images/date.png" Width="24" Height="24"/>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="56"/>
+                                    <Setter Property="Height" Value="44"/>
+                                    <Setter Property="Margin" Value="-0 -2 0 0 "/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border CornerRadius="25"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#283654"
+                                                        Background="#283654">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Button x:Name="ButtonOpenCalendar" Visibility="Collapsed"
+                                >
+                            <Grid Width="308">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Grid.Column="0" HorizontalAlignment="Right" Margin="0 0 10 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <DatePicker Grid.Column="0" Foreground="#778DB8"/>
+                                    <TextBlock Grid.Column="1" Text="dan" Margin="5 0 0 0" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Foreground="White" FontFamily="Segoe UI" FontSize="13px"/>
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 10 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <DatePicker Grid.Column="0" Foreground="#778DB8"/>
+                                    <TextBlock Grid.Column="1" Text="gacha" Margin="5 0 0 0" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Foreground="White" FontFamily="Segoe UI" FontSize="13px"/>
+
+                                </Grid>
+
+                            </Grid>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Width" Value="328"/>
+                                    <Setter Property="Height" Value="44"/>
+                                    <Setter Property="Margin" Value="0 -2 0 0 "/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border CornerRadius="25"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#283654"
+                                                        Background="#283654">
+                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </Border>
+        </Grid>
+        
+        <!--Second row for summa-->
+        <Grid Grid.Row="1">
+            <DataGrid x:Name="dataGridSumma" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="All"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="20 0 20 20">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                    </Style>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Background" Value="#FFFFFF"/>
+                        <Setter Property="Foreground" Value="#7A7979"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="FontWeight" Value="SemiBold"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+
+
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#E3E2E2"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="#283654"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Height" Value="42"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="30 0 0 0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                    <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="Background" Value="#263859"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Naqd so'm" Binding="{Binding naqd_som}" IsReadOnly="True" Width="150*"/>
+                    <DataGridTextColumn Header="Naqd dollar" Binding="{Binding naqd_dollar}" IsReadOnly="True" Width="150*"/>
+                    <DataGridTextColumn Header="Plastik" Binding="{Binding plastik}" IsReadOnly="True" Width="150*" />
+                    <DataGridTextColumn Header="Pul o'tkazma" Binding="{Binding transfer}" IsReadOnly="True" Width="150*"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Text="Nasiya" TextAlignment="Left" Width="200"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                        <TextBlock Text="So'm:" FontWeight="SemiBold" Foreground="#283654" FontFamily="Segoe UI" FontSize="15px" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Left"/>
+                                    </Grid>
+                                    <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+                                        <TextBlock Text="{Binding som}" FontSize="14px"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" Grid.Column="0" >
+                                        <TextBlock Text="Dollar:" FontWeight="SemiBold" Foreground="#283654" FontFamily="Segoe UI" FontSize="15px" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Left"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+                                        <TextBlock Text="{Binding dollar}" FontSize="14px" />
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.Header>
+                            <TextBlock Text="Vazvrat" TextAlignment="Left" Width="200"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid Width="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+                                        <TextBlock Text="So'm:" FontWeight="SemiBold" Foreground="#283654" FontFamily="Segoe UI" FontSize="15px" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Left"/>
+                                    </Grid>
+                                    <Grid Grid.Row="0" Grid.Column="1">
+                                        <TextBlock Text="{Binding som}" FontSize="14px"/>
+                                    </Grid>
+
+                                    <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left">
+                                        <TextBlock Text="Dollar:" FontWeight="SemiBold" Foreground="#283654" FontFamily="Segoe UI" FontSize="15px" VerticalAlignment="Center"
+                                                   HorizontalAlignment="Left"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Text="{Binding dollar}" FontSize="14px"/>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+        <!--Third row for datagrid-->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Eng ko'p sotilgan mahsulotlar bo'yicha analiz" FontFamily="Segoe UI" FontSize="33px" Foreground="#283654"
+                       VerticalAlignment="Top"  HorizontalAlignment="Center" Margin="0"/>
+            <ScrollViewer Grid.Row="1" x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridSale" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                              Margin="20 0 20 20"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          >
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="50"/>
+                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#4D638C"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Nomi" Binding="{Binding name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="O'lchov birligi" Binding="{Binding measurement}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Miqdori" Binding="{Binding quantity}" IsReadOnly="True" Width="100*"/>
+                        <DataGridTextColumn Header="Umumiy summa" Binding="{Binding name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Valyuta" Binding="{Binding valyuta}" IsReadOnly="True" Width="100*"/>
+                        <DataGridTextColumn Header="Qoldiq" Binding="{Binding price}" IsReadOnly="True" Width="100*" />
+                        <DataGridTextColumn Header="Keltirilgan sana" Binding="{Binding price}" IsReadOnly="True" Width="200*" />
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock />
+                            </DataGridTemplateColumn.Header>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,302 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.DebtorsPayHistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250">
+    <Grid Background="#E5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- First row for searching -->
+        <Grid Grid.Row="0" Background="#4D638C">
+            <Button Command="{Binding UpdateViewCommand}" CommandParameter="Debtors">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="40"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="25 0 0 0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#283654"/>
+                                <Setter Property="BorderBrush" Value="#283654"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="../Images/imageback.png" Width="30" Height="30"/>
+            </Button>
+            <TextBlock Text="To'lov tarixi" Foreground="White" FontFamily="Segoe UI" FontSize="20px"
+                       VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100 0 0 0"/>
+        </Grid>
+
+        <!--Second row for date-->
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="47 0 0 0">
+            <Button x:Name="ButtonOpenCalendar" Visibility="Visible"
+                                >
+                <Grid Width="308">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" HorizontalAlignment="Right" Margin="0 0 10 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <DatePicker Grid.Column="0" Foreground="#778DB8"/>
+                        <TextBlock Grid.Column="1" Text="dan" Margin="5 0 0 0" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Foreground="White" FontFamily="Segoe UI" FontSize="13px"/>
+
+                    </Grid>
+
+                    <Grid Grid.Column="1" HorizontalAlignment="Right" Margin="0 0 10 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <DatePicker Grid.Column="0" Foreground="#778DB8"/>
+                        <TextBlock Grid.Column="1" Text="gacha" Margin="5 0 0 0" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Foreground="White" FontFamily="Segoe UI" FontSize="13px"/>
+
+                    </Grid>
+
+                </Grid>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="328"/>
+                        <Setter Property="Height" Value="44"/>
+                        <Setter Property="Margin" Value="0 -2 0 0 "/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="25"
+                                                        BorderThickness="1"
+                                                        BorderBrush="#283654"
+                                                        Background="#283654">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        
+        <!--Third row for displayin client information-->
+        <Grid Grid.Row="2">
+            <DataGrid x:Name="dataGridClient" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="25 0 25 20">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                    </Style>
+                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                        <Setter Property="Background" Value="#FF17223B"/>
+                        <Setter Property="Foreground" Value="#7A7979"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#4D638C"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+
+
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <Trigger Property="AlternationIndex" Value="0">
+                                <Setter Property="Background" Value="#FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="AlternationIndex" Value="1">
+                                <Setter Property="Background" Value="#E3E2E2"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+
+                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                        <Setter Property="Background" Value="#283654"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Height" Value="42"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Padding" Value="30 0 0 0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGridColumnHeader">
+                                    <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="Background" Value="#263859"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mijoz" Binding="{Binding client}" IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Telefon raqami" Binding="{Binding phone}" IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Karta raqami" Binding="{Binding cart_number}" IsReadOnly="True" Width="200*" />
+                    <DataGridTextColumn Header="Manzili" Binding="{Binding address}" IsReadOnly="True" Width="200*"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+        
+        <!--4th row for datagrid-->
+        <Grid Grid.Row="3">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridPayHistory" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="25 0 25 20">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#4D638C"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Sana" Binding="{Binding id}" IsReadOnly="True" Width="200"/>
+                        <DataGridTextColumn Header="Naqd so'm" Binding="{Binding client}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Naqd dollar" Binding="{Binding phone}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Plastik" Binding="{Binding address}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Pul o'tkazish" Binding="{Binding cart_number}" IsReadOnly="True" Width="150*" />
+                        <DataGridTextColumn Header="Balldan" Binding="{Binding bonus_sum}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Diskount so'm" Binding="{Binding bonus_dollar}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Diskount dollar" Binding="{Binding bonus_dollar}" IsReadOnly="True" Width="150*"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

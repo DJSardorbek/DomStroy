@@ -1,0 +1,715 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2170D487-A6F5-4431-9D9B-60230B53B790}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>DomStroyB2C_MVVM</RootNamespace>
+    <AssemblyName>DomStroyB2C_MVVM</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.17.3.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.17.3\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=2.0.1.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.2.0.1\lib\net452\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=4.1.0.2556, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.4.1.0\lib\net452\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="wpftoolkit.extended, Version=1.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Downloads\wpftoolkit.extended.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\UpdateViewCommand.cs" />
+    <Compile Include="DBAccess.cs" />
+    <Compile Include="Models\cartDTO.cs" />
+    <Compile Include="Models\clientDTO.cs" />
+    <Compile Include="Models\productDTO.cs" />
+    <Compile Include="Models\employeeDTO.cs" />
+    <Compile Include="Models\queueDTO.cs" />
+    <Compile Include="PasswordHelper.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CashDeskViewModel.cs" />
+    <Compile Include="ViewModels\ClientOrderViewModel.cs" />
+    <Compile Include="ViewModels\DebtorsPayHistoryViewModel.cs" />
+    <Compile Include="ViewModels\DebtorsProductViewModel.cs" />
+    <Compile Include="ViewModels\DebtorsViewModel.cs" />
+    <Compile Include="ViewModels\DoingInventoryViewModel.cs" />
+    <Compile Include="ViewModels\FakturaReportViewModel.cs" />
+    <Compile Include="ViewModels\InventoryViewModel.cs" />
+    <Compile Include="ViewModels\LoadingViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\MissedProductsViewModel.cs" />
+    <Compile Include="ViewModels\ModalViewModels\BasketViewModel.cs" />
+    <Compile Include="ViewModels\ModalViewModels\ComentViewModel.cs" />
+    <Compile Include="ViewModels\OrdersViewModel.cs" />
+    <Compile Include="ViewModels\ProductMovementViewModel.cs" />
+    <Compile Include="ViewModels\ProductResidueViewModel.cs" />
+    <Compile Include="ViewModels\ProductReturnViewModel.cs" />
+    <Compile Include="ViewModels\QueueNavbatlarViewModel.cs" />
+    <Compile Include="ViewModels\QueueViewModel.cs" />
+    <Compile Include="ViewModels\RecieveFakturaViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
+    <Compile Include="ViewModels\SaleViewModel.cs" />
+    <Compile Include="ViewModels\SeeEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\SeeFakturaViewModel.cs" />
+    <Compile Include="ViewModels\SettingViewModel.cs" />
+    <Compile Include="Views\BuyurtmalarTarixiView.xaml.cs">
+      <DependentUpon>BuyurtmalarTarixiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BuyurtmalarView.xaml.cs">
+      <DependentUpon>BuyurtmalarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChashDeskView.xaml.cs">
+      <DependentUpon>ChashDeskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ClientOrderView.xaml.cs">
+      <DependentUpon>ClientOrderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DebtorsPayHistoryView.xaml.cs">
+      <DependentUpon>DebtorsPayHistoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DebtorsProductView.xaml.cs">
+      <DependentUpon>DebtorsProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DebtorsView.xaml.cs">
+      <DependentUpon>DebtorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DebtPaymentView.xaml.cs">
+      <DependentUpon>DebtPaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DoingInventoryView.xaml.cs">
+      <DependentUpon>DoingInventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FakturaReportView.xaml.cs">
+      <DependentUpon>FakturaReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FiliallarBazasiView.xaml.cs">
+      <DependentUpon>FiliallarBazasiView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FReportProductView.xaml.cs">
+      <DependentUpon>FReportProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InventoryView.xaml.cs">
+      <DependentUpon>InventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoadingView.xaml.cs">
+      <DependentUpon>LoadingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Loading\LoadingWindow.xaml.cs">
+      <DependentUpon>LoadingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Loading\LoadingWindowGif.xaml.cs">
+      <DependentUpon>LoadingWindowGif.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MissedProductsView.xaml.cs">
+      <DependentUpon>MissedProductsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalViews\BasketView.xaml.cs">
+      <DependentUpon>BasketView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalViews\CliantAddView.xaml.cs">
+      <DependentUpon>CliantAddView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalViews\ComentView.xaml.cs">
+      <DependentUpon>ComentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewProductMovementView.xaml.cs">
+      <DependentUpon>NewProductMovementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OrdersView.xaml.cs">
+      <DependentUpon>OrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentView.xaml.cs">
+      <DependentUpon>PaymentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductMovementView.xaml.cs">
+      <DependentUpon>ProductMovementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductResidueView.xaml.cs">
+      <DependentUpon>ProductResidueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductReturnView.xaml.cs">
+      <DependentUpon>ProductReturnView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QoldiqSozlamarView.xaml.cs">
+      <DependentUpon>QoldiqSozlamarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueueBuyurtmaView.xaml.cs">
+      <DependentUpon>QueueBuyurtmaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueueNavbatlarView.xaml.cs">
+      <DependentUpon>QueueNavbatlarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueueView.xaml.cs">
+      <DependentUpon>QueueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecieveFakturaView.xaml.cs">
+      <DependentUpon>RecieveFakturaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportHodimlarView.xaml.cs">
+      <DependentUpon>ReportHodimlarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportMaxsulotView.xaml.cs">
+      <DependentUpon>ReportMaxsulotView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportOtkazView.xaml.cs">
+      <DependentUpon>ReportOtkazView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportSavdoView.xaml.cs">
+      <DependentUpon>ReportSavdoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepOtkazProductView.xaml.cs">
+      <DependentUpon>RepOtkazProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SaleView.xaml.cs">
+      <DependentUpon>SaleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeeEmployeeView.xaml.cs">
+      <DependentUpon>SeeEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SeeFakturaView.xaml.cs">
+      <DependentUpon>SeeFakturaView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TovarAnalizView.xaml.cs">
+      <DependentUpon>TovarAnalizView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TovarQoldiqView.xaml.cs">
+      <DependentUpon>TovarQoldiqView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ResourceDictionaries\MainResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuyurtmalarTarixiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BuyurtmalarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChashDeskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ClientOrderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DebtorsPayHistoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DebtorsProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DebtorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DebtPaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DoingInventoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FakturaReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FiliallarBazasiView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FReportProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InventoryView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoadingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Loading\LoadingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Loading\LoadingWindowGif.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MissedProductsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalViews\BasketView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalViews\CliantAddView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalViews\ComentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewProductMovementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OrdersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaymentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductMovementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductResidueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductReturnView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QoldiqSozlamarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueueBuyurtmaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueueNavbatlarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecieveFakturaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportHodimlarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportMaxsulotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportOtkazView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportSavdoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RepOtkazProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SaleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SeeEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SeeFakturaView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TovarAnalizView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TovarQoldiqView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
+    <Resource Include="Images\more.png" />
+    <Resource Include="Images\SellCash.png" />
+    <Resource Include="Images\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LoadBackGround.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\down.png" />
+    <Resource Include="Images\up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SellQueue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SellCart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SellBook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SellCash1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SellCancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\imageback.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CalendarBorder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Close.png" />
+    <Resource Include="Images\PavCard.png" />
+    <Resource Include="Images\PavCards.png" />
+    <Resource Include="Images\PavCash.png" />
+    <Resource Include="Images\PavCashs.png" />
+    <Resource Include="Images\PavTransfer.png" />
+    <Resource Include="Images\PavValyuta.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PavDebt1.png" />
+    <Resource Include="Images\PavDebt2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PavTransfers.png" />
+    <Resource Include="Images\PavValyutas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\maximize.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\carbonmenu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PavDebts.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cancelRecieve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ChangePrice.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\employee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cInventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\checkList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\stopInventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\editInventory.png" />
+    <Resource Include="Images\editInventory1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\setting.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\employeeAdd.png" />
+    <Resource Include="Images\employeeList.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\removeEmployee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\bigEmployeeAdd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuHome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuSell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuBook.png" />
+    <Resource Include="Images\menuCash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuQueue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuReport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuDebtor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuResidue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menuRecieve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\recieveReport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pere.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CashBack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Otkaz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Inventory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Pay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\date.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\PayHistory.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\seeRecieve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\prRecieve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DomStroy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logOut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Loading\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\changeCurrency.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\+.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\x.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>

@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+
+             xmlns:ld="clr-namespace:DomStroyB2C_MVVM"
+             xmlns:wm="clr-namespace:DomStroyB2C_MVVM.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250"
+             x:Name="asd"
+             Loaded="asd_Loaded">
+
+    <UserControl.Resources>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Foreground" Value="#9A9695"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Grid.Column="1" >
+        <Image Source="../Images/LoadBackGround.jpg" Stretch="Fill"/>
+        <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <!-- 1 st row for domstroy.png-->
+                <Image Grid.Row="0" Source="../Images/DomStroy.png" Width="450" Height="200" Margin="0 0 0 0"/>
+
+                <!-- 2 nd row for password-->
+                <StackPanel Grid.Row="1" HorizontalAlignment="Right">
+                    <TextBlock Text="Parol" Foreground="#BEBCBC" FontSize="20px" FontFamily="Roboto"
+                            Margin="0 30 0 7"/>
+                    <!--<TextBox Style="{StaticResource txtLogin}" Width="360" Height="50" BorderBrush="#BEBEBE"
+                            BorderThickness="1" Margin="0 0 30 0"/>-->
+                    <Border Margin="0 0 30 0" CornerRadius="5" Height="50" Width="360" Background="#FFFFFF"/>
+                    <Grid Margin="0 -50 30 0">
+                        <PasswordBox Name="Password" Height="30"  Margin="20 12 0 0" BorderThickness="0"
+                                ld:PasswordHelper.Attach="True"
+                                ld:PasswordHelper.Password="{Binding Text, ElementName=txtPassword, Mode=TwoWay}">
+                            <PasswordBox.InputBindings>
+                                <KeyBinding 
+                                        Key="Return"
+                                        Command="{Binding LoadingCommnad}" 
+                                        CommandParameter="Main"/>
+                            </PasswordBox.InputBindings>
+                            <!--<i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="KeyDown">
+                                        <i:InvokeCommandAction Command="{Binding LoadingCommnad}" CommandParameter="Main"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>-->
+                        </PasswordBox>
+                        <TextBox Visibility="Collapsed" Padding="10,0"  x:Name="txtPassword" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <TextBox.Text>
+                                <Binding Path="Password"
+                                        UpdateSourceTrigger="PropertyChanged"/>
+
+                            </TextBox.Text>
+                        </TextBox>
+                    </Grid>
+
+                </StackPanel>
+
+
+                <!-- 3 rd row for login button -->
+                <Grid Grid.Row="2" HorizontalAlignment="Right">
+                    <Button x:Name="btnLogin">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding LoadingCommnad}" CommandParameter="Main"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <TextBlock Text="Kirish" FontSize="18"/>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Width" Value="360"/>
+                                <Setter Property="Height" Value="50"/>
+                                <Setter Property="Margin" Value="0 45 30 0"/>
+                                <Setter Property="Background" Value="#FE8950"/>
+                                <!--#FB9D70-->
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontFamily" Value="Roboto"/>
+                                <Setter Property="FontSize" Value="20px"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border CornerRadius="4"
+                                                        BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FB9D70"/>
+                                        <Setter Property="BorderBrush" Value="#FB9D70"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Grid>
+
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,287 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250">
+    <UserControl.Resources>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0 20 0 0"/>
+        </Style>
+
+        <Style TargetType="{x:Type Button}" x:Key="btnMenu">
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="Height" Value="130"/>
+            <Setter Property="Background" Value="#283654"/>
+            <Setter Property="BorderBrush" Value="#283654"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="12"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#4D638C"/>
+                    <Setter Property="BorderBrush" Value="#4D638C"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#EDEDED">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Row 1-->
+        <Grid Grid.Row="0" Background="#283654">
+
+            <Button Command="{Binding BackLoginCommand}">
+
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/logOut.png" Width="30" Height="26" Margin="-70 0 0 0"/>
+                    <TextBlock Text="Profildan chiqish" VerticalAlignment="Center" Margin="0 0 0 0"
+                                           Foreground="#462A1D" FontSize="15"/>
+
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="240"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="VerticalAlignment" Value="Top"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="0 5 10 0"/>
+                        <Setter Property="Background" Value="#FB9D70"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="FontFamily" Value="Segoe UI"/>
+                        <Setter Property="FontSize" Value="20px"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                    CornerRadius="5"
+                                    Background="{TemplateBinding Background}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                                        </ContentPresenter>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#FE8950"/>
+                                <Setter Property="BorderBrush" Value="#FE8950"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
+                </Button.Style>
+            </Button>
+        </Grid>
+
+        <!--Row 2-->
+        <Grid Grid.Row="1">
+            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Grid.Column="0" 
+                          Margin="20 0 20 15">
+                        <Button Style="{StaticResource btnMenu}" 
+                                Command="{Binding UpdateViewCommand}" 
+                                Click="Button_Click" CommandParameter="Sale">
+                            <StackPanel>
+                                <Image Source="../Images/menuSell.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Sotuv"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="1"
+                          Margin="20 0 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_7"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="CashDesk">
+                            <StackPanel>
+                                <Image Source="../Images/menuCash.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Kassa"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="2"
+                          Margin="20 0 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_5"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Orders">
+                            <StackPanel>
+                                <Image Source="../Images/menuBook.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Buyurtmalar"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="3"
+                          Margin="20 0 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_8"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Queue">
+                            <StackPanel>
+                                <Image Source="../Images/menuQueue.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Navbat"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="0"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_6"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Report">
+                            <StackPanel>
+                                <Image Source="../Images/menuReport.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Hisobot"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_3"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Debtors">
+                            <StackPanel>
+                                <Image Source="../Images/menuDebtor.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Qarzdorlar"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="2"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_1"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="ProductResidue">
+                            <StackPanel>
+                                <Image Source="../Images/menuResidue.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Tovar qoldiq"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="3"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_2"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="RecieveFaktura">
+                            <StackPanel>
+                                <Image Source="../Images/menuRecieve.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Faktura qabul"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="0"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_4"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="FakturaReport">
+                            <StackPanel>
+                                <Image Source="../Images/RecieveReport.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Faktura hisobot"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="1"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_9"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="ProductMovement">
+                            <StackPanel>
+                                <Image Source="../Images/Pere.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Перемеще́ние"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="2"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_10"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="ProductRetun">
+                            <StackPanel>
+                                <Image Source="../Images/CashBack.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Tovar qaytarib olish"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="3"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}">
+                            <StackPanel>
+                                <Image Source="../Images/Otkaz.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Otkazlar"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="0"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}" Click="Button_Click_11"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Inventory">
+                            <StackPanel>
+                                <Image Source="../Images/Inventory.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Inventarizatsiya"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="1"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}">
+                            <StackPanel>
+                                <Image Source="../Images/ChangePrice.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Narx o'zgartirish"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="2"
+                          Margin="20 15 20 15">
+                        <Button Style="{StaticResource btnMenu}"
+                                Command="{Binding UpdateViewCommand}" CommandParameter="Settings">
+                            <StackPanel>
+                                <Image Source="../Images/Settings.png" Width="45" Height="45" Margin="0 10 0 0"/>
+                                <TextBlock Text="Sozlamalar"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+
+
+                </Grid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</UserControl>

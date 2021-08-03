@@ -1,0 +1,112 @@
+﻿<Application x:Class="DomStroyB2C_MVVM.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM"
+             xmlns:vm="clr-namespace:DomStroyB2C_MVVM.ViewModels"
+             xmlns:views="clr-namespace:DomStroyB2C_MVVM.Views"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+
+            <DataTemplate DataType="{x:Type vm:LoadingViewModel}">
+                <views:LoadingView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:LoginViewModel}">
+                <views:LoginView/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type vm:MainViewModel}">
+                <views:MainView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SaleViewModel}">
+                <views:SaleView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ClientOrderViewModel}">
+                <views:ClientOrder/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ProductResidueViewModel}">
+                <views:ProductResidueView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:RecieveFakturaViewModel}">
+            <views:RecieveFakturaView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SeeFakturaViewModel}">
+                <views:SeeFakturaView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DebtorsViewModel}">
+                <views:DebtorsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DebtorsPayHistoryViewModel}">
+                <views:DebtorsPayHistoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:FakturaReportViewModel}">
+                <views:FakturaReportView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:OrdersViewModel}">
+                <views:OrdersView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ReportViewModel}">
+                <views:ReportView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ProductReturnViewModel}">
+                <views:ProductReturnView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:CashDeskViewModel}">
+                <views:ChashDeskView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:QueueViewModel}">
+                <views:QueueView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:ProductMovementViewModel}">
+                <views:ProductMovementView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:InventoryViewModel}">
+                <views:InventoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:DoingInventoryViewModel}">
+                <views:DoingInventoryView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:MissedProductsViewModel}">
+                <views:MissedProductsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SettingViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SeeEmployeeViewModel}">
+                <views:SeeEmployeeView/>
+            </DataTemplate>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionaries/MainResourceDictionary.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

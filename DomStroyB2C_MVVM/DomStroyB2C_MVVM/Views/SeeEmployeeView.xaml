@@ -1,0 +1,304 @@
+﻿<UserControl x:Class="DomStroyB2C_MVVM.Views.SeeEmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="1250">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="txtInfor">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontSize" Value="22px"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="20 0 0 0"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="#E5E5E5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!--First row blue header-->
+        <Grid Background="#4D638C">
+            <Button Command="{Binding UpdateViewCommand}" CommandParameter="Settings">
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="40"/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="HorizontalAlignment" Value="Left"/>
+                        <Setter Property="Margin" Value="25 0 0 0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#283654"/>
+                                <Setter Property="BorderBrush" Value="#283654"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="../Images/imageback.png" Width="30" Height="30"/>
+            </Button>
+        </Grid>
+
+        <!--Second row for displaying employee information-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--First column for image and client name-->
+            <Border Width="290" Height="280" BorderThickness="1" Margin="0 20 0 0"
+                    Background="#283654" CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+
+                    <!--First row for image-->
+                    <Image Grid.Row="0" Source="../Images/bigEmployeeAdd.png" Width="180" Height="135"/>
+
+                    <!--second row for text-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="Umarjon Maxkamov" Foreground="White" FontFamily="Segoe UI" FontSize="18px" VerticalAlignment="Center" HorizontalAlignment="Left"
+                                   Margin="20 0 0 0" Width="180"/>
+                        
+                        
+                        <Grid Margin="20 0 0 0">
+                            <Rectangle x:Name="Back" Fill="#FFADABAD" HorizontalAlignment="Left" Height="21" VerticalAlignment="Center" Width="50" RadiusX="10" RadiusY="10"
+                                       MouseLeftButtonDown="Back_MouseLeftButtonDown"/>
+                            <Ellipse x:Name="Dot" HorizontalAlignment="Center" Height="15.89" VerticalAlignment="Center" Width="15.89" Fill="#4D638C" Margin="0"
+                                     MouseLeftButtonDown="Dot_MouseLeftButtonDown"/>
+                        </Grid>
+                        <!--Toggle button-->
+                        
+                    </StackPanel>
+
+
+                </Grid>
+            </Border>
+
+            <!--Second column for client information-->
+            <Border  Grid.Column="1" CornerRadius="8" BorderThickness="1" Background="White" Height="280" Margin="20 20 20 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="33"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <!--first row for first name-->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Ismi : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="Umarjon"/>
+                    </StackPanel>
+
+                    <!--second row for last name-->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Familiyasi : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="Maxkamov"/>
+                    </StackPanel>
+
+                    <!--third row for phone number-->
+                    <StackPanel Grid.Row="3" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Telefon raqami : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="+998 99 603-16-18"/>
+                    </StackPanel>
+
+                    <!--4th row for Login-->
+                    <StackPanel Grid.Row="4" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Login : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="Umarjon@live.net"/>
+                    </StackPanel>
+
+                    <!--5th row for password-->
+                    <StackPanel Grid.Row="5" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Parol : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="3225"/>
+                    </StackPanel>
+
+                    <!--6th row for condition-->
+                    <StackPanel Grid.Row="6" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource txtInfor}" 
+                                   Text="Holati : " Margin="45,0,0,0"/>
+                        <TextBlock Style="{StaticResource txtInfor}" Text="aktiv"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <!--Third row for search and add employee-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="270"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--First column for search-->
+            <Grid>
+                <TextBox Style="{StaticResource txtSearch}" 
+                     Width="524" Height="38" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                     Margin="270 0 20 0" Padding="30 5 50 5"/>
+
+                <Image Source="../Images/search.png" Height="20" Width="20"
+                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                   Margin="770 0 35 0"/>
+            </Grid>
+
+            <!--Second column for employee add button-->
+            <Button Grid.Column="1" Style="{StaticResource btnSell}" Width="243px" Height="40px" Margin="0 0 20 0">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Images/bigemployeeAdd.png" Width="32" Height="24" Margin="-20 0 0 0"/>
+                    <TextBlock Text="Hodim qo'shish" FontSize="18px" Margin="28 0 0 0"/>
+                </StackPanel>
+                
+            </Button>
+            
+        </Grid>
+        
+        <!--4th row for datagrid-->
+        <Grid Grid.Row="3" Margin="0 5 0 0">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridEmployee" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    Background="#FFFFFF"
+                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          Margin="25 0 25 0">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="50"/>
+                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
+                                            CornerRadius="10 10 0 0"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="№" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Ism" Binding="{Binding first_name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Familiya" Binding="{Binding last_name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Lavozim" Binding="{Binding staff}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Login" Binding="{Binding staff}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.Header>
+                                <TextBlock Width="150" Text="Parol" TextAlignment="Center"/>
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox   Text="{Binding password}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Telefon raqami" Binding="{Binding staff}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Aktivligi" Binding="{Binding staff}" IsReadOnly="True" Width="150*"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+        
+        
+    </Grid>
+</UserControl>
