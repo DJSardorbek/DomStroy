@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
         xmlns:mateilDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-        Title="PaymentView" Height="575" Width="966" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ResizeMode="NoResize"
+        Title="PaymentView" Height="575" Width="966" AllowsTransparency="True" WindowStyle="None" 
+        Background="{x:Null}" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         BorderBrush="#C0C0C0" BorderThickness="1">
     <Window.Resources>
@@ -23,7 +25,7 @@
             <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
             <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
             <Setter Property="AllowDrop" Value="True" />
-            <Setter Property="CaretBrush" Value="#283654"/>
+            <Setter Property="CaretBrush" Value="#FFFFFF"/>
             <!---->
             <Setter Property="Width" Value="235"/>
             <Setter Property="Height" Value="54"/>
@@ -33,7 +35,6 @@
             <Setter Property="Background" Value="#6783B8"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="FontSize" Value="20px"/>
-            <Setter Property="Text" Value="Sodiqjonov Sardorbek"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
@@ -48,11 +49,11 @@
 
                             <TextBlock IsHitTestVisible="False"
                                    Text="{TemplateBinding Tag}"
-                                   Padding="100 10 0 5">
+                                   Padding="60 15 5 5">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
-                                        <Setter Property="Foreground" Value="#A8A0A0"/>
+                                        <Setter Property="Foreground" Value="#EFEEEF"/>
                                         <Setter Property="FontFamily" Value="Segoe UI"/>
                                         <Setter Property="FontSize" Value="15px"/>
                                         <Style.Triggers>
@@ -159,7 +160,7 @@
         <Grid Grid.Column="0" Background="#4D638C">
             <Grid.RowDefinitions>
                 <RowDefinition Height="210"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="330"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -174,20 +175,131 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
-                        <TextBox Style="{StaticResource txtClient}" Margin="34 0 0 0" />
+                        <TextBox Style="{StaticResource txtClient}" Margin="34 0 0 0" 
+                                 Tag="Mijozni tanlang...">
+                            <TextBox.Text>
+                                <Binding Path="Search" Mode="TwoWay"
+                                         UpdateSourceTrigger="PropertyChanged"/>
+                            </TextBox.Text>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
 
                     <Grid Grid.Column="1" Background="#6783B8" Height="54" Margin="0 0 32 0">
-                        <Button Style="{StaticResource btnClient}" Cursor="Hand">
-                            <Image Source="../Images/carbonmenu.png" Width="40" Height="40"/>
+                        <Button Style="{StaticResource btnClient}" Cursor="Hand"
+                                Command="{Binding ClientVisibilityCommand}">
+                            <Image Source="../Images/arrow.png" Width="24" Height="14"/>
                         </Button>
                     </Grid>
                 </Grid>
 
             </StackPanel>
 
+            <Grid Grid.Row="1" Margin="0 -66 0 0" Visibility="{Binding ClientDataGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                
+                <!--first row for datagrid-->
+                <ScrollViewer x:Name="scrollViewer1" VerticalScrollBarVisibility="Disabled">
+                    <ScrollViewer.Style>
+                        <Style TargetType="ScrollViewer">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                    <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ScrollViewer.Style>
+                    <DataGrid x:Name="dataGridClient" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                              Width="Auto"
+                              HorizontalGridLinesBrush="#E3E2E2"
+                              AutoGenerateColumns="False"
+                              GridLinesVisibility="Horizontal"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              IsReadOnly="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserSortColumns="False"
+                              Background="#FFFFFF"
+                              BorderThickness="0" BorderBrush="#C0C0C0" 
+                              SelectionMode="Single" SelectionUnit="FullRow"
+                              Margin="35 0 32 0"
+                              ItemsSource="{Binding ClientList}"
+                              SelectedItem="{Binding Path=Client, Mode=TwoWay}"
+                              >
+                        <DataGrid.InputBindings>
+                            <KeyBinding
+                            Key="Enter"
+                            Command="{Binding MoveBasket}"/>
+                        </DataGrid.InputBindings>
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                                <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                            </Style>
+                            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="#7A7979"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Height" Value="38"/>
+                                <Setter Property="TextBlock.TextAlignment" Value="Left" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#B6E0FF"/>
+                                    </Trigger>
+
+                                </Style.Triggers>
+                            </Style>
+
+
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            </Style>
+
+
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                                <Setter Property="Background" Value="#283654"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Style.Triggers>
+
+                                </Style.Triggers>
+                            </Style>
+                            <!--Scrolbar uchun style-->
+                            <Style TargetType="ScrollBar">
+                                <Setter Property="Background" Value="#263859"/>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mijoz" Binding="{Binding Path=FullName}" IsReadOnly="True" Width="*"/>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+
+                </ScrollViewer>
+                
+                <!--second row for add client button-->
+                <Button Grid.Row="1" Style="{StaticResource btnClient}"
+                        Margin="35 4 32 0"
+                        Command="{Binding AddClientCommand}">
+                    <TextBlock Text="+ Yangi mijoz qo'shish" FontFamily="Segoe UI"
+                               FontSize="14px" Foreground="White"/>
+                </Button>
+            </Grid>
+            
             <!--second row client information-->
-            <StackPanel Grid.Row="1">
+            <StackPanel Grid.Row="1" Visibility="Collapsed">
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 20 ">
                     <Run Text="To'plangan ball: "/>
@@ -216,7 +328,7 @@
             </StackPanel>
 
             <!--Third row for debt-->
-            <StackPanel Grid.Row="2" Margin="0 10 0 0">
+            <StackPanel Grid.Row="2" Margin="0 10 0 0" Visibility="Collapsed">
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 0 ">
                     <Run Text="Nasiya miqdori: "/>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomStroyB2C_MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,29 +23,16 @@ namespace DomStroyB2C_MVVM.Views
         public PaymentView()
         {
             InitializeComponent();
-            comboCurrency.SelectedIndex = 1;
+            comboCurrency.SelectedIndex = 0;
+            
+            this.DataContext = new PaymentViewModel();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-
-        private void btnMaxsimaze_Click(object sender, RoutedEventArgs e)
-        {
-            if (Height == 700)
-            {
-                Height = 850;
-                Top -= 75;
-                return;
-            }
-            else
-            {
-                Height = 700;
-                Top += 75;
-                return;
-            }
-        }
+        
         int i = 0;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
