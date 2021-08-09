@@ -17,13 +17,20 @@ namespace DomStroyB2C_MVVM.ViewModels
         public PaymentViewModel()
         {
             ClientDataGrid = Visibility.Collapsed;
+            CalendarVisibility = Visibility.Collapsed;
+            ClientInfoVisibility = Visibility.Collapsed;
             addClientCommand = new RelayCommand(OpenAddClientWindow);
             clientVisibilityCommand = new RelayCommand(SetClientVisibility);
             searchCommand = new RelayCommand(SearchClient);
+            changeCurrencyCommand = new RelayCommand(ChangeCurrency);
             objDbAccess = new DBAccess();
             tbClient = new DataTable();
             GetClientList();
+            GetCurrency();
             Search = "";
+            Total_sum = "2120000";
+            CurrencyType = "So'm";
+            CurrencyVisibility = Visibility.Collapsed;
         }
 
         #endregion
@@ -31,7 +38,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         #region Private Fields
 
         /// <summary>
-        /// The Visibility valur to bind clientDataGrid
+        /// The Visibility value to bind clientDataGrid
         /// </summary>
         private Visibility clientDataGrid;
 
@@ -40,6 +47,26 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return clientDataGrid; }
             set { clientDataGrid = value; OnPropertyChanged("ClientDataGrid"); }
         }
+
+        /// <summary>
+        /// The visibility value to bind calendar
+        /// </summary>
+        private Visibility calendarVisibility;
+
+        public Visibility CalendarVisibility
+        {
+            get { return calendarVisibility; }
+            set { calendarVisibility = value; OnPropertyChanged("CalendarVisibility"); }
+        }
+
+        private Visibility clientInfoVisibility;
+
+        public Visibility ClientInfoVisibility
+        {
+            get { return clientInfoVisibility; }
+            set { clientInfoVisibility = value; OnPropertyChanged("ClientInfoVisibility"); }
+        }
+
 
         /// <summary>
         /// The choosen client
@@ -83,12 +110,56 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return tbClient; }
         }
 
+        /// <summary>
+        /// The text of txtSearch
+        /// </summary>
         private string search;
 
         public string Search
         {
             get { return search; }
             set { search = value; OnPropertyChanged("Search"); }
+        }
+
+        /// <summary>
+        /// The currency
+        /// </summary>
+        private string curreny;
+
+        public string Currency
+        {
+            get { return curreny; }
+            set { curreny = value; OnPropertyChanged("Currency"); }
+        }
+
+        /// <summary>
+        /// The total sum
+        /// </summary>
+        private string total_sum;
+
+        public string Total_sum
+        {
+            get { return total_sum; }
+            set { total_sum = value; OnPropertyChanged("Total_sum"); }
+        }
+
+        /// <summary>
+        /// The currency type
+        /// </summary>
+        private string currencyType;
+
+        public string CurrencyType
+        {
+            get { return currencyType; }
+            set { currencyType = value; OnPropertyChanged("CurrencyType"); }
+        }
+
+        private Visibility currencyVisibility;
+
+        public Visibility CurrencyVisibility
+        {
+            get { return currencyVisibility; }
+            set { currencyVisibility = value;  OnPropertyChanged("CurrencyVisibility"); }
         }
 
 
@@ -124,6 +195,13 @@ namespace DomStroyB2C_MVVM.ViewModels
         public RelayCommand SearchCommand
         {
             get { return searchCommand; }
+        }
+
+        private RelayCommand changeCurrencyCommand;
+
+        public RelayCommand ChangeCurrencyCommand
+        {
+            get { return changeCurrencyCommand; }
         }
 
 
@@ -211,6 +289,52 @@ namespace DomStroyB2C_MVVM.ViewModels
             {
                 GetClientList();
                 ClientDataGrid = Visibility.Collapsed;
+            }
+        }
+
+        /// <summary>
+        /// The function to get currency
+        /// </summary>
+        public void GetCurrency()
+        {
+            string queryToCurrency = "select * from currency";
+            using(DataTable tbCurrency = new DataTable())
+            {
+                ObjDbAccess.readDatathroughAdapter(queryToCurrency, tbCurrency);
+                if(!string.IsNullOrEmpty(tbCurrency.Rows[0]["real_currency"].ToString()))
+                {
+                    Currency = tbCurrency.Rows[0]["real_currency"].ToString();
+                }
+                else
+                {
+                    Currency = "0";
+                }
+            }
+        }
+
+        public void ChangeCurrency()
+        {
+            if(CurrencyType == "So'm")
+            {
+                double _dTotalSum = double.Parse(Total_sum);
+                double _dCurrency = double.Parse(Currency);
+                double _dResult = _dTotalSum / _dCurrency;
+                _dResult = Math.Round(_dResult, 3);
+                Total_sum = _dResult.ToString();
+                CurrencyType = "Dollar";
+                CurrencyVisibility = Visibility.Visible;
+                return;
+            }
+            else
+            {
+                double _dTotalSum = double.Parse(Total_sum);
+                double _dCurrency = double.Parse(Currency);
+                double _dResult = _dTotalSum * _dCurrency;
+                _dResult = Math.Round(_dResult, 3);
+                Total_sum = _dResult.ToString();
+                CurrencyType = "So'm";
+                CurrencyVisibility = Visibility.Collapsed;
+                return;
             }
         }
 

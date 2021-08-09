@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
              d:DesignHeight="650" d:DesignWidth="1200">
@@ -34,8 +35,8 @@
                               Margin="0 10 10 10"
                     BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
                         AlternationCount="2"   
-                          SelectedItem="{Binding Path=Queue}"
-                            ItemsSource="{Binding Path=QueueList}">
+                          SelectedItem="{Binding Path=Queue, Mode=TwoWay}"
+                            ItemsSource="{Binding Path=QueueList, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -113,6 +114,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Style="{StaticResource btnPlus}" Width="60">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.TakeToBasketCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                     <materialDesign:PackIcon Kind="Plus" Width="20" Height="20"  Foreground="White"/>
                                 </Button>
                             </DataTemplate>
@@ -126,6 +132,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Style="{StaticResource btnCancel}" Width="60">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Click">
+                                            <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.CancelShopCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
                                     <Image Source="../Images/cancelRecieve.png" Width="20" Height="20"/>
                                 </Button>
                             </DataTemplate>

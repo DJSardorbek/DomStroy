@@ -8,6 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/arrow.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/message.error.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/message.success.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/message.warning.png")]
 
 

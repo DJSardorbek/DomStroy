@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views.ModalViews"
         mc:Ignorable="d"
-        Title="BasketView" Height="600" Width="400"
+        Title="BasketView" Height="550" Width="400"
         AllowsTransparency="True" 
         WindowStyle="None" 
         ResizeMode="NoResize"
@@ -137,7 +137,6 @@
                     <RowDefinition Height="64"/>
                     <RowDefinition Height="64"/>
                     <RowDefinition Height="64"/>
-                    <RowDefinition Height="64"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
@@ -220,32 +219,8 @@
                                Foreground="#A7A7A7" Width="80" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
                                Margin="-220,-28,0,0" Background="White"/>
                 </Grid>
-
-                <!--5th row currency-->
+                <!--5th row price-->
                 <Grid Grid.Row="4" Background="White">
-
-                    <TextBox Width="324" Height="45" Text="{Binding Product.Currency}"/>
-
-                    <StackPanel Orientation="Horizontal"
-                        Margin="-220,-28,0,0"  
-                        VerticalAlignment="Center" HorizontalAlignment="Center"
-                        Width="80"
-                        Background="White">
-                        <TextBlock Text="Karta raqami" FontFamily="Segoe UI" FontSize="10px"
-                               Foreground="#A7A7A7"  TextAlignment="Center"
-                                
-                                   Margin="5 0 0 0"/>
-
-                        <TextBlock Text="*" FontFamily="Segoe UI" FontSize="18px"
-                               Foreground="Red" Width="15" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
-                                Background="White"
-                                   Margin="0 5 0 0"/>
-
-                    </StackPanel>
-                </Grid>
-
-                <!--6th row price-->
-                <Grid Grid.Row="5" Background="White">
 
                     <TextBox Width="324" Height="45" Text="{Binding Product.Selling_price}"/>
 
@@ -268,7 +243,7 @@
                 </Grid>
 
                 <!--6th row product-->
-                <Grid Grid.Row="6" Background="White">
+                <Grid Grid.Row="5" Background="White">
 
                     <TextBox Width="324" Height="45" Text="{Binding Product.Selling_price}"
                              Tag="kun.oy.yil"/>
@@ -292,7 +267,7 @@
                 </Grid>
 
                 <!--7th row for buttons-->
-                <Border CornerRadius="0 0 10 10" Grid.Row="7"
+                <Border CornerRadius="0 0 10 10" Grid.Row="6"
                     Background="White">
                     <Grid>
                         <Grid.ColumnDefinitions>

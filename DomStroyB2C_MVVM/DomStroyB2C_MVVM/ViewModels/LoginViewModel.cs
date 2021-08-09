@@ -161,8 +161,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 // If this staff is new, we insert him to local Db
                                 if (tbStaff.Rows.Count == 0)
                                 {
-                                    MySqlCommand cmdInsert = new MySqlCommand("insert into staff (id,first_name,token,password,role) " +
-                                        "values('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "')");
+                                    MySqlCommand cmdInsert = new MySqlCommand("insert into staff (id,first_name,token,password,role,section) " +
+                                        "values('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "','"+Employee.data.section+"')");
                                     ObjDbContext.executeQuery(cmdInsert);
                                     cmdInsert.Dispose();
                                 }
@@ -171,13 +171,15 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 if (tbStaff.Rows.Count == 1)
                                 {
                                     MySqlCommand cmdUpdate = new MySqlCommand("update staff set first_name='" + Employee.data.first_name + "', " +
-                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "'");
+                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "', section= '"+Employee.data.section+"' " +
+                                                                "where password='"+Password+"'");
                                     ObjDbContext.executeQuery(cmdUpdate);
                                     cmdUpdate.Dispose();
                                 }
 
                                 MainWindowViewModel.user_password = Password;
                                 MainWindowViewModel.user_id = Employee.data.id;
+                                MainWindowViewModel.section = Employee.data.section;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
                                 //LoginVisibility = false;

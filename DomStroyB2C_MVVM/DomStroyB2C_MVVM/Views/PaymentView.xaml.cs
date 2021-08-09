@@ -24,8 +24,6 @@ namespace DomStroyB2C_MVVM.Views
         {
             InitializeComponent();
             comboCurrency.SelectedIndex = 0;
-            
-            this.DataContext = new PaymentViewModel();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -58,6 +56,20 @@ namespace DomStroyB2C_MVVM.Views
                 txtCurrencyType.Text = "So'm";
                 txtCurrency.Visibility = Visibility.Collapsed;
                 return;
+            }
+        }
+
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (dataGridClient.Visibility == Visibility.Visible)
+            {
+                if (e.Key == Key.Down)
+                {
+                    dataGridClient.SelectedIndex = 0;
+                    var u = e.OriginalSource as UIElement;
+                    e.Handled = true;
+                    u.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
+                }
             }
         }
     }

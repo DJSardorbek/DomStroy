@@ -1,0 +1,57 @@
+﻿<Window x:Class="DomStroyB2C_MVVM.Views.ModalViews.MessageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views.ModalViews"
+        mc:Ignorable="d"
+        Title="MessageView" Height="350" Width="450"
+        WindowStartupLocation="CenterScreen" WindowStyle="None"
+        ResizeMode="NoResize" AllowsTransparency="True"
+        Background="{x:Null}">
+    <Border CornerRadius="10" BorderThickness="1"
+            BorderBrush="#C0C0C0" Background="White">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!--first row blue background-->
+            <Border Grid.Row="0"
+                    CornerRadius="10 10 0 0" 
+                    Background="#283654">
+                <TextBlock Text="Xabar" FontFamily="Segoe UI" FontSize="22"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="White"/>
+            </Border>
+
+            <!--second row for display message-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <!--first row for image and message-->
+                <StackPanel>
+                    <Image Source="../../Images/message.Error.png" Width="64" Height="64"
+                           Margin="0 50 0 0"/>
+                    <TextBlock Text="Tovarlar buyurtmaga o'tkazildi, Iltimos tekshirib qaytadan urinib ko'ring!" FontFamily="Segoe UI"
+                               FontSize="20px" VerticalAlignment="Center" HorizontalAlignment="Center"
+                               TextWrapping="Wrap"
+                               Padding="18"/>
+                </StackPanel>
+                
+                <!--second row for OK button-->
+                <Button x:Name="btnOk" Grid.Row="1" Style="{StaticResource btnBorder5}"
+                        Width="180" Height="40"
+                        Click="btnOk_Click">
+                    <TextBlock Text="OK" FontFamily="Segoe UI" FontSize="14px"
+                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="White"/>
+                </Button>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

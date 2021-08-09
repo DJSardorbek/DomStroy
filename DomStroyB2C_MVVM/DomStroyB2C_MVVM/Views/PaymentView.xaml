@@ -176,7 +176,8 @@
 
                     <Grid Grid.Column="0">
                         <TextBox Style="{StaticResource txtClient}" Margin="34 0 0 0" 
-                                 Tag="Mijozni tanlang...">
+                                 Tag="Mijozni tanlang..."
+                                 KeyUp="TextBox_KeyUp">
                             <TextBox.Text>
                                 <Binding Path="Search" Mode="TwoWay"
                                          UpdateSourceTrigger="PropertyChanged"/>
@@ -299,18 +300,8 @@
             </Grid>
             
             <!--second row client information-->
-            <StackPanel Grid.Row="1" Visibility="Collapsed">
-                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
-                           Margin="47 0 0 20 ">
-                    <Run Text="To'plangan ball: "/>
-                    <Run Text="70"/>
-                </TextBlock>
-
-                <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
-                           Margin="47 0 0 20 ">
-                    <Run Text="Diskount karta: "/>
-                    <Run Text="70"/>
-                </TextBlock>
+            <StackPanel Grid.Row="1" Visibility="{Binding ClientInfoVisibility}">
+                
 
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 20 ">
@@ -328,7 +319,7 @@
             </StackPanel>
 
             <!--Third row for debt-->
-            <StackPanel Grid.Row="2" Margin="0 10 0 0" Visibility="Collapsed">
+            <StackPanel Grid.Row="2" Margin="0 -200 0 0" Visibility="{Binding CalendarVisibility}">
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 0 ">
                     <Run Text="Nasiya miqdori: "/>
@@ -439,22 +430,23 @@
                                     <ColumnDefinition Width="46"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock x:Name="txtCurrencyType" Text="So'm"
+                                    <TextBlock x:Name="txtCurrencyType" Text="{Binding Path=CurrencyType, Mode=TwoWay}"
                                            FontFamily="Segoe UI" FontSize="20px"
                                            VerticalAlignment="Center" Foreground="#283654" HorizontalAlignment="Left"
                                            Margin="15 0 0 0"/>
                                     <TextBlock x:Name="txtCurrency" Width="90"
-                                           Visibility="Collapsed"
+                                           Visibility="{Binding Path=CurrencyVisibility, Mode=TwoWay}"
                                            FontFamily="Segoe UI" FontSize="14px"
                                            VerticalAlignment="Bottom" Foreground="#283654" 
                                            FontWeight="SemiBold"
                                            Margin="10 0 0 10">
                                     <Run Text="kursi: "/>
-                                    <Run Text="10700"/>
+                                    <Run Text="{Binding Path=Currency, Mode=TwoWay}"/>
                                     </TextBlock>
                                 </StackPanel>
 
-                                <Button x:Name="btnChangeCurrency" Click="btnChangeCurrency_Click" Grid.Column="1" Width="46" Tag="Valyuta" 
+                                <Button x:Name="btnChangeCurrency" Grid.Column="1" Width="46" Tag="Valyuta"
+                                        Command="{Binding ChangeCurrencyCommand}"
                                 Style="{StaticResource btnClient}"
                                 Cursor="Hand">
                                     <Image Source="../Images/changeCurrency.png" Width="19" Height="19"/>
@@ -468,7 +460,7 @@
                             BorderBrush="#283654" Width="333" 
                             Height="52">
 
-                            <TextBlock Text="1 500 000" FontSize="20px"
+                            <TextBlock Text="{Binding Path=Total_sum, Mode=TwoWay}" FontSize="20px"
                                    FontFamily="Segoe UI" Foreground="#283654"
                                    VerticalAlignment="Center" Margin="20 0 0 0"/>
                         </Border>

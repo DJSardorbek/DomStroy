@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
              d:DesignHeight="730" d:DesignWidth="1250">
@@ -38,21 +39,24 @@
                     </Style>
                 </ScrollViewer.Style>
                 <DataGrid x:Name="dataGridCash" Visibility="Visible"
-                              HorizontalScrollBarVisibility="Auto" 
-                    Width="Auto"
-                    HorizontalGridLinesBrush="#E3E2E2"
-                    AutoGenerateColumns="False"
-                    GridLinesVisibility="Horizontal"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    IsReadOnly="False"
-                    CanUserReorderColumns="False"
-                    CanUserResizeColumns="False"
-                    CanUserResizeRows="False"
-                    Background="#FFFFFF"
-                              Margin="20"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
+                          HorizontalScrollBarVisibility="Auto" 
+                          Width="Auto"
+                          HorizontalGridLinesBrush="#E3E2E2"
+                          AutoGenerateColumns="False"
+                          GridLinesVisibility="Horizontal"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          IsReadOnly="False"
+                          CanUserReorderColumns="False"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
+                          Background="#FFFFFF"
+                          Margin="20"
+                          BorderThickness="1" SelectionMode="Single" 
+                          SelectionUnit="FullRow"
+                          AlternationCount="2"
+                          ItemsSource="{Binding ShopList}"
+                          SelectedItem="{Binding Path=Shop, Mode=TwoWay}"
                           >
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
@@ -118,12 +122,12 @@
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="№" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
-                        <DataGridTextColumn Header="Mijoz" Binding="{Binding client}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Sotuvchi" Binding="{Binding saler}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="So'mda" Binding="{Binding som}" IsReadOnly="True" Width="150"/>
-                        <DataGridTextColumn Header="Dollarda" Binding="{Binding dollar}" IsReadOnly="True" Width="150"/>
-                        <DataGridTextColumn Header="Sana" Binding="{Binding date}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Chek" Binding="{Binding Id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Izoh" Binding="{Binding Comment}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Sotuvchi" Binding="{Binding Seller}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Summa so'm" Binding="{Binding SumSom}" IsReadOnly="True" Width="150"/>
+                        <DataGridTextColumn Header="Summ dollar" Binding="{Binding SumDollar}" IsReadOnly="True" Width="150"/>
+                        <DataGridTextColumn Header="Sana" Binding="{Binding Date}" IsReadOnly="True" Width="150*"/>
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
                                 <TextBlock Text="To'lov" Width="120 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
@@ -131,6 +135,11 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Style="{StaticResource btnPlus}" Width="100">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="Click">
+                                                <i:InvokeCommandAction Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.OpenPaymentCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
                                         <Image Source="../Images/Pay.png" Width="20" Height="20"/>
                                     </Button>
                                 </DataTemplate>

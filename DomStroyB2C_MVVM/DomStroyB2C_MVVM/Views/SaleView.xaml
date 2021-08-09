@@ -473,7 +473,8 @@
                         </Button>
                     </Grid>
                     <Grid Grid.Column="1" Margin="0 0 20 0">
-                        <Button Style="{StaticResource btnSell}" Click="Button_Click_1">
+                        <Button Style="{StaticResource btnSell}" Click="Button_Click_1"
+                               Command="{Binding SeperateShopCommand}">
                             <StackPanel Orientation="Horizontal" Width="230">
                                 <Image Source="../Images/SellCash1.png" Height="33" Width="33" Margin="25 0 0 0"/>
                                 <TextBlock Text="Kassa" FontSize="18px" Foreground="#FFFFFF"

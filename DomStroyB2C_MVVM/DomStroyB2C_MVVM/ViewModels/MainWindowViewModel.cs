@@ -13,6 +13,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public static string user_password = "";
         public static int user_id = 0;
+        public static int section = 0;
 
         #region Constructor
 

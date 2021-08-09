@@ -18,9 +18,9 @@ namespace DomStroyB2C_MVVM.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            PaymentView view = new PaymentView();
+            //PaymentView view = new PaymentView();
 
-            view.ShowDialog();
+            //view.ShowDialog();
 
         }
 
