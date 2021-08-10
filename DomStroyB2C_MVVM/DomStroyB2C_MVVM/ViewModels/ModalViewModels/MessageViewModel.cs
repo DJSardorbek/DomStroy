@@ -39,4 +39,5 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
 
         #endregion
     }
+
 }

@@ -1,7 +1,9 @@
 ﻿
 using DomStroyB2C_MVVM.Commands;
 using DomStroyB2C_MVVM.Models;
+using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
 using DomStroyB2C_MVVM.Views.Loading;
+using DomStroyB2C_MVVM.Views.ModalViews;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
@@ -179,6 +181,7 @@ namespace DomStroyB2C_MVVM.ViewModels
 
                                 MainWindowViewModel.user_password = Password;
                                 MainWindowViewModel.user_id = Employee.data.id;
+                                MainWindowViewModel.user_token = Employee.token;
                                 MainWindowViewModel.section = Employee.data.section;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
@@ -190,12 +193,20 @@ namespace DomStroyB2C_MVVM.ViewModels
                 // If the response is error
                 else
                 {
-                    System.Windows.MessageBox.Show($"{task.Result}");
+                    MessageView message = new MessageView()
+                    {
+                        DataContext = new MessageViewModel("../../Images/message.Error.png", "Parol noto'g'ri kiritildi, qaytadan urinib ko'ring!")
+                    };
+                    message.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(ex.Message);
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Error.png", ex.Message)
+                };
+                message.ShowDialog();
             }
             #endregion
         }

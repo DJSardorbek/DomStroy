@@ -695,10 +695,15 @@ namespace DomStroyB2C_MVVM.ViewModels
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
-                MessageBox.Show("Tovarlar bekor qilindi!");
                 started_shop = false;
                 GetBasketList();
                 SumSomDollar();
+
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Cancel.png", "Tovarlar muvaffaqiyatli bekor qilindi!")
+                };
+                message.ShowDialog();
             }
         }
 
@@ -863,10 +868,15 @@ namespace DomStroyB2C_MVVM.ViewModels
             cmd = new MySqlCommand("update shopid set shop=0 where password='" + MainWindowViewModel.user_password + "'");
             ObjDbAccess.executeQuery(cmd);
             cmd.Dispose();
-            MessageBox.Show("Tovarlar kassaga muvaffaqiyatli o'tkazildi!");
             started_shop = false;
             GetBasketList();
             SumSomDollar();
+            MessageView message = new MessageView()
+            {
+                DataContext = new MessageViewModel("../../Images/message.Success.png", "Tovarlar kassaga muvaffaqiyatli o'tkazildi!")
+            };
+            message.ShowDialog();
+            
         }
     }
 

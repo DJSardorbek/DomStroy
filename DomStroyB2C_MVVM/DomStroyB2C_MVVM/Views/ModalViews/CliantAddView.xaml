@@ -140,10 +140,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <!--First row product-->
+                <!--First row firstName-->
                 <Grid Grid.Row="0" Background="White">
 
-                    <TextBox x:Name="txtFirstName" Width="324" Height="45" Text="{Binding Path=Product.Name}"/>
+                    <TextBox Width="324" Height="45">
+                        <TextBox.Text>
+                            <Binding Path="FirstName" 
+                                     UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                    </TextBox>
+                             
 
                     <StackPanel Orientation="Horizontal"
                         Margin="-270,-22,0,0"  
@@ -164,10 +170,17 @@
                     
                 </Grid>
 
-                <!--Second row producer-->
+                <!--Second row lastName-->
                 <Grid Grid.Row="1" Background="White">
 
-                    <TextBox Width="324" Height="45" Text="{Binding Path=Product.Producer}"/>
+                    <TextBox Width="324" Height="45">
+                        <TextBox.Text>
+                            <Binding Path="LastName"
+                                 UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                        
+                    </TextBox> 
+                             
 
                     <StackPanel Orientation="Horizontal"
                         Margin="-240,-28,0,0"  
@@ -187,11 +200,15 @@
                     </StackPanel>
                 </Grid>
 
-                <!--Third row maesurement-->
+                <!--Third row phone_1-->
                 <Grid Grid.Row="2" Background="White">
 
-                    <TextBox Width="324" Height="45" Text="{Binding Product.Measurement}"/>
-
+                    <TextBox Width="324" Height="45">
+                        <TextBox.Text>
+                            <Binding Path="Phone_1"
+                                     UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                    </TextBox>
                     <StackPanel Orientation="Horizontal"
                         Margin="-200,-28,0,0"  
                         VerticalAlignment="Center" HorizontalAlignment="Center"
@@ -210,19 +227,29 @@
                     </StackPanel>
                 </Grid>
 
-                <!--4th row amount-->
+                <!--4th row phone_2-->
                 <Grid Grid.Row="3" Background="White">
 
-                    <TextBox Width="324" Height="45" Text="{Binding Product.Amount}"/>
+                    <TextBox Width="324" Height="45">
+                        <TextBox.Text>
+                            <Binding Path="Phone_2"
+                                     UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                    </TextBox> 
 
                     <TextBlock Text="Telefon raqami_2" FontFamily="Segoe UI" FontSize="10px"
                                Foreground="#A7A7A7" Width="80" VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center"
                                Margin="-220,-28,0,0" Background="White"/>
                 </Grid>
-                <!--5th row price-->
+                <!--5th row address-->
                 <Grid Grid.Row="4" Background="White">
 
-                    <TextBox Width="324" Height="45" Text="{Binding Product.Selling_price}"/>
+                    <TextBox Width="324" Height="45">
+                        <TextBox.Text>
+                            <Binding Path="Phone_2"
+                                     UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                    </TextBox> 
 
                     <StackPanel Orientation="Horizontal"
                         Margin="-240,-28,0,0"  
@@ -242,11 +269,16 @@
                     </StackPanel>
                 </Grid>
 
-                <!--6th row product-->
+                <!--6th row birthDate-->
                 <Grid Grid.Row="5" Background="White">
 
-                    <TextBox Width="324" Height="45" Text="{Binding Product.Selling_price}"
-                             Tag="kun.oy.yil"/>
+                    <TextBox Width="324" Height="45" Tag="kun.oy.yil">
+                        <TextBox.Text>
+                            <Binding Path="BirthDate"
+                                     UpdateSourceTrigger="PropertyChanged"/>
+                        </TextBox.Text>
+                    </TextBox> 
+                             
 
                     <StackPanel Orientation="Horizontal"
                         Margin="-200,-28,0,0"  
@@ -277,7 +309,7 @@
 
                         <Button x:Name="btnSubmit" Grid.Column="0" Tag="Save"
                                 
-                                Command="{Binding SubmitCommand}"/>
+                                Command="{Binding PostClientCommand}"/>
                         <Button x:Name="btnCancel" Grid.Column="1" Tag="Cancel"
                                 Click="btnCancel_Click"/>
                     </Grid>

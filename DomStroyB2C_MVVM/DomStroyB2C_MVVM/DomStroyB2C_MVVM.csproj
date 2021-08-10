@@ -117,6 +117,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="API\AllApi.cs" />
+    <Compile Include="API\Client\ClientModel.cs" />
+    <Compile Include="API\Client\ClientService\ClientService.cs" />
+    <Compile Include="API\Client\IClientService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
     <Compile Include="DBAccess.cs" />
@@ -738,6 +742,10 @@
     <Resource Include="Images\message.Success.png" />
     <Resource Include="Images\message.Warning.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\message.Cancel.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

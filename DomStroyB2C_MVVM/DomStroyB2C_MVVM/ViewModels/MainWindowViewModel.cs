@@ -11,8 +11,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// user_password and user_id of user
         /// </summary>
-        public static string user_password = "";
+        public static string user_password = string.Empty;
         public static int user_id = 0;
+        public static string user_token = string.Empty;
         public static int section = 0;
 
         #region Constructor
@@ -29,7 +30,6 @@ namespace DomStroyB2C_MVVM.ViewModels
         }
 
         #endregion
-
 
         #region private values
 
@@ -70,7 +70,6 @@ namespace DomStroyB2C_MVVM.ViewModels
         }
 
         #endregion
-
 
         #region Commands
 

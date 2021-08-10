@@ -35,9 +35,9 @@
 
                 <!--first row for image and message-->
                 <StackPanel>
-                    <Image Source="../../Images/message.Error.png" Width="64" Height="64"
+                    <Image Source="{Binding Image}" Width="64" Height="64"
                            Margin="0 50 0 0"/>
-                    <TextBlock Text="Tovarlar buyurtmaga o'tkazildi, Iltimos tekshirib qaytadan urinib ko'ring!" FontFamily="Segoe UI"
+                    <TextBlock Text="{Binding Message}"
                                FontSize="20px" VerticalAlignment="Center" HorizontalAlignment="Center"
                                TextWrapping="Wrap"
                                Padding="18"/>

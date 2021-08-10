@@ -87,7 +87,11 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
             ObjDbAccess.executeQuery(cmdShopId);
             cmdShopId.Dispose();
             comentView.Close();
-            System.Windows.MessageBox.Show("Tovarlar navbatga o'tkazildi!");
+            MessageView message = new MessageView()
+            {
+                DataContext = new MessageViewModel("../../Images/message.Success.png", "Tovarlar navbatga muvaffaqiyatli o'tkazildi!")
+            };
+            message.ShowDialog();
         }
 
         #endregion
