@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System;
 using DomStroyB2C_MVVM.Views;
 using DomStroyB2C_MVVM.Views.ModalViews;
+using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
@@ -14,14 +15,10 @@ namespace DomStroyB2C_MVVM.ViewModels
     {
         public ICommand UpdateViewCommand { get; set; }
 
-        public MainWindowViewModel mainWindow;
-
         #region Constructor
 
-        public ClientOrderViewModel(MainWindowViewModel mainWindow)
+        public ClientOrderViewModel()
         {
-            this.mainWindow = mainWindow;
-            UpdateViewCommand = new UpdateViewCommand(mainWindow);
             tbClient = new DataTable();
             objDbAccess = new DBAccess();
             GetClients();
@@ -94,8 +91,8 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public void GetClients()
         {
-            string queryClient = "select c.id, concat(c.first_name, ' ', c.last_name) as full_name, c.phone_1,c.address, dc.card, dc.bonus_sum, dc.bonus_dollar " +
-                                  "from client as c inner join discountcard as dc where c.discount_card = dc.id";
+            string queryClient = "SELECT c.id, concat(c.first_name, ' ', c.last_name) AS full_name, c.phone_1,c.address, dc.card, dc.bonus_sum, dc.bonus_dollar " +
+                                  "FROM client as c INNER JOIN discountcard as dc WHERE c.discount_card = dc.id";
             tbClient.Clear();
             ObjDbAccess.readDatathroughAdapter(queryClient, tbClient);
             ConvertClientTableToList();
@@ -119,12 +116,22 @@ namespace DomStroyB2C_MVVM.ViewModels
                        }).ToList();
         }
 
+        /// <summary>
+        /// The function to open Client add view
+        /// </summary>
         public void AddClient()
         {
             CliantAddView clientAddView = new CliantAddView();
+            clientAddView.DataContext = new ClientAddViewModel(clientAddView);
             clientAddView.ShowDialog();
+
+            GetClients();
         }
 
+        public void TakeClientToOrder()
+        {
+
+        }
         #endregion
     }
 }

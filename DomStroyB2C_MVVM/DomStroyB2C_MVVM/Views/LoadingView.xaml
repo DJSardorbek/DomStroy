@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
              d:DesignHeight="730" d:DesignWidth="1370">
-    <Grid >
+    <Grid Background="White">
         <Image Source="../Images/LoadBackGround.jpg" Stretch="Fill"/>
         <Image Source="../Images/DomStroy.png" Width="700" Height="300" VerticalAlignment="Top" Margin="150"/>
     </Grid>

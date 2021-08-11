@@ -143,7 +143,8 @@
                 <!--First row firstName-->
                 <Grid Grid.Row="0" Background="White">
 
-                    <TextBox Width="324" Height="45">
+                    <TextBox Width="324" Height="45"
+                             x:Name="txtFirstName">
                         <TextBox.Text>
                             <Binding Path="FirstName" 
                                      UpdateSourceTrigger="PropertyChanged"/>
@@ -246,7 +247,7 @@
 
                     <TextBox Width="324" Height="45">
                         <TextBox.Text>
-                            <Binding Path="Phone_2"
+                            <Binding Path="Address"
                                      UpdateSourceTrigger="PropertyChanged"/>
                         </TextBox.Text>
                     </TextBox> 
@@ -272,7 +273,7 @@
                 <!--6th row birthDate-->
                 <Grid Grid.Row="5" Background="White">
 
-                    <TextBox Width="324" Height="45" Tag="kun.oy.yil">
+                    <TextBox Width="324" Height="45" Tag="dd.MM.yyyy">
                         <TextBox.Text>
                             <Binding Path="BirthDate"
                                      UpdateSourceTrigger="PropertyChanged"/>

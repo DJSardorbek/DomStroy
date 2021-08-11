@@ -863,8 +863,7 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource btnPlus}"
-                                            >
+                                    <Button Style="{StaticResource btnPlus}">
                                         <materialDesign:PackIcon Kind="Plus" Foreground="White" Width="25" Height="25"/>
                                     </Button>
                                 </DataTemplate>

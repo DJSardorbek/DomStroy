@@ -78,12 +78,12 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
         {
             // first we update shop table
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            MySqlCommand cmdShop = new MySqlCommand("update shop set queue=1, comment='" + Comment + "', traded_at='"+currentDate+"', total_sum='"+sumSom+"', total_dollar='"+sumDollar+"' where id='" + shop + "'");
+            MySqlCommand cmdShop = new MySqlCommand("UPDATE shop SET queue=1, comment='" + Comment + "', traded_at='"+currentDate+"', total_sum='"+sumSom+"', total_dollar='"+sumDollar+"' WHERE id='" + shop + "'");
             ObjDbAccess.executeQuery(cmdShop);
             cmdShop.Dispose();
 
             // now we update shopid table
-            MySqlCommand cmdShopId = new MySqlCommand("update shopid set shop=0 where password='" + MainWindowViewModel.user_password + "'");
+            MySqlCommand cmdShopId = new MySqlCommand("UPDATE shopid SET shop=0 WHERE password='" + MainWindowViewModel.user_password + "'");
             ObjDbAccess.executeQuery(cmdShopId);
             cmdShopId.Dispose();
             comentView.Close();

@@ -1,9 +1,14 @@
-﻿
-using DomStroyB2C_MVVM.API.Client;
+﻿using DomStroyB2C_MVVM.API.Client;
 using DomStroyB2C_MVVM.API.Client.ClientService;
 using DomStroyB2C_MVVM.Commands;
+using DomStroyB2C_MVVM.Views.Loading;
 using DomStroyB2C_MVVM.Views.ModalViews;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using System;
+using System.Threading;
+using System.Windows.Input;
+using System.Windows.Media.Effects;
 
 namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
 {
@@ -11,10 +16,12 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
     {
         #region Constructor
 
-        public ClientAddViewModel()
+        public ClientAddViewModel(CliantAddView cliantAddView)
         {
+            this.cliantAddView = cliantAddView;
             _clientService = new ClientService();
             postClientCommand = new RelayCommand(PostClient);
+            objDbAccess = new DBAccess();
         }
 
         #endregion
@@ -108,6 +115,18 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
             get { return _clientService; }
         }
 
+        private CliantAddView cliantAddView { get; set; }
+
+        /// <summary>
+        /// Data Access
+        /// </summary>
+        private DBAccess objDbAccess;
+
+        public DBAccess ObjDbAccess
+        {
+            get { return objDbAccess; }
+        }
+
         #endregion
 
         #region Commands
@@ -136,19 +155,93 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
                 _phone_1 = Phone_1,
                 _phone_2 = Phone_2,
                 _returnDate = DateTime.Now.ToString("yyyy-MM-dd"),
-                _birthDay = BirthDate
+                _birthDay = DateTimeConverter(BirthDate)
             };
-             
-            string reponse = await clientService.Post(model);
-            if(reponse !="error")
+
+            LoadAnimation();
+            string response = await clientService.Post(model);
+            System.Windows.MessageBox.Show(DateTimeConverter(BirthDate));
+            if(response != "error")
             {
+                // The response from server
+                ClientResponseModel r = JsonConvert.DeserializeObject<ClientResponseModel>(response);
+
+                // The command to add new client
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO client (id,first_name,last_name,phone_1,phone_2,address,birth_date,discount_card,return_date,loan_sum,loan_dollar,ball) " +
+                $"VALUES({r.id}, '{r.first_name}', '{r.last_name}', '{r.phone_1}', '{r.phone_2}', '{r.address}', '{r.birth_date}', 1, '{r.return_date}', '{r.loan_sum}', '{r.loan_dollar}', '{r.ball}')");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+
+                // Message for display client added successfully
                 MessageView message = new MessageView()
                 {
                     DataContext = new MessageViewModel("../../Images/message.Success.png", "Mijoz muvaffaqiyatli qo'shildi!")
                 };
                 message.ShowDialog();
+                cliantAddView.Close();
+            }
+
+            else
+            {
+                // Message for display error
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan xatolik yuz berdi!")
+                };
+                message.ShowDialog();
             }
         }
+
+        public string DateTimeConverter(string date)
+        {
+            string[] _date = date.Split('.');
+            string day = string.Empty, month = string.Empty, year = string.Empty;
+
+            day = _date[0];
+            month = _date[1];
+            year = _date[2];
+
+            return year + '-' + month + '-' + day;
+        }
+
+        #region Loadin animation
+        // An effect that sets effect to the usercontrol ui
+        BlurEffect myEffect = new BlurEffect();
+
+
+        // Command that runs LoadAnimation function
+        private ICommand loading { get; set; }
+
+        public ICommand Loading
+        {
+            get { return loading; }
+        }
+
+        // A function that sets time to showing loading window
+        void Simulator()
+        {
+
+            for (int i = 0; i < 80; i++)
+
+                Thread.Sleep(5);
+        }
+
+        // A function that shows loading window
+        public void LoadAnimation()
+        {
+            myEffect.Radius = 10;
+
+            cliantAddView.Effect = myEffect;
+
+            using (LoadingWindow lw = new LoadingWindow(Simulator))
+            {
+                lw.ShowDialog();
+            }
+            myEffect.Radius = 0;
+
+            cliantAddView.Effect = myEffect;
+        }
+        #endregion
 
         #endregion
     }

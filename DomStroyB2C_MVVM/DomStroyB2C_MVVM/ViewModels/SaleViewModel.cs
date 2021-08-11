@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
 using DomStroyB2C_MVVM.Views.ModalViews;
+using DomStroyB2C_MVVM.Views;
 using MySql.Data.MySqlClient;
 using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
 
@@ -41,7 +42,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             deleteCartCommand = new RelayCommand(DeleteCart);
             updateCartProductCommand = new RelayCommand(ChangeCartProduct);
             cancelShopCommand = new RelayCommand(CancelShop);
-            moveOrderCommand = new RelayCommand(AddOrder);
+            moveOrderCommand = new RelayCommand(TakeShopToQueue);
             separateShopCommand = new RelayCommand(SeperateShop);
             tbProduct = new DataTable();
             tbBasket = new DataTable();
@@ -367,9 +368,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             //    ObjDbAccess.readDatathroughAdapter(queryShopId, tbShopId);
             //    shop = Convert.ToInt32(tbShopId.Rows[0]["shop"]);
             //}
-            string queryBasket = "select cart.*, product.name, product.producer, product.measurement, product.selling_price, product.currency from cart " +
-                "inner join product on cart.product = product.product_id " +
-                "where cart.shop ='" + shop + "' order by cart.id";
+            string queryBasket = "SELECT cart.*, product.name, product.producer, product.measurement, product.selling_price, product.currency FROM cart " +
+                "INNER JOIN product ON cart.product = product.product_id " +
+                "WHERE cart.shop ='" + shop + "' ORDER BY cart.id";
             tbBasket.Clear();
             objDbAccess.readDatathroughAdapter(queryBasket, TbBasket);
 
@@ -428,8 +429,8 @@ namespace DomStroyB2C_MVVM.ViewModels
             int shop = 0;
             using (DataTable tbShopId = new DataTable())
             {
-                string queryShopId = "select shopid.shop from shopid inner join staff on shopid.password = staff.password " +
-                    "where staff.password='" + MainWindowViewModel.user_password + "'";
+                string queryShopId = "SELECT shopid.shop FROM shopid INNER JOIN staff ON shopid.password = staff.password " +
+                    "WHERE staff.password='" + MainWindowViewModel.user_password + "'";
                 ObjDbAccess.readDatathroughAdapter(queryShopId, tbShopId);
                 if (tbShopId.Rows.Count > 0)
                     shop = Convert.ToInt32(tbShopId.Rows[0]["shop"]);
@@ -447,9 +448,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             if (started_shop == false)
             {
                 // Creating new shop
-                MySqlCommand cmdCreate = new MySqlCommand("insert into shop (seller, client, card, transfer, cash_sum, cash_dollar, loan_sum, loan_dollar, " +
+                MySqlCommand cmdCreate = new MySqlCommand("INSERT INTO shop (seller, client, card, transfer, cash_sum, cash_dollar, loan_sum, loan_dollar, " +
                     "discount_sum, discount_dollar, traded_at, status_server, status_payment, queue, debt, book, total_sum, total_dollar) " +
-                    "values('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, 0, 0)");
+                    "VALUES('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, 0, 0)");
                 ObjDbAccess.executeQuery(cmdCreate);
                 cmdCreate.Dispose();
 
@@ -457,7 +458,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 int new_shop = 0;
                 using (DataTable tbGetNewShopId = new DataTable())
                 {
-                    string queryGetNewShopId = "select id from shop order by id desc limit 1";
+                    string queryGetNewShopId = "SELECT id FROM shop ORDER BY id DESC LIMIT 1";
                     ObjDbAccess.readDatathroughAdapter(queryGetNewShopId, tbGetNewShopId);
                     new_shop = Convert.ToInt32(tbGetNewShopId.Rows[0]["id"]);
                 }
@@ -466,7 +467,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 int id = 1;
                 using (DataTable tbShopId = new DataTable())
                 {
-                    string queryToGetShopId = "select * from shopid order by id desc limit 1";
+                    string queryToGetShopId = "SELECT * FROM shopid ORDER BY id DESC LIMIT 1";
                     ObjDbAccess.readDatathroughAdapter(queryToGetShopId, tbShopId);
                     if (tbShopId.Rows.Count == 1)
                     {
@@ -477,14 +478,14 @@ namespace DomStroyB2C_MVVM.ViewModels
                 using (DataTable tbStaffShop = new DataTable())
                 {
                     // Getting employee's shopid
-                    string queryToGetStaffShop = "select * from shopid where password='" + MainWindowViewModel.user_password + "'";
+                    string queryToGetStaffShop = "SELECT * FROM shopid WHERE password='" + MainWindowViewModel.user_password + "'";
                     ObjDbAccess.readDatathroughAdapter(queryToGetStaffShop, tbStaffShop);
 
                     // If this employee doesn't have shopid, we insert new shopid for him
                     if (tbStaffShop.Rows.Count == 0)
                     {
-                        MySqlCommand cmd = new MySqlCommand("insert into shopid (id, shop, password) " +
-                            "values('" + id + "', '" + new_shop + "', '" + MainWindowViewModel.user_password + "')");
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO shopid (id, shop, password) " +
+                            "VALUES('" + id + "', '" + new_shop + "', '" + MainWindowViewModel.user_password + "')");
                         objDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                     }
@@ -492,7 +493,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                     // If this employee has, we update it to new one
                     else
                     {
-                        MySqlCommand cmd = new MySqlCommand("update shopid set shop='" + new_shop + "' where password='" + MainWindowViewModel.user_password + "'");
+                        MySqlCommand cmd = new MySqlCommand("UPDATE shopid SET shop='" + new_shop + "' WHERE password='" + MainWindowViewModel.user_password + "'");
                         objDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                     }
@@ -511,15 +512,15 @@ namespace DomStroyB2C_MVVM.ViewModels
 
                 string sum = "sum"/*, dollar = "$"*/;
 
-                string querySumSom = "select sum(cart.sum) from cart " +
-                    "inner join product on cart.product = product.product_id " +
-                    "inner join shop on cart.shop = shop.id " +
-                    "where product.currency='" + sum + "' and cart.shop='" + GetShop() + "'";
+                string querySumSom = "SELECT SUM(cart.sum) FROM cart " +
+                    "INNER JOIN product ON cart.product = product.product_id " +
+                    "INNER JOIN shop ON cart.shop = shop.id " +
+                    "WHERE product.currency='" + sum + "' AND cart.shop='" + GetShop() + "'";
                 objDbAccess.readDatathroughAdapter(querySumSom, tbSum);
 
-                if (!string.IsNullOrEmpty(tbSum.Rows[0]["sum(cart.sum)"].ToString()))
+                if (!string.IsNullOrEmpty(tbSum.Rows[0]["SUM(cart.sum)"].ToString()))
                 {
-                    SumSom = double.Parse(tbSum.Rows[0]["sum(cart.sum)"].ToString());
+                    SumSom = double.Parse(tbSum.Rows[0]["SUM(cart.sum)"].ToString());
                 }
                 else
                 {
@@ -566,12 +567,12 @@ namespace DomStroyB2C_MVVM.ViewModels
                 double productCartAmount = 0;
                 using (DataTable tbProduct = new DataTable())
                 {
-                    string queryProduct = "select amount from product where product_id='" + Basket.Product + "'";
+                    string queryProduct = "SELECT amount FROM product WHERE product_id='" + Basket.Product + "'";
                     ObjDbAccess.readDatathroughAdapter(queryProduct, tbProduct);
                     productAmount = double.Parse(tbProduct.Rows[0]["amount"].ToString());
 
                     tbProduct.Clear();
-                    string queryBasketAmount = "select amount from cart where id='" + Basket.Id + "'";
+                    string queryBasketAmount = "SELECT amount FROM cart WHERE id='" + Basket.Id + "'";
                     ObjDbAccess.readDatathroughAdapter(queryBasketAmount, tbProduct);
                     productCartAmount = double.Parse(tbProduct.Rows[0]["amount"].ToString());
                 }
@@ -588,12 +589,12 @@ namespace DomStroyB2C_MVVM.ViewModels
                 double changedAmount = productAmount - enteredAmount + productCartAmount;
 
                 // The command it updates product table
-                MySqlCommand cmdUpdateProduct = new MySqlCommand("update product set amount='" + DoubleToStr(changedAmount) + "' where product.product_id='" + Basket.Product + "'");
+                MySqlCommand cmdUpdateProduct = new MySqlCommand("UPDATE product SET amount='" + DoubleToStr(changedAmount) + "' WHERE product.product_id='" + Basket.Product + "'");
                 objDbAccess.executeQuery(cmdUpdateProduct);
                 cmdUpdateProduct.Dispose();
 
                 // The command it updates cart table
-                MySqlCommand cmd = new MySqlCommand("update cart set sum='" + DoubleToStr(changedSum) + "', amount='" + DoubleToStr(enteredAmount) + "' where cart.id='" + Basket.Id + "'");
+                MySqlCommand cmd = new MySqlCommand("UPDATE cart SET sum='" + DoubleToStr(changedSum) + "', amount='" + DoubleToStr(enteredAmount) + "' WHERE cart.id='" + Basket.Id + "'");
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
@@ -626,7 +627,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         public void DeleteCart()
         {
             // Delete product from cart
-            MySqlCommand cmdDeleteCart = new MySqlCommand("delete from cart where id='" + Basket.Id + "'");
+            MySqlCommand cmdDeleteCart = new MySqlCommand("DELETE FROM cart WHERE id='" + Basket.Id + "'");
             objDbAccess.executeQuery(cmdDeleteCart);
             cmdDeleteCart.Dispose();
 
@@ -635,7 +636,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             double productAmount = 0;
             using (DataTable tbProduct = new DataTable())
             {
-                string queryProduct = "select amount from product where product_id='" + Basket.Product + "'";
+                string queryProduct = "SELECT amount FROM product WHERE product_id='" + Basket.Product + "'";
                 ObjDbAccess.readDatathroughAdapter(queryProduct, tbProduct);
                 productAmount = double.Parse(tbProduct.Rows[0]["amount"].ToString());
             }
@@ -644,7 +645,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             double changedAmount = productAmount + deletedAmount;
 
             // Updating product to the changed amount
-            MySqlCommand cmdDeleteProduct = new MySqlCommand("update product set amount='" + DoubleToStr(changedAmount) + "' where product_id='" + basket.Product + "'");
+            MySqlCommand cmdDeleteProduct = new MySqlCommand("UPDATE product SET amount='" + DoubleToStr(changedAmount) + "' WHERE product_id='" + basket.Product + "'");
             ObjDbAccess.executeQuery(cmdDeleteProduct);
             cmdDeleteProduct.Dispose();
 
@@ -668,12 +669,12 @@ namespace DomStroyB2C_MVVM.ViewModels
                 for (int i = 0; i < tbBasket.Rows.Count; i++)
                 {
                     deletedAmount = double.Parse(tbBasket.Rows[i]["amount"].ToString());
-                    string queryProduct = "select amount from product where product_id='" + tbBasket.Rows[i]["product"] + "'";
+                    string queryProduct = "SELECT amount FROM product WHERE product_id='" + tbBasket.Rows[i]["product"] + "'";
                     ObjDbAccess.readDatathroughAdapter(queryProduct, tbProduct);
                     productAmount = double.Parse(tbProduct.Rows[0]["amount"].ToString());
                     changedAmount = deletedAmount + productAmount;
 
-                    cmdUpdateProduct = new MySqlCommand("update product set amount='" + DoubleToStr(changedAmount) + "' where product_id='" + tbBasket.Rows[i]["product"] + "'");
+                    cmdUpdateProduct = new MySqlCommand("UPDATE product SET amount='" + DoubleToStr(changedAmount) + "' WHERE product_id='" + tbBasket.Rows[i]["product"] + "'");
                     objDbAccess.executeQuery(cmdUpdateProduct);
                     tbProduct.Clear();
                     cmdUpdateProduct.Dispose();
@@ -681,17 +682,17 @@ namespace DomStroyB2C_MVVM.ViewModels
                 }
 
                 // The command it deletes shop from cart table
-                MySqlCommand cmd = new MySqlCommand("delete from cart where shop='" + shop + "'");
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM cart WHERE shop='" + shop + "'");
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
                 // The command it deletes shop from shop table
-                cmd = new MySqlCommand("delete from shop where id='" + shop + "'");
+                cmd = new MySqlCommand("DELETE FROM shop WHERE id='" + shop + "'");
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
                 // The command it updates shop of shopid table
-                cmd = new MySqlCommand("update shopid set shop=0 where password='" + MainWindowViewModel.user_password + "'");
+                cmd = new MySqlCommand("UPDATE shopid SET shop=0 WHERE password='" + MainWindowViewModel.user_password + "'");
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
@@ -708,9 +709,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         }
 
         /// <summary>
-        /// The function to move client to order list
+        /// The function to move client to queue list
         /// </summary>
-        public void AddOrder()
+        public void TakeShopToQueue()
         {
             int shop = GetShop();
             if (shop != 0 && BasketList.Count > 0)
@@ -740,7 +741,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             bool currentShop = false;
 
             // First we get sections from local db
-            string queryToSection = "select id from section order by id";
+            string queryToSection = "SELECT id FROM section ORDER BY id";
             tbSection.Clear();
             ObjDbAccess.readDatathroughAdapter(queryToSection, tbSection);
 
@@ -766,9 +767,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             for (int i = 0; i < countSection; i++)
             {
                 section = Convert.ToInt32(tbSection.Rows[i]["id"].ToString());
-                queryToSeparate = "select cart.*, product.product_id, product.section from cart " +
-                                  "inner join product on cart.product=product.product_id " +
-                                  "where product.section='"+section+"' and shop='"+ Currentshop + "'";
+                queryToSeparate = "SELECT cart.*, product.product_id, product.section FROM cart " +
+                                  "INNER JOIN product ON cart.product=product.product_id " +
+                                  "WHERE product.section='"+section+"' AND shop='"+ Currentshop + "'";
                 TbSeperate.Clear();
                 ObjDbAccess.readDatathroughAdapter(queryToSeparate, TbSeperate);
                 if (TbSeperate.Rows.Count > 0)
@@ -779,49 +780,49 @@ namespace DomStroyB2C_MVVM.ViewModels
                         using(DataTable datatable = new DataTable())
                         {
                             // The sum of som
-                            queryToSeparate = "select sum(cart.sum) from cart " +
-                                              "inner join product on cart.product = product.product_id " +
-                                              $"where product.currency='{"sum"}' and product.section='" + section + "' and cart.shop='"+Currentshop+"'";
+                            queryToSeparate = "SELECT SUM(cart.sum) FROM cart " +
+                                              "INNER JOIN product ON cart.product = product.product_id " +
+                                              $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='"+Currentshop+"'";
                             MessageBox.Show(queryToSeparate);
 
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
-                            MessageBox.Show(datatable.Rows[0]["sum(cart.sum)"].ToString());
-                            if (!string.IsNullOrEmpty(datatable.Rows[0]["sum(cart.sum)"].ToString()))
+                            MessageBox.Show(datatable.Rows[0]["SUM(cart.sum)"].ToString());
+                            if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
                             {
-                                total_som = double.Parse(datatable.Rows[0]["sum(cart.sum)"].ToString());
+                                total_som = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
 
                             // The sum of dollar
-                            queryToSeparate = "select sum(cart.sum) as summa from cart " +
-                                              "inner join product on cart.product = product.product_id " +
-                                              $"where product.currency='{"dollar"}' and product.section='" + section + "' and cart.shop='"+Currentshop+"'";
+                            queryToSeparate = "SELECT SUM(cart.sum) AS summa FROM cart " +
+                                              "INNER JOIN product ON cart.product = product.product_id " +
+                                              $"WHERE product.currency='{"dollar"}' AND product.section='" + section + "' AND cart.shop='"+Currentshop+"'";
                             datatable.Clear();
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
-                            if (!string.IsNullOrEmpty(datatable.Rows[0]["sum(cart.sum)"].ToString()))
+                            if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
                             {
-                                total_dollar = double.Parse(datatable.Rows[0]["sum(cart.sum)"].ToString());
+                                total_dollar = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
                         }
                         
 
                         // Now we create a new shop
-                        MySqlCommand cmdCreate = new MySqlCommand("insert into shop (seller, client, card, transfer, cash_sum, cash_dollar, loan_sum, loan_dollar, " +
+                        MySqlCommand cmdCreate = new MySqlCommand("INSERT INTO shop (seller, client, card, transfer, cash_sum, cash_dollar, loan_sum, loan_dollar, " +
                         "discount_sum, discount_dollar, traded_at, status_server, status_payment, queue, debt, book, total_sum, total_dollar) " +
-                        "values('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, '"+total_som+"', '"+total_dollar+"')");
+                        "VALUES('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, '"+total_som+"', '"+total_dollar+"')");
                         ObjDbAccess.executeQuery(cmdCreate);
                         cmdCreate.Dispose();
 
                         // And get it
                         using(DataTable datatable = new DataTable())
                         {
-                            string qeury = "select id from shop order by id desc limit 1";
+                            string qeury = "SELECT id FROM shop ORDER BY id DESC LIMIT 1";
                             ObjDbAccess.readDatathroughAdapter(qeury, datatable);
                             createdShop = Convert.ToInt32(datatable.Rows[0]["id"].ToString());
                             datatable.Clear();
                         }
 
                         // Then we update the shop of cart to the created one
-                        cmd = new MySqlCommand("update cart inner join product on cart.product = product.product_id set cart.shop ='" + createdShop + "' where product.section = '" + section + "' and cart.shop='"+Currentshop+"'");
+                        cmd = new MySqlCommand("UPDATE cart INNER JOIN product ON cart.product = product.product_id SET cart.shop ='" + createdShop + "' WHERE product.section = '" + section + "' AND cart.shop='"+Currentshop+"'");
                         ObjDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                         total_som = 0; total_dollar = 0;
@@ -832,30 +833,30 @@ namespace DomStroyB2C_MVVM.ViewModels
                         using (DataTable datatable = new DataTable())
                         {
                             // The sum of som
-                            queryToSeparate = "select sum(cart.sum) from cart " +
-                                              "inner join product on cart.product = product.product_id " +
-                                              $"where product.currency='{"sum"}' and product.section='" + section + "' and cart.shop='" + Currentshop + "'";
+                            queryToSeparate = "SELECT SUM(cart.sum) FROM cart " +
+                                              "INNER JOIN product ON cart.product = product.product_id " +
+                                              $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
                             MessageBox.Show(queryToSeparate);
 
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
-                            MessageBox.Show(datatable.Rows[0]["sum(cart.sum)"].ToString());
-                            if (!string.IsNullOrEmpty(datatable.Rows[0]["sum(cart.sum)"].ToString()))
+                            MessageBox.Show(datatable.Rows[0]["SUM(cart.sum)"].ToString());
+                            if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
                             {
-                                total_som = double.Parse(datatable.Rows[0]["sum(cart.sum)"].ToString());
+                                total_som = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
 
                             // The sum of dollar
-                            queryToSeparate = "select sum(cart.sum) as summa from cart " +
-                                              "inner join product on cart.product = product.product_id " +
-                                              $"where product.currency='{"dollar"}' and product.section='" + section + "' and cart.shop='" + Currentshop + "'";
+                            queryToSeparate = "SELECT SUM(cart.sum) AS summa FROM cart " +
+                                              "INNER JOIN product ON cart.product = product.product_id " +
+                                              $"WHERE product.currency='{"dollar"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
                             datatable.Clear();
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
-                            if (!string.IsNullOrEmpty(datatable.Rows[0]["sum(cart.sum)"].ToString()))
+                            if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
                             {
-                                total_dollar = double.Parse(datatable.Rows[0]["sum(cart.sum)"].ToString());
+                                total_dollar = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
                         }
-                        cmd = new MySqlCommand("update shop set traded_at ='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"', total_sum='"+total_som+"', total_dollar='"+total_dollar+"'  where id='"+Currentshop+"'");
+                        cmd = new MySqlCommand("UPDATE shop SET traded_at ='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"', total_sum='"+total_som+"', total_dollar='"+total_dollar+"'  WHERE id='"+Currentshop+"'");
                         ObjDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                         total_som = 0; total_dollar = 0;
@@ -865,7 +866,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             }
 
             // The command it updates shop of shopid table
-            cmd = new MySqlCommand("update shopid set shop=0 where password='" + MainWindowViewModel.user_password + "'");
+            cmd = new MySqlCommand("UPDATE shopid SET shop=0 WHERE password='" + MainWindowViewModel.user_password + "'");
             ObjDbAccess.executeQuery(cmd);
             cmd.Dispose();
             started_shop = false;
@@ -877,6 +878,21 @@ namespace DomStroyB2C_MVVM.ViewModels
             };
             message.ShowDialog();
             
+        }
+
+        /// <summary>
+        /// The function to move shop to order list
+        /// </summary>
+        public void TakeShopToOrder()
+        {
+            int shop = GetShop();
+            if(shop!= 0 && BasketList.Count > 0)
+            {
+                ClientOrder clientOrderView = new ClientOrder()
+                {
+                    DataContext = new ClientOrderViewModel()
+                };
+            }
         }
     }
 

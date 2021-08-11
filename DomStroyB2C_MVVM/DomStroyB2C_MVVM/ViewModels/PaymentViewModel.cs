@@ -214,10 +214,8 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public void OpenAddClientWindow()
         {
-            CliantAddView cliantAddView = new CliantAddView()
-            {
-                DataContext = new ClientAddViewModel()
-            };
+            CliantAddView cliantAddView = new CliantAddView();
+            cliantAddView.DataContext = new ClientAddViewModel(cliantAddView);
             cliantAddView.ShowDialog();
            
         }

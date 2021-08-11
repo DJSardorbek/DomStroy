@@ -119,6 +119,7 @@
     </ApplicationDefinition>
     <Compile Include="API\AllApi.cs" />
     <Compile Include="API\Client\ClientModel.cs" />
+    <Compile Include="API\Client\ClientResponseModel.cs" />
     <Compile Include="API\Client\ClientService\ClientService.cs" />
     <Compile Include="API\Client\IClientService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
