@@ -59,7 +59,7 @@ namespace DomStroyB2C_MVVM.Commands
             if (parameter.ToString() == "ClientOrder")
             {
                 viewModel.GridVisibility = false;
-                viewModel.SelectedViewModel = new ClientOrderViewModel();
+                viewModel.SelectedViewModel = new ClientOrderViewModel(viewModel);
             }
             if (parameter.ToString() == "ProductResidue")
             {

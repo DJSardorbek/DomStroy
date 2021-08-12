@@ -125,6 +125,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
     <Compile Include="DBAccess.cs" />
+    <Compile Include="Models\bookDTO.cs" />
     <Compile Include="Models\cartDTO.cs" />
     <Compile Include="Models\clientDTO.cs" />
     <Compile Include="Models\productDTO.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="ViewModels\ProductMovementViewModel.cs" />
     <Compile Include="ViewModels\ProductResidueViewModel.cs" />
     <Compile Include="ViewModels\ProductReturnViewModel.cs" />
+    <Compile Include="ViewModels\QueueBuyurtmalarViewModel.cs" />
     <Compile Include="ViewModels\QueueNavbatlarViewModel.cs" />
     <Compile Include="ViewModels\QueueViewModel.cs" />
     <Compile Include="ViewModels\RecieveFakturaViewModel.cs" />

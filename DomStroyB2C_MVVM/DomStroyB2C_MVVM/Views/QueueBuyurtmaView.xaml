@@ -126,7 +126,8 @@
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource btnCancel}" Width="60">
+                                <Button Style="{StaticResource btnCancel}" Width="60"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}">
                                     <Image Source="../Images/cancelRecieve.png" Width="20" Height="20"/>
                                 </Button>
                             </DataTemplate>

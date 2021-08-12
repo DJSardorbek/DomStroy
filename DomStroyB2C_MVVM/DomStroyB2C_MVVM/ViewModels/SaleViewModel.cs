@@ -42,8 +42,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             deleteCartCommand = new RelayCommand(DeleteCart);
             updateCartProductCommand = new RelayCommand(ChangeCartProduct);
             cancelShopCommand = new RelayCommand(CancelShop);
-            moveOrderCommand = new RelayCommand(TakeShopToQueue);
+            moveQueueCommand = new RelayCommand(TakeShopToQueue);
             separateShopCommand = new RelayCommand(SeperateShop);
+            moveOrderCommand = new RelayCommand(TakeShopToOrder);
             tbProduct = new DataTable();
             tbBasket = new DataTable();
             tbSection = new DataTable();
@@ -197,6 +198,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         #endregion
 
         #region Commands
+        
         /// <summary>
         /// The command for inserting new product
         /// </summary>
@@ -216,7 +218,6 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return updateCommand; }
         }
 
-
         /// <summary>
         /// The command for search product
         /// </summary>
@@ -228,12 +229,14 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return searchCommand; }
         }
 
+        /// <summary>
+        /// The command for take shop to queue
+        /// </summary>
+        private RelayCommand moveQueueCommand;
 
-        private RelayCommand moveOrderCommand;
-
-        public RelayCommand MoveOrderCommand
+        public RelayCommand MoveQueueCommand
         {
-            get { return moveOrderCommand; }
+            get { return moveQueueCommand; }
         }
 
 
@@ -267,11 +270,24 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return cancelShopCommand; }
         }
 
+        /// <summary>
+        /// The command for take shop to cash desk
+        /// </summary>
         private RelayCommand separateShopCommand;
 
         public RelayCommand SeperateShopCommand
         {
             get { return separateShopCommand; }
+        }
+
+        /// <summary>
+        /// The command for take shop to order
+        /// </summary>
+        private RelayCommand moveOrderCommand;
+
+        public RelayCommand MoveOrderCommand
+        {
+            get { return moveOrderCommand; }
         }
 
 
@@ -713,13 +729,16 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public void TakeShopToQueue()
         {
+            // First we check if the shop is started
             int shop = GetShop();
             if (shop != 0 && BasketList.Count > 0)
             {
+                // We will open comment view to leave a comment
                 ComentView commentView = new ComentView();
                 commentView.DataContext = new ComentViewModel(shop, SumSom, SumDollar, commentView);
                 commentView.ShowDialog();
 
+                // If the shop is moved to queue we will accesss to start a new shop
                 if (GetShop() == 0)
                 {
                     started_shop = false;
@@ -769,7 +788,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 section = Convert.ToInt32(tbSection.Rows[i]["id"].ToString());
                 queryToSeparate = "SELECT cart.*, product.product_id, product.section FROM cart " +
                                   "INNER JOIN product ON cart.product=product.product_id " +
-                                  "WHERE product.section='"+section+"' AND shop='"+ Currentshop + "'";
+                                  "WHERE product.section='" + section + "' AND shop='" + Currentshop + "'";
                 TbSeperate.Clear();
                 ObjDbAccess.readDatathroughAdapter(queryToSeparate, TbSeperate);
                 if (TbSeperate.Rows.Count > 0)
@@ -777,12 +796,12 @@ namespace DomStroyB2C_MVVM.ViewModels
                     if (currentShop != false)
                     {
                         // We set value to total_sum and total_dollar
-                        using(DataTable datatable = new DataTable())
+                        using (DataTable datatable = new DataTable())
                         {
                             // The sum of som
                             queryToSeparate = "SELECT SUM(cart.sum) FROM cart " +
                                               "INNER JOIN product ON cart.product = product.product_id " +
-                                              $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='"+Currentshop+"'";
+                                              $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
                             MessageBox.Show(queryToSeparate);
 
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
@@ -795,7 +814,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                             // The sum of dollar
                             queryToSeparate = "SELECT SUM(cart.sum) AS summa FROM cart " +
                                               "INNER JOIN product ON cart.product = product.product_id " +
-                                              $"WHERE product.currency='{"dollar"}' AND product.section='" + section + "' AND cart.shop='"+Currentshop+"'";
+                                              $"WHERE product.currency='{"dollar"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
                             datatable.Clear();
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
                             if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
@@ -803,17 +822,17 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 total_dollar = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
                         }
-                        
+
 
                         // Now we create a new shop
                         MySqlCommand cmdCreate = new MySqlCommand("INSERT INTO shop (seller, client, card, transfer, cash_sum, cash_dollar, loan_sum, loan_dollar, " +
                         "discount_sum, discount_dollar, traded_at, status_server, status_payment, queue, debt, book, total_sum, total_dollar) " +
-                        "VALUES('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, '"+total_som+"', '"+total_dollar+"')");
+                        "VALUES('" + MainWindowViewModel.user_id + "', 1, 0, 0, 0, 0, 0, 0, 0, 0, '" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', 0, 0, 0, 0, 0, '" + total_som + "', '" + total_dollar + "')");
                         ObjDbAccess.executeQuery(cmdCreate);
                         cmdCreate.Dispose();
 
                         // And get it
-                        using(DataTable datatable = new DataTable())
+                        using (DataTable datatable = new DataTable())
                         {
                             string qeury = "SELECT id FROM shop ORDER BY id DESC LIMIT 1";
                             ObjDbAccess.readDatathroughAdapter(qeury, datatable);
@@ -822,7 +841,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                         }
 
                         // Then we update the shop of cart to the created one
-                        cmd = new MySqlCommand("UPDATE cart INNER JOIN product ON cart.product = product.product_id SET cart.shop ='" + createdShop + "' WHERE product.section = '" + section + "' AND cart.shop='"+Currentshop+"'");
+                        cmd = new MySqlCommand("UPDATE cart INNER JOIN product ON cart.product = product.product_id SET cart.shop ='" + createdShop + "' WHERE product.section = '" + section + "' AND cart.shop='" + Currentshop + "'");
                         ObjDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                         total_som = 0; total_dollar = 0;
@@ -856,7 +875,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 total_dollar = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             }
                         }
-                        cmd = new MySqlCommand("UPDATE shop SET traded_at ='"+DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss")+"', total_sum='"+total_som+"', total_dollar='"+total_dollar+"'  WHERE id='"+Currentshop+"'");
+                        cmd = new MySqlCommand("UPDATE shop SET traded_at ='" + DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "', total_sum='" + total_som + "', total_dollar='" + total_dollar + "'  WHERE id='" + Currentshop + "'");
                         ObjDbAccess.executeQuery(cmd);
                         cmd.Dispose();
                         total_som = 0; total_dollar = 0;
@@ -877,7 +896,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 DataContext = new MessageViewModel("../../Images/message.Success.png", "Tovarlar kassaga muvaffaqiyatli o'tkazildi!")
             };
             message.ShowDialog();
-            
+
         }
 
         /// <summary>
@@ -885,13 +904,23 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public void TakeShopToOrder()
         {
+            // First we will check if the shop is started
             int shop = GetShop();
-            if(shop!= 0 && BasketList.Count > 0)
+            if (shop != 0 && BasketList.Count > 0)
             {
-                ClientOrder clientOrderView = new ClientOrder()
+                // We will open ClientOrderView to move shop to order
+                mainWindow.SelectedViewModel = new ClientOrderViewModel(mainWindow);
+                
+
+                // If the shop is moved to order we will access to start a new shop
+                if (GetShop() == 0)
                 {
-                    DataContext = new ClientOrderViewModel()
-                };
+                    started_shop = false;
+                    GetBasketList();
+                    SumSomDollar();
+                }
+                else
+                    return;
             }
         }
     }

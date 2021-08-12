@@ -144,7 +144,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                     //Checking a user if he is not work in this branch
                     using (DataTable tbCheckBranch = new DataTable())
                     {
-                        string queryCheckBranch = "select * from branch where id='" + Employee.data.branch + "'";
+                        string queryCheckBranch = "select * from branch where id='" + Employee.data.branch.id + "'";
                         ObjDbContext.readDatathroughAdapter(queryCheckBranch, tbCheckBranch);
                         if (tbCheckBranch.Rows.Count == 0)
                         {
@@ -164,7 +164,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 if (tbStaff.Rows.Count == 0)
                                 {
                                     MySqlCommand cmdInsert = new MySqlCommand("insert into staff (id,first_name,token,password,role,section) " +
-                                        "values('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "','"+Employee.data.section+"')");
+                                        "values('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "','"+Employee.data.section.id+"')");
                                     ObjDbContext.executeQuery(cmdInsert);
                                     cmdInsert.Dispose();
                                 }
@@ -173,7 +173,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 if (tbStaff.Rows.Count == 1)
                                 {
                                     MySqlCommand cmdUpdate = new MySqlCommand("update staff set first_name='" + Employee.data.first_name + "', " +
-                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "', section= '"+Employee.data.section+"' " +
+                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "', section= '"+Employee.data.section.id+"' " +
                                                                 "where password='"+Password+"'");
                                     ObjDbContext.executeQuery(cmdUpdate);
                                     cmdUpdate.Dispose();
@@ -182,7 +182,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 MainWindowViewModel.user_password = Password;
                                 MainWindowViewModel.user_id = Employee.data.id;
                                 MainWindowViewModel.user_token = Employee.token;
-                                MainWindowViewModel.section = Employee.data.section;
+                                MainWindowViewModel.section = Employee.data.section.id;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
                                 //LoginVisibility = false;
