@@ -1,5 +1,7 @@
 ﻿using DomStroyB2C_MVVM.Commands;
 using DomStroyB2C_MVVM.Models;
+using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
+using DomStroyB2C_MVVM.Views.ModalViews;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -197,7 +199,11 @@ namespace DomStroyB2C_MVVM.ViewModels
             int shop = GetShop();
             if(shop != 0)
             {
-                MessageBox.Show("Korzinka bo'sh emas, iltimos korzinkani tekshiring", "Xatolik", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.warning.png", "Korzinka bo'sh emas, iltimos korzinkani tekshiring!")
+                };
+                message.ShowDialog();
                 return;
             }
             else
@@ -213,7 +219,11 @@ namespace DomStroyB2C_MVVM.ViewModels
                 cmd.Dispose();
 
                 SaleViewModel.started_shop = true;
-                MessageBox.Show("Tovarlar korzinkaga muvaffaqiyatli o'tkazildi!", "Xabar", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.success.png", "Tovarlar korzinkaga muvaffaqiyatli o'tkazildi!")
+                };
+                message.ShowDialog();
                 GetQueueList();
             }
         }

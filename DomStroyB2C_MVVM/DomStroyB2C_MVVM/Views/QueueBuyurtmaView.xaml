@@ -19,7 +19,7 @@
                 </Style>
             </ScrollViewer.Style>
             <DataGrid x:Name="dataGridOrder" Visibility="Visible"
-                              HorizontalScrollBarVisibility="Auto" 
+                    HorizontalScrollBarVisibility="Auto" 
                     Width="Auto"
                     HorizontalGridLinesBrush="#E3E2E2"
                     AutoGenerateColumns="False"
@@ -31,10 +31,12 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                              Margin="0 10 10 10"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          >
+                    Margin="0 10 10 10"
+                    BorderThickness="1" SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"
+                    ItemsSource="{Binding Path=BookList, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=Book, Mode=TwoWay}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -46,7 +48,7 @@
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="Height" Value="50"/>
                         <!--<Setter Property="BorderBrush" Value="#263859"/>-->
-                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Setter Property="TextBlock.TextAlignment" Value="Left" />
                         <Setter Property="VerticalAlignment" Value="Center"/>
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
@@ -83,7 +85,7 @@
                                             CornerRadius="10 10 0 0"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}">
-                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 0 0"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -99,21 +101,22 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="№" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
-                    <DataGridTextColumn Header="Sotuvchi" Binding="{Binding saler}" IsReadOnly="True" Width="150*"/>
-                    <DataGridTextColumn Header="Mijoz" Binding="{Binding client}" IsReadOnly="True" Width="150*"/>
-                    <DataGridTextColumn Header="Telefon raqami" Binding="{Binding phone}" IsReadOnly="True" Width="150*"/>
-                    <DataGridTextColumn Header="Olgan vaqti" Binding="{Binding ol_date}" IsReadOnly="True" Width="100*"/>
-                    <DataGridTextColumn Header="Kelish vaqti" Binding="{Binding kel_date}" IsReadOnly="True" Width="100*" />
-                    <DataGridTextColumn Header="Summa so'mda" Binding="{Binding som}" IsReadOnly="True" Width="100*" />
-                    <DataGridTextColumn Header="Summa dollarda" Binding="{Binding dollar}" IsReadOnly="True" Width="100*" />
+                    <DataGridTextColumn Header="Chek" Binding="{Binding Chek}" IsReadOnly="True" Width="80"/>
+                    <DataGridTextColumn Header="Sotuvchi" Binding="{Binding Seller}" IsReadOnly="True" Width="130*"/>
+                    <DataGridTextColumn Header="Mijoz" Binding="{Binding Client}" IsReadOnly="True" Width="150*"/>
+                    <DataGridTextColumn Header="Telefon raqami" Binding="{Binding Phone_1}" IsReadOnly="True" Width="120"/>
+                    <DataGridTextColumn Header="Olgan vaqti" Binding="{Binding Traded_at}" IsReadOnly="True" Width="180"/>
+                    <DataGridTextColumn Header="Kelish vaqti" Binding="{Binding Arrival_date}" IsReadOnly="True" Width="130" />
+                    <DataGridTextColumn Header="Summa so'mda" Binding="{Binding SumSom}" IsReadOnly="True" Width="120" />
+                    <DataGridTextColumn Header="Summa dollarda" Binding="{Binding SumDollar}" IsReadOnly="True" Width="120" />
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="Sotuvga olish" Width="120 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                            <TextBlock Text="Sotuvga olish" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource btnPlus}" Width="60">
+                                <Button Style="{StaticResource btnPlus}" Width="50"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.TakeBookToBasketCommand}">
                                     <materialDesign:PackIcon Kind="Plus" Width="20" Height="20"  Foreground="White"/>
                                 </Button>
                             </DataTemplate>
@@ -122,12 +125,12 @@
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.Header>
-                            <TextBlock Text="Bekor qilish" Width="120 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                            <TextBlock Text="Bekor qilish" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
                         </DataGridTemplateColumn.Header>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Style="{StaticResource btnCancel}" Width="60"
-                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext}">
+                                <Button Style="{StaticResource btnCancel}" Width="50"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.CancelBookCommand}">
                                     <Image Source="../Images/cancelRecieve.png" Width="20" Height="20"/>
                                 </Button>
                             </DataTemplate>
@@ -139,5 +142,5 @@
             </DataGrid>
 
         </ScrollViewer>
-    </Grid>     
+    </Grid>
 </UserControl>

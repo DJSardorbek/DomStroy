@@ -128,6 +128,8 @@
     <Compile Include="Models\bookDTO.cs" />
     <Compile Include="Models\cartDTO.cs" />
     <Compile Include="Models\clientDTO.cs" />
+    <Compile Include="Models\clientOrderDTO.cs" />
+    <Compile Include="Models\PaymentType.cs" />
     <Compile Include="Models\productDTO.cs" />
     <Compile Include="Models\employeeDTO.cs" />
     <Compile Include="Models\queueDTO.cs" />

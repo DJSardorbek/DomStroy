@@ -31,15 +31,8 @@ namespace DomStroyB2C_MVVM.Views
             Close();
         }
         
-        int i = 0;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            switch(i)
-            {
-                case 0 : stackNaqd.Visibility = Visibility.Visible; i++; break; 
-                case 1: stackPlastik.Visibility = Visibility.Visible; i++; break; 
-                case 2: stackXR.Visibility = Visibility.Visible; i =0; break;
-            }
             
         }
 
@@ -71,6 +64,11 @@ namespace DomStroyB2C_MVVM.Views
                     u.MoveFocus(new TraversalRequest(FocusNavigationDirection.Down));
                 }
             }
+        }
+
+        private void comboCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtPayedSumma.Focus();
         }
     }
 }

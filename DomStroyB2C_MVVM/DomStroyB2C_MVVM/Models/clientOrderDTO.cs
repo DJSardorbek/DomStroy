@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace DomStroyB2C_MVVM.Models
 {
-    public class clientDTO : INotifyPropertyChanged
+    public class clientOrderDTO: INotifyPropertyChanged
     {
         #region Implement InotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -49,23 +49,30 @@ namespace DomStroyB2C_MVVM.Models
             set { address = value; OnPropertyChanged("Address"); }
         }
 
-        private double loan_sum;
+        private string card;
 
-        public double Loan_sum
+        public string Card
         {
-            get { return loan_sum; }
-            set { loan_sum = value; OnPropertyChanged("Loan_sum"); }
+            get { return card; }
+            set { card = value; OnPropertyChanged("Card"); }
         }
 
-        private double loan_dollar;
+        private double bonusSum;
 
-        public double Loan_dollar
+        public double BonusSum
         {
-            get { return loan_dollar; }
-            set { loan_dollar = value; OnPropertyChanged("Loan_dollar"); }
+            get { return bonusSum; }
+            set { bonusSum = value; OnPropertyChanged("BonusSum"); }
+        }
+
+        private double bonusDollar;
+
+        public double BonusDollar
+        {
+            get { return bonusDollar; }
+            set { bonusDollar = value; OnPropertyChanged("BonusDollar"); }
         }
 
         #endregion
-
     }
 }

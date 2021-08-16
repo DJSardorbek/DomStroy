@@ -48,9 +48,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// List of clients
         /// </summary>
-        private List<clientDTO> clients;
+        private List<clientOrderDTO> clients;
 
-        public List<clientDTO> Clients
+        public List<clientOrderDTO> Clients
         {
             get { return clients; }
             set { clients = value; OnPropertyChanged("Clients"); }
@@ -175,7 +175,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         public void ConvertClientTableToList()
         {
             Clients = (from DataRow dr in TbClient.Rows
-                       select new clientDTO()
+                       select new clientOrderDTO()
                        {
                            Id = Convert.ToInt32(dr["id"]),
                            FullName = dr["full_name"].ToString(),
@@ -217,8 +217,9 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             // now we update shop table
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-            string ArrivalDateTime = $"Kelish kuni: {ArrivalDate.ToString("yyyy-MM-dd")}, vaqti: {ArrivalTime}"; 
-            MySqlCommand cmdShop = new MySqlCommand("UPDATE shop SET book=1, comment='" + ArrivalDateTime + "', traded_at='" + currentDate + "', total_sum='" + SumSom + "', total_dollar='" + SumDollar + "' WHERE id='" + Shop + "'");
+            string arrivalDateTime = $"{ArrivalDate.ToString("yyyy-MM-dd")} {ArrivalTime}";
+            int selectedClientId = Client.Id;
+            MySqlCommand cmdShop = new MySqlCommand("UPDATE shop SET book=1, comment='" + arrivalDateTime + "', traded_at='" + currentDate + "', total_sum='" + SumSom + "', total_dollar='" + SumDollar + "', client='"+selectedClientId+"' WHERE id='" + Shop + "'");
             ObjDbAccess.executeQuery(cmdShop);
             cmdShop.Dispose();
 

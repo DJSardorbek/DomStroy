@@ -51,6 +51,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return objDbAccess; }
         }
 
+        /// <summary>
+        /// Selected shop
+        /// </summary>
         private shopDTO shop;
 
         public shopDTO Shop
@@ -59,6 +62,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             set { shop = value; OnPropertyChanged("Shop"); }
         }
 
+        /// <summary>
+        /// The list of shop
+        /// </summary>
         private List<shopDTO> shopList;
 
         public List<shopDTO> ShopList
@@ -66,6 +72,8 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return shopList; }
             set { shopList = value; OnPropertyChanged("ShopList"); }
         }
+
+
 
         #endregion
 
@@ -125,9 +133,16 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public void OpenPaymentView()
         {
+            double total_sum = Shop.SumSom;
+            int shop = Shop.Id;
+            PaymentViewModel paymentViewModel = new PaymentViewModel();
+            paymentViewModel.Total_sum = total_sum.ToString();
+            paymentViewModel.Remembered_sum = total_sum.ToString();
+            paymentViewModel.Shop = shop;
+
             PaymentView paymentView = new PaymentView()
             {
-                DataContext = new PaymentViewModel()
+                DataContext = paymentViewModel
             };
 
             paymentView.ShowDialog();

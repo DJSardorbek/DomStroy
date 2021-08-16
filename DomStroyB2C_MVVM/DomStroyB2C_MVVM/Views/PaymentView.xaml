@@ -28,7 +28,7 @@
             <Setter Property="CaretBrush" Value="#FFFFFF"/>
             <!---->
             <Setter Property="Width" Value="235"/>
-            <Setter Property="Height" Value="54"/>
+            <Setter Property="Height" Value="60"/>
             <Setter Property="VerticalAlignment" Value="Bottom"/>
             <Setter Property="BorderBrush" Value="#6783B8"/>
             <Setter Property="Foreground" Value="White"/>
@@ -176,6 +176,7 @@
 
                     <Grid Grid.Column="0">
                         <TextBox Style="{StaticResource txtClient}" Margin="34 0 0 0" 
+                                 FontSize="14px" Cursor="Arrow"
                                  Tag="Mijozni tanlang..."
                                  KeyUp="TextBox_KeyUp">
                             <TextBox.Text>
@@ -190,7 +191,7 @@
                         </TextBox>
                     </Grid>
 
-                    <Grid Grid.Column="1" Background="#6783B8" Height="54" Margin="0 0 32 0">
+                    <Grid Grid.Column="1" Background="#6783B8" Height="60" Margin="0 0 32 0">
                         <Button Style="{StaticResource btnClient}" Cursor="Hand"
                                 Command="{Binding ClientVisibilityCommand}">
                             <Image Source="../Images/arrow.png" Width="24" Height="14"/>
@@ -240,8 +241,13 @@
                         <DataGrid.InputBindings>
                             <KeyBinding
                             Key="Enter"
-                            Command="{Binding MoveBasket}"/>
+                            Command="{Binding ChooseClientCommand}"/>
                         </DataGrid.InputBindings>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ChooseClientCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <DataGrid.Resources>
                             <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                                 <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -306,15 +312,14 @@
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 20 ">
                     <Run Text="Qarzdorlik:   Uz:"/>
-                    <Run Text="70"/>
-
+                    <Run Text="{Binding Path=Loan_sum, Mode=TwoWay}"/>
 
                 </TextBlock>
 
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 20 ">
                     <Run Text="                       $:"/>
-                    <Run Text="70"/>
+                    <Run Text="{Binding Path=Loan_dollar, Mode=TwoWay}"/>
                 </TextBlock>
             </StackPanel>
 
@@ -496,7 +501,10 @@
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <!--combobox for change payment type-->
                         <ComboBox x:Name="comboCurrency" Style="{StaticResource ComboBox1}"
-                             Width="207" Height="51" Margin="49 0 0 0">
+                             Width="207" Height="51" Margin="49 0 0 0"
+                                  Text="{Binding Path=PaymentType, Mode=OneWayToSource}"
+                                  SelectedIndex="{Binding Path=PaymentType, Mode=OneWayToSource}"
+                                  SelectionChanged="comboCurrency_SelectionChanged">
                             <!--first item main cash desk-->
                             <ComboBoxItem>
                                 <StackPanel Orientation="Horizontal">
@@ -526,15 +534,24 @@
                         </ComboBox>
 
                         <!--textbox for input money-->
-                        <TextBox Width="281" Height="51" BorderThickness="0 1 1 1"
-                                 BorderBrush="#283654" Text="1 000 000" 
+                        <TextBox x:Name="txtPayedSumma" Width="281" Height="51" BorderThickness="0 1 1 1"
+                                 BorderBrush="#283654"
                                  FontSize="20px" Foreground="#283654"
                                  Padding="20 10 10 0" CaretBrush="#283654">
+                            <TextBox.Text>
+                                <Binding Path="PayedSumma"
+                                         UpdateSourceTrigger="PropertyChanged"/>
+                            </TextBox.Text>
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Return"
+                                            Command="{Binding SubmitPaymentCommand}"/>
+                            </TextBox.InputBindings>
 
                         </TextBox>
 
                         <!--add button-->
-                        <Button Cursor="Hand">
+                        <Button Cursor="Hand"
+                                Command="{Binding SubmitPaymentCommand}">
                             <Image Source="../Images/+.png" Width="20" Height="20"/>
                             <Button.Style>
                                 <Style TargetType="{x:Type Button}">
@@ -644,12 +661,15 @@
 
                             <!--first input for main cash desk-->
                             <Border x:Name="stackNaqd" BorderThickness="0 0 0 1" 
-                                    BorderBrush="#283654" Visibility="Collapsed">
+                                    BorderBrush="#283654" Visibility="{Binding Path=CashVisibility}">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
-                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                    <Image Source="../Images/PavCash.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                    <TextBlock Width="270" HorizontalAlignment="Left" Height="33"
+                                               Text="{Binding Cash}" FontFamily="Segoe UI" FontSize="20px"
                                                Padding="20 2 0 0"/>
-                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30"
+                                            Command="{Binding ClearCashCommand}">
                                         <Image Source="../Images/x.png" Width="15"/>
                                     </Button>
                                 </StackPanel>
@@ -658,12 +678,15 @@
 
                             <!--second input for credit card-->
                             <Border x:Name="stackPlastik" BorderThickness="0 0 0 1" 
-                                    BorderBrush="#283654" Visibility="Collapsed">
+                                    BorderBrush="#283654" Visibility="{Binding Path=CreditCardVisibility}">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
-                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                    <Image Source="../Images/PavCard.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                    <TextBlock Width="270" HorizontalAlignment="Left" Height="33"
+                                               Text="{Binding CreditCard}" FontFamily="Segoe UI" FontSize="20px"
                                                Padding="20 2 0 0"/>
-                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30"
+                                            Command="{Binding ClearCreditCardCommand}">
                                         <Image Source="../Images/x.png" Width="15"/>
                                     </Button>
                                 </StackPanel>
@@ -672,12 +695,15 @@
 
                             <!--third input for bank account number-->
                             <Border x:Name="stackXR" BorderThickness="0 0 0 1" 
-                                    BorderBrush="#283654" Visibility="Collapsed">
+                                    BorderBrush="#283654" Visibility="{Binding Path=TransferVisibility}">
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Width="300" HorizontalAlignment="Left" Height="33"
-                                               Text="1 000 000" FontFamily="Segoe UI" FontSize="20px"
+                                    <Image Source="../Images/PavTransfer.png" Height="20" Width="25"
+                                           Margin="8 0 0 0"/>
+                                    <TextBlock Width="270" HorizontalAlignment="Left" Height="33"
+                                               Text="{Binding Transfer}" FontFamily="Segoe UI" FontSize="20px"
                                                Padding="20 2 0 0"/>
-                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30">
+                                    <Button Style="{StaticResource btnSearch}" Margin="0" Width="30"
+                                            Command="{Binding ClearTransferCommand}">
                                         <Image Source="../Images/x.png" Width="15"/>
                                     </Button>
                                 </StackPanel>

@@ -792,7 +792,8 @@
                     BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
                         AlternationCount="2"   
                           Margin="25 0 25 0"
-                          ItemsSource="{Binding Path=Clients}">
+                          ItemsSource="{Binding Path=Clients, Mode=TwoWay}"
+                          SelectedItem="{Binding Path=Client, Mode=TwoWay}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
