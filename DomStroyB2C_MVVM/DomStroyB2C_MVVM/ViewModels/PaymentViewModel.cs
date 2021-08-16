@@ -7,6 +7,7 @@ using System.Windows;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using MySql.Data.MySqlClient;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
@@ -31,13 +32,19 @@ namespace DomStroyB2C_MVVM.ViewModels
             objDbAccess = new DBAccess();
             tbClient = new DataTable();
             GetClientList();
+            Search = ClientList.First().FullName;
+            ClientId = ClientList.First().Id;
+            Loan_sum = ClientList.First().Loan_sum.ToString();
+            Loan_dollar = ClientList.First().Loan_dollar.ToString();
+            ClientInfoVisibility = Visibility.Visible;
             GetCurrency();
-            Search = string.Empty;
             CurrencyType = "So'm";
             CurrencyVisibility = Visibility.Collapsed;
             clearCashCommand = new RelayCommand(ClearCash);
             clearCreditCardComamnd = new RelayCommand(ClearCreditCard);
             clearTransferComamnd = new RelayCommand(ClearTransfer);
+            Total_loan = "0";
+            ReturnDate = DateTime.Now;
         }
 
         #endregion
@@ -200,9 +207,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// The total sum of debt
         /// </summary>
-        private double loan_sum;
+        private string loan_sum;
 
-        public double Loan_sum
+        public string Loan_sum
         {
             get { return loan_sum; }
             set { loan_sum = value; OnPropertyChanged("Loan_sum"); }
@@ -211,9 +218,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// The total dollar of debt
         /// </summary>
-        private double loan_dollar;
+        private string loan_dollar;
 
-        public double Loan_dollar
+        public string Loan_dollar
         {
             get { return loan_dollar; }
             set { loan_dollar = value; OnPropertyChanged("Loan_dollar"); }
@@ -307,6 +314,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             set { transferVisibility = value; OnPropertyChanged("TransferVisibility"); }
         }
 
+        /// <summary>
+        /// The summa that payed by client
+        /// </summary>
         private string payedSumma;
 
         public string PayedSumma
@@ -314,6 +324,15 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return payedSumma; }
             set { payedSumma = value; OnPropertyChanged("PayedSumma"); }
         }
+
+        private string total_loan;
+
+        public string Total_loan
+        {
+            get { return total_loan; }
+            set { total_loan = value; OnPropertyChanged("Total_loan"); }
+        }
+
 
         #endregion
 
@@ -403,6 +422,15 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return clearTransferComamnd; }
         }
 
+        private DateTime returnDate;
+
+        public DateTime ReturnDate
+        {
+            get { return returnDate; }
+            set { returnDate = value; OnPropertyChanged("ReturnDate"); }
+        }
+
+
         #endregion
 
         #region Helper functions
@@ -426,14 +454,24 @@ namespace DomStroyB2C_MVVM.ViewModels
             if (ClientDataGrid == Visibility.Visible)
             {
                 ClientDataGrid = Visibility.Collapsed;
-                if (ClientId != null)
+                if (ClientId == 1)
+                {
                     ClientInfoVisibility = Visibility.Visible;
+                    //CalendarVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    ClientInfoVisibility = Visibility.Visible;
+                    CalendarVisibility = Visibility.Visible;
+                }
+
                 return;
             }
             else
             {
                 ClientDataGrid = Visibility.Visible;
                 ClientInfoVisibility = Visibility.Collapsed;
+                CalendarVisibility = Visibility.Collapsed;
                 return;
             }
 
@@ -449,12 +487,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             ObjDbAccess.readDatathroughAdapter(queryCLient, TbClient);
             ConvertClientTableToList();
 
-            Client = ClientList.First();
-            ClientId = Client.Id;
-            Loan_sum = Client.Loan_sum;
-            Loan_dollar = Client.Loan_dollar;
-            Search = Client.FullName;
-            ClientInfoVisibility = Visibility.Visible;
+
         }
 
         /// <summary>
@@ -537,6 +570,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 CreditCardVisibility = Visibility.Collapsed;
                 Transfer = string.Empty;
                 TransferVisibility = Visibility.Collapsed;
+                Total_loan = "0";
 
                 return;
             }
@@ -553,6 +587,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 CreditCardVisibility = Visibility.Collapsed;
                 Transfer = string.Empty;
                 TransferVisibility = Visibility.Collapsed;
+                Total_loan = "0";
 
                 return;
             }
@@ -564,12 +599,16 @@ namespace DomStroyB2C_MVVM.ViewModels
         public void ChooseClient()
         {
             ClientId = Client.Id;
-            Loan_sum = Client.Loan_sum;
-            Loan_dollar = Client.Loan_dollar;
+            Loan_sum = Client.Loan_sum.ToString();
+            Loan_dollar = Client.Loan_dollar.ToString();
             Search = Client.FullName;
             ClientDataGrid = Visibility.Collapsed;
             GetClientList();
             ClientInfoVisibility = Visibility.Visible;
+            if (ClientId != 1)
+                CalendarVisibility = Visibility.Visible;
+
+            CompyuteLoanSum();
 
         }
 
@@ -586,6 +625,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 if (CheckPayedSumma())
                 {
                     Cash = PayedSumma; CashVisibility = Visibility.Visible; PayedSumma = "";
+                    CompyuteLoanSum();
                 }
             }
 
@@ -595,6 +635,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 if (CheckPayedSumma())
                 {
                     CreditCardVisibility = Visibility.Visible; CreditCard = PayedSumma; PayedSumma = "";
+                    CompyuteLoanSum();
                 }
             }
 
@@ -604,6 +645,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 if (CheckPayedSumma())
                 {
                     Transfer = PayedSumma; TransferVisibility = Visibility.Visible; PayedSumma = "";
+                    CompyuteLoanSum();
                 }
             }
         }
@@ -625,7 +667,7 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             total_sum = cash + credit_card + transfer;
             bool return_value = true;
-            if(string.IsNullOrEmpty(PayedSumma))
+            if (string.IsNullOrEmpty(PayedSumma))
             {
                 return false;
             }
@@ -686,6 +728,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             Cash = string.Empty;
             CashVisibility = Visibility.Collapsed;
+            CompyuteLoanSum();
         }
 
         // The function to clear credit_card
@@ -693,6 +736,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             CreditCard = string.Empty;
             CreditCardVisibility = Visibility.Collapsed;
+            CompyuteLoanSum();
         }
 
         // The function to clear transfer
@@ -700,8 +744,107 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             Transfer = string.Empty;
             TransferVisibility = Visibility.Collapsed;
+            CompyuteLoanSum();
         }
 
+        // The function to compyute loan sum of client
+        public void CompyuteLoanSum()
+        {
+            if (ClientId != 1)
+            {
+                double cash = 0, credit_card = 0, transfer = 0;
+                double total_sum = 0, total_loan = 0;
+                if (!string.IsNullOrEmpty(Cash))
+                    cash = double.Parse(Cash);
+                if (!string.IsNullOrEmpty(CreditCard))
+                    credit_card = double.Parse(CreditCard);
+                if (!string.IsNullOrEmpty(Transfer))
+                    transfer = double.Parse(Transfer);
+
+                total_sum = cash + credit_card + transfer;
+                if (double.Parse(Total_sum) > total_sum)
+                {
+                    total_loan = double.Parse(Total_sum) - total_sum;
+                    Total_loan = total_loan.ToString();
+                }
+                else
+                {
+                    Total_loan = "0";
+                }
+            }
+        }
+
+        /// <summary>
+        /// The function to finish payment
+        /// </summary>
+        public void FinalizePayment()
+        {
+            // the total sum of shopping
+            double total_sum = 0;
+            total_sum = double.Parse(Total_sum);
+
+            // the total payed sum
+            double cash = 0, credit_card = 0, transfer = 0;
+            double total_payment = 0;
+            if (!string.IsNullOrEmpty(Cash))
+                cash = double.Parse(Cash);
+            if (!string.IsNullOrEmpty(CreditCard))
+                credit_card = double.Parse(CreditCard);
+            if (!string.IsNullOrEmpty(Transfer))
+                transfer = double.Parse(Transfer);
+            total_payment = cash + credit_card + transfer;
+
+            // If the client is not simple
+            if (ClientId != 1)
+            {
+                // we add total loan sum to payed sum
+                double total_loan = double.Parse(Total_loan);
+                total_payment += total_loan;
+            }
+
+            // If payment is not equal to total sum, we display error message
+            if (total_payment != total_sum)
+            {
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Error.png", "To'lov summasi to'liq to'lanmadi!")
+                };
+                message.ShowDialog();
+                return;
+            }
+
+            // if every this is ok, we finalize payment
+            else
+            {
+                MySqlCommand cmd;
+                string cash_sum = "0", cash_dollar = "0";
+                if(CurrencyType == "So'm")
+                {
+                    cash_sum = Cash.ToString();
+                    cash_sum = DoubleToStr(cash_sum);
+                }
+                else
+                {
+                    cash_dollar = Cash.ToString();
+                    cash_dollar = DoubleToStr(cash_dollar);
+                }
+                // If the client is simple
+                if (ClientId == 1)
+                {
+
+                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', ");
+                }
+            }
+        }
+
+        public string DoubleToStr(string s)
+        {
+            if(s.Contains(','))
+            {
+                s = s.Replace(',', '.');
+            }
+            return s;
+        }
         #endregion
     }
 }

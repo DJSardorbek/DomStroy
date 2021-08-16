@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
         xmlns:mateilDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Title="PaymentView" Height="575" Width="966" AllowsTransparency="True" WindowStyle="None" 
@@ -328,7 +329,7 @@
                 <TextBlock Grid.Row="1" Style="{StaticResource txtInformation}"
                            Margin="47 0 0 0 ">
                     <Run Text="Nasiya miqdori: "/>
-                    <Run Text="0.0"/>
+                    <Run Text="{Binding Total_loan}"/>
                 </TextBlock>
 
                 <Border BorderBrush="#4D638C" BorderThickness="1"
@@ -338,7 +339,8 @@
                     <DatePicker Grid.Row="1" Width="138"  Height="35"
                         HorizontalAlignment="Left" Margin="0 10 0 0"
                                 Foreground="White"
-                                >
+                                SelectedDate="{Binding ReturnDate, Mode=TwoWay,
+                                TargetNullValue={x:Static System:DateTime.Now}}">
 
                     </DatePicker>
                 </Border>
