@@ -18,7 +18,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <!-- Row 1 for searching -->
         <Grid Grid.Row="0" Background="#4D638C">
             <TextBox x:Name="txtSearch" Tag="Izlash..." Style="{StaticResource txtSearch}"  
@@ -30,9 +30,9 @@
             <Image Source="../Images/search.png" Height="20" Width="20"
                    VerticalAlignment="Center" HorizontalAlignment="Right"
                    Margin="0 0 35 0"/>
-            
+
         </Grid>
-        
+
         <!-- Row 2 for datagrid -->
 
         <Grid Grid.Row="1">
@@ -46,8 +46,8 @@
                         </Style.Triggers>
                     </Style>
                 </ScrollViewer.Style>
-                <DataGrid x:Name="dataGridFaktura" Visibility="Visible"
-                              HorizontalScrollBarVisibility="Auto" 
+                    <DataGrid x:Name="dataGridFaktura" Visibility="Visible"
+                    HorizontalScrollBarVisibility="Auto" 
                     Width="Auto"
                     HorizontalGridLinesBrush="#E3E2E2"
                     AutoGenerateColumns="False"
@@ -59,10 +59,13 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                              Margin="20 20 20 20"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          >
+                    Margin="20 20 20 20"
+                    BorderThickness="1" SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"   
+                    ItemsSource="{Binding Path=InvoiceList, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=Invoice, Mode=TwoWay}"
+                    >
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -74,7 +77,7 @@
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Height" Value="50"/>
                             <!--<Setter Property="BorderBrush" Value="#263859"/>-->
-                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
@@ -111,7 +114,7 @@
                                             CornerRadius="10 10 0 0"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 0 0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -127,15 +130,15 @@
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Faktura nomi" Binding="{Binding name}" IsReadOnly="True" Width="200*"/>
-                        <DataGridTextColumn Header="Filial/ Ombor" Binding="{Binding filial}" IsReadOnly="True" Width="200*"/>
-                        <DataGridTextColumn Header="Sana" Binding="{Binding sana}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Summa so'mda" Binding="{Binding som}" IsReadOnly="True" Width="180"/>
-                        <DataGridTextColumn Header="Summa dollarda" Binding="{Binding dollar}"  IsReadOnly="True" Width="180"/>
-                        
+                        <DataGridTextColumn Header="Faktura nomi" Binding="{Binding name}" IsReadOnly="True" Width="180*"/>
+                        <DataGridTextColumn Header="Filial/ Ombor" Binding="{Binding from_branch.name}" IsReadOnly="True" Width="180*"/>
+                        <DataGridTextColumn Header="Sana" Binding="{Binding created_at}" IsReadOnly="True" Width="180*"/>
+                        <DataGridTextColumn Header="Summa so'mda" Binding="{Binding get_item_sum}" IsReadOnly="True" Width="120*"/>
+                        <DataGridTextColumn Header="Summa dollarda" Binding="{Binding get_item_dollar}"  IsReadOnly="True" Width="120*"/>
+
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Ko'rish" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                                <TextBlock Text="Ko'rish" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center" Margin="-15 0 0 0"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -145,10 +148,10 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        
+
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Qabul" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                                <TextBlock Text="Qabul" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center" Margin="-15 0 0 0"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -161,7 +164,7 @@
 
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
-                                <TextBlock Text="Bekor" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
+                                <TextBlock Text="Bekor" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center" Margin="-15 0 0 0"/>
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

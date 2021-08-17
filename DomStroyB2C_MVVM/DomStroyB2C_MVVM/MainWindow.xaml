@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:DomStroyB2C_MVVM"
         xmlns:v="clr-namespace:DomStroyB2C_MVVM.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="730" Width="1370"
+        Title="{Binding Path=Title, Mode=TwoWay}" Height="730" Width="1370"
         MinHeight="730" MinWidth="1300"
         WindowStartupLocation="CenterScreen">
 
@@ -557,11 +557,11 @@
                 <ListViewItem>
                     <StackPanel>
                         <Button x:Name="btnRecieveFaktura" Click="btnRecieveFaktura_Click" Style="{StaticResource btnMenu}"
-                                Command="{Binding UpdateViewCommand}" CommandParameter="RecieveFaktura">
+                                Command="{Binding OpenInvoiceCommand}" CommandParameter="RecieveFaktura">
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Image Source="Images/menuRecieve.png" Width="25" Height="25"
                                    Margin="0 0 0 0" HorizontalAlignment="Center"/>
-                                <TextBlock Text="Tovar qabuli" Style="{StaticResource txtBlockMenu}"
+                                <TextBlock Text="Faktura qabuli" Style="{StaticResource txtBlockMenu}"
                                        Margin="0 6 0 0" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Button>

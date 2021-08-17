@@ -135,17 +135,19 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             double total_sum = Shop.SumSom;
             int shop = Shop.Id;
-            PaymentViewModel paymentViewModel = new PaymentViewModel();
+
+            PaymentView paymentView = new PaymentView();
+
+            PaymentViewModel paymentViewModel = new PaymentViewModel(paymentView);
             paymentViewModel.Total_sum = total_sum.ToString();
             paymentViewModel.Remembered_sum = total_sum.ToString();
             paymentViewModel.Shop = shop;
 
-            PaymentView paymentView = new PaymentView()
-            {
-                DataContext = paymentViewModel
-            };
+            paymentView.DataContext = paymentViewModel;
 
             paymentView.ShowDialog();
+
+            GetShopList();
         }
         #endregion
     }

@@ -65,10 +65,10 @@ namespace DomStroyB2C_MVVM.Commands
             {
                 viewModel.SelectedViewModel = new ProductResidueViewModel(viewModel);
             }
-            if (parameter.ToString() == "RecieveFaktura")
-            {
-                viewModel.SelectedViewModel = new RecieveFakturaViewModel(viewModel);
-            }
+            //if (parameter.ToString() == "RecieveFaktura")
+            //{
+            //    viewModel.SelectedViewModel = new RecieveFakturaViewModel(viewModel);
+            //}
             if (parameter.ToString() == "SeeFaktura")
             {
                 viewModel.SelectedViewModel = new SeeFakturaViewModel(viewModel);

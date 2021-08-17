@@ -195,7 +195,7 @@
                     <Grid Grid.Row="1" Grid.Column="3"
                           Margin="20 15 20 15">
                         <Button Style="{StaticResource btnMenu}" Click="Button_Click_2"
-                                Command="{Binding UpdateViewCommand}" CommandParameter="RecieveFaktura">
+                                Command="{Binding OpenInvoiceCommand}" CommandParameter="RecieveFaktura">
                             <StackPanel>
                                 <Image Source="../Images/menuRecieve.png" Width="45" Height="45" Margin="0 10 0 0"/>
                                 <TextBlock Text="Faktura qabul"/>

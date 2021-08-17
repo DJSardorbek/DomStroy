@@ -625,7 +625,8 @@
                     </Grid.ColumnDefinitions>
 
                     <!--first column for to'lov button-->
-                    <Button Grid.Column="0" Click="Button_Click">
+                    <Button Grid.Column="0" Click="Button_Click"
+                            Command="{Binding FinalizePaymentCommand}">
                         <TextBlock Text="To'lov" FontFamily="Segoue UI"
                                    FontSize="50px" Foreground="White"/>
                         <Button.Style>

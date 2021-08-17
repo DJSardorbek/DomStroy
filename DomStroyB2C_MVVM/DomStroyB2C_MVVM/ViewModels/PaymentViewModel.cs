@@ -8,6 +8,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using MySql.Data.MySqlClient;
+using DomStroyB2C_MVVM.Views;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
@@ -15,8 +16,9 @@ namespace DomStroyB2C_MVVM.ViewModels
     {
         #region Constructor
 
-        public PaymentViewModel()
+        public PaymentViewModel(PaymentView view)
         {
+            this.View = view;
             ClientDataGrid = Visibility.Collapsed;
             CalendarVisibility = Visibility.Collapsed;
             ClientInfoVisibility = Visibility.Collapsed;
@@ -45,11 +47,17 @@ namespace DomStroyB2C_MVVM.ViewModels
             clearTransferComamnd = new RelayCommand(ClearTransfer);
             Total_loan = "0";
             ReturnDate = DateTime.Now;
+            finalizePaymentCommand = new RelayCommand(FinalizePayment);
         }
 
         #endregion
 
         #region Private Fields
+
+        /// <summary>
+        /// The paymentview
+        /// </summary>
+        private PaymentView View { get; set; }
 
         /// <summary>
         /// The Visibility value to bind clientDataGrid
@@ -430,6 +438,15 @@ namespace DomStroyB2C_MVVM.ViewModels
             set { returnDate = value; OnPropertyChanged("ReturnDate"); }
         }
 
+        /// <summary>
+        /// The command to finalize payment
+        /// </summary>
+        private RelayCommand finalizePaymentCommand;
+
+        public RelayCommand FinalizePaymentCommand
+        {
+            get { return finalizePaymentCommand; }
+        }
 
         #endregion
 
@@ -731,7 +748,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             CompyuteLoanSum();
         }
 
-        // The function to clear credit_card
+        /// <summary>
+        /// The function to clear credit_card
+        /// </summary>
         public void ClearCreditCard()
         {
             CreditCard = string.Empty;
@@ -739,7 +758,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             CompyuteLoanSum();
         }
 
-        // The function to clear transfer
+        /// <summary>
+        /// The function to clear transfer
+        /// </summary>
         public void ClearTransfer()
         {
             Transfer = string.Empty;
@@ -747,7 +768,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             CompyuteLoanSum();
         }
 
-        // The function to compyute loan sum of client
+        /// <summary>
+        /// The function to compyute loan sum of client
+        /// </summary>
         public void CompyuteLoanSum()
         {
             if (ClientId != 1)
@@ -817,26 +840,71 @@ namespace DomStroyB2C_MVVM.ViewModels
             else
             {
                 MySqlCommand cmd;
-                string cash_sum = "0", cash_dollar = "0";
+                string cash_sum = "0", cash_dollar = "0", loan_sum="0", loan_dollar="0";
+                // if the currency type is som
                 if(CurrencyType == "So'm")
                 {
+                    // Payed som
                     cash_sum = Cash.ToString();
                     cash_sum = DoubleToStr(cash_sum);
+
+                    // Loan som
+                    if(ClientId !=1 && !string.IsNullOrEmpty(Total_loan))
+                    {
+                        loan_sum = Total_loan;
+                        loan_sum = DoubleToStr(loan_sum);
+                    }
+                    
+
                 }
+                // else if the currency is dollar
                 else
                 {
+                    // Payed dollar
                     cash_dollar = Cash.ToString();
                     cash_dollar = DoubleToStr(cash_dollar);
+
+                    // Loan dollar
+                    if(ClientId != 1 && !string.IsNullOrEmpty(Total_loan))
+                    {
+                        loan_dollar = Total_loan;
+                        loan_dollar = DoubleToStr(loan_dollar);
+                    }
                 }
                 // If the client is simple
                 if (ClientId == 1)
                 {
-
-                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', ");
+                    string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
+                        $"loan_sum='{loan_sum}', loan_dollar='{loan_dollar}', traded_at='{traded_at}', status_payment=1 WHERE id='{Shop}'");
+                    ObjDbAccess.executeQuery(cmd);
+                    cmd.Dispose();
                 }
+                // else if the client is not simple
+                else
+                {
+                    string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
+                        $"loan_sum='{loan_sum}', loan_dollar='{loan_dollar}', traded_at='{traded_at}', status_payment=1, debt=1 WHERE id='{Shop}'");
+                    ObjDbAccess.executeQuery(cmd);
+                    cmd.Dispose();
+                }
+
+                // we display the successfull payment finalize
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Success.png", "To'lov muvaffaqiyatli amalga oshirildi!")
+                };
+
+                message.ShowDialog();
+                // after finalize payment we close payment vuiew
+                View.Close();
             }
         }
 
+        /// <summary>
+        /// The function to convert double value to string
+        /// </summary>
         public string DoubleToStr(string s)
         {
             if(s.Contains(','))

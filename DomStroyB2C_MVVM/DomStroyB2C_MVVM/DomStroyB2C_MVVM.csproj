@@ -122,6 +122,12 @@
     <Compile Include="API\Client\ClientResponseModel.cs" />
     <Compile Include="API\Client\ClientService\ClientService.cs" />
     <Compile Include="API\Client\IClientService.cs" />
+    <Compile Include="API\Invoce_sended\IInvoice_sendedService.cs" />
+    <Compile Include="API\Invoce_sended\Invoice_sendedModel.cs" />
+    <Compile Include="API\Invoce_sended\Invoice_sendedService\Invoice_sendedService.cs" />
+    <Compile Include="API\Shop\IShopService.cs" />
+    <Compile Include="API\Shop\ShopModel.cs" />
+    <Compile Include="API\Shop\ShopService\ShopService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />
     <Compile Include="DBAccess.cs" />
