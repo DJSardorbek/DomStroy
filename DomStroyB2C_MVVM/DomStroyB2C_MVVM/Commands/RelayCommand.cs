@@ -13,6 +13,7 @@ namespace DomStroyB2C_MVVM.Commands
         public event EventHandler CanExecuteChanged;
 
         private Action mAction;
+        private RelayCommand cancelInvoice;
 
         /// <summary>
         /// The constructor that sets value to mAction
@@ -21,6 +22,11 @@ namespace DomStroyB2C_MVVM.Commands
         public RelayCommand(Action action)
         {
             mAction = action;
+        }
+
+        public RelayCommand(RelayCommand cancelInvoice)
+        {
+            this.cancelInvoice = cancelInvoice;
         }
 
         public bool CanExecute(object parameter)

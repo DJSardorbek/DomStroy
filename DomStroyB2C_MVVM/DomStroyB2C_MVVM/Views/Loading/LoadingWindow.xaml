@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views.Loading"
         mc:Ignorable="d"
-        Title="LoadingWindow" Height="180" Width="190" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Background="#19000000" AllowsTransparency="True">
+        Title="LoadingWindow" Height="180" Width="190" Loaded="Window_Loaded" ResizeMode="NoResize" WindowStyle="None" 
+        WindowStartupLocation="CenterScreen" Background="#19000000" AllowsTransparency="True">
     <Window.Resources>
         <Storyboard x:Key="Storyboard1" RepeatBehavior="Forever">
             <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)" Storyboard.TargetName="rectangle">

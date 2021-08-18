@@ -127,6 +127,8 @@ namespace DomStroyB2C_MVVM.ViewModels
             #region with internet
             try
             {
+                
+
                 //The url for post user password
                 Uri url = new Uri("http://143.244.156.131/api-auth/");
                 var strContent = "{\"password\": \"" + Password + "\"}";
@@ -134,7 +136,6 @@ namespace DomStroyB2C_MVVM.ViewModels
                 var task = Task.Run(() => PostUri(url, content));
                 LoadAnimation();
                 task.Wait();
-
                 // If the response is not error
                 if (task.Result != "error")
                 {

@@ -44,7 +44,7 @@
                   Focusable="False">
 
                 <Image Source="Images/menuLogo.png"
-                       Width="70" Height="30" Margin="0 5 0 0"/>
+                       Width="70" Height="30" Margin="0 5 0 0" MouseDown="Image_MouseDown"/>
             </Grid>
 
             <!-- Row 2 for buttons-->

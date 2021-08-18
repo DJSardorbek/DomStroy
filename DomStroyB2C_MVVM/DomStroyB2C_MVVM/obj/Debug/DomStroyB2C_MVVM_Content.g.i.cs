@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("images/message.cancel.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("views/loading/loading.gif")]
 
 

@@ -14,6 +14,7 @@
         </Style>
     </UserControl.Resources>
     <Grid Background="#E5E5E5">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -142,7 +143,8 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource btnSee}" Command="{Binding UpdateViewCommand}" CommandParameter="SeeFaktura">
+                                    <Button Style="{StaticResource btnSee}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.OpenInvoiceItemCommand}">
                                         <Image Source="../Images/seeRecieve.png" Width="25" Height="25"/>
                                     </Button>
                                 </DataTemplate>
@@ -168,7 +170,8 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource btnCancel}">
+                                    <Button Style="{StaticResource btnCancel}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.CancelInvoiceCommand}">
                                         <Image Source="../Images/cancelRecieve.png" Width="20" Height="20"/>
                                     </Button>
                                 </DataTemplate>

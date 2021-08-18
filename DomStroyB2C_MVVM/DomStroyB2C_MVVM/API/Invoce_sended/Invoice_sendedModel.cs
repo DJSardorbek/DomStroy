@@ -6,8 +6,6 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended
     {
         public int id { get; set; }
 
-        public int staff { get; set; }
-
         public int deliver { get; set; }
 
         public double get_item_sum { get; set; }

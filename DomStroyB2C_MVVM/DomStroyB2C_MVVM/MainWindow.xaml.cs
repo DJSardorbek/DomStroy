@@ -1,5 +1,6 @@
 ﻿using DomStroyB2C_MVVM.ViewModels;
 using DomStroyB2C_MVVM.Views.Loading;
+using DomStroyB2C_MVVM.Views.ModalViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -100,5 +101,11 @@ namespace DomStroyB2C_MVVM
             ListView.SelectedIndex = 13;
         }
         #endregion
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LoadingView view = new LoadingView();
+            view.ShowDialog();
+        }
     }
 }

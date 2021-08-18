@@ -15,7 +15,7 @@
 
         <!--first row for search and return back-->
         <Grid Grid.Row="0" Background="#4D638C">
-            <Button Command="{Binding UpdateViewCommand}" CommandParameter="RecieveFaktura">
+            <Button Command="{Binding BackToInvoiceCommand}">
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Width" Value="40"/>
@@ -65,8 +65,8 @@
                         </Style.Triggers>
                     </Style>
                 </ScrollViewer.Style>
-                <DataGrid x:Name="dataGridBasket" Visibility="Visible"
-                              HorizontalScrollBarVisibility="Auto" 
+                    <DataGrid x:Name="dataGridBasket" Visibility="Visible"
+                    HorizontalScrollBarVisibility="Auto" 
                     Width="Auto"
                     HorizontalGridLinesBrush="#E3E2E2"
                     AutoGenerateColumns="False"
@@ -78,10 +78,13 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                              Margin="10"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          >
+                    Margin="10"
+                    BorderThickness="1" SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"
+                    ItemsSource="{Binding Path=InvoiceItemList, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=Invoice, Mode=TwoWay}"
+                    >
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -93,7 +96,7 @@
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Height" Value="50"/>
                             <!--<Setter Property="BorderBrush" Value="#263859"/>-->
-                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
@@ -130,7 +133,7 @@
                                             CornerRadius="10 10 0 0"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 0 0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -146,16 +149,17 @@
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
-                        <DataGridTextColumn Header="Nomi" Binding="{Binding name}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="O'lchov" Binding="{Binding measurement}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Miqdor" Binding="{Binding quantity}" IsReadOnly="False" Width="100"/>
-                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding name}" IsReadOnly="True" Width="200*"/>
-                        <DataGridTextColumn Header="Valyuta" Binding="{Binding valyuta}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Yuborilgan narxi" Binding="{Binding price}" Width="150" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Mahsulot grupasi" Binding="{Binding price}" Width="150" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Ball" Binding="{Binding summa}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Umumiy summa" Binding="{Binding summa}" IsReadOnly="True" Width="150"/>
+                        <DataGridTextColumn Header="Kod" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Nomi" Binding="{Binding product.name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Mahsulot grupasi" Binding="{Binding product.category.name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Miqdor" Binding="{Binding amount}" IsReadOnly="False" Width="100"/>
+                        <DataGridTextColumn Header="O'lchov" Binding="{Binding product.measurement}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="Ball" Binding="{Binding product.ball}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="Yuborilgan narxi" Binding="{Binding selling_price}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Umumiy summa" Binding="{Binding get_summa}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Valyuta" Binding="{Binding product.currency}" IsReadOnly="True" Width="100*"/>
+                        
                     </DataGrid.Columns>
 
                 </DataGrid>
