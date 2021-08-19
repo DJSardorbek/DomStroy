@@ -133,7 +133,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 Uri url = new Uri("http://143.244.156.131/api-auth/");
                 var strContent = "{\"password\": \"" + Password + "\"}";
                 HttpContent content = new StringContent(strContent, Encoding.UTF8, "application/json");
-                var task = Task.Run(() => PostUri(url, content));
+                var task = Task.Run(async ()  => await PostUri(url, content));
                 LoadAnimation();
                 task.Wait();
                 // If the response is not error

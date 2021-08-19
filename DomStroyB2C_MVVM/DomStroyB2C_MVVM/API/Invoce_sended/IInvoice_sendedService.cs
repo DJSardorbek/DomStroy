@@ -7,6 +7,6 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended
     {
         Task<IEnumerable<Invoice_sendedModel>> GetAll();
 
-        Task<bool> Post(CancelInvoice cancelInvoice);
+        Task<bool> Patch(int id, Invoice_status model);
     }
 }

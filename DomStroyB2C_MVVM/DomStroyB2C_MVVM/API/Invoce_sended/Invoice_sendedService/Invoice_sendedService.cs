@@ -25,18 +25,24 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended.Invoice_sendedService
             }
         }
 
-        public async Task<bool> Post(CancelInvoice cancelInvoice)
+        public async Task<bool> Patch(int id, Invoice_status model)
         {
             var result = false;
             using(HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri(AllApi.INVOICE_SENDED);
+                client.BaseAddress = new Uri(AllApi.INVOICEITEM_SENDED + id.ToString() + '/');
                 client.DefaultRequestHeaders.Add("Authorization", AllApi.AUTH_TOKEN);
 
-                string json = JsonConvert.SerializeObject(cancelInvoice);
+                string json = JsonConvert.SerializeObject(model);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                using(HttpResponseMessage response = await client.PutAsync(client.BaseAddress, content))
+                var method = new HttpMethod("PATCH");
+                var request = new HttpRequestMessage(method, client.BaseAddress)
+                {
+                    Content = content
+                };
+
+                using(HttpResponseMessage response = await client.SendAsync(request)) 
                 {
                     if(response.IsSuccessStatusCode)
                     {

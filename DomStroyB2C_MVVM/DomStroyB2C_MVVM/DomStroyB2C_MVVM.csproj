@@ -125,10 +125,10 @@
     <Compile Include="API\Client\ClientResponseModel.cs" />
     <Compile Include="API\Client\ClientService\ClientService.cs" />
     <Compile Include="API\Client\IClientService.cs" />
-    <Compile Include="API\Invoce_sended\CancelInvoice.cs" />
     <Compile Include="API\Invoce_sended\IInvoice_sendedService.cs" />
     <Compile Include="API\Invoce_sended\Invoice_sendedModel.cs" />
     <Compile Include="API\Invoce_sended\Invoice_sendedService\Invoice_sendedService.cs" />
+    <Compile Include="API\Invoce_sended\Invoice_status.cs" />
     <Compile Include="API\InvoiceItem_sended\IInvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItemService\InvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItem_sended.cs" />
