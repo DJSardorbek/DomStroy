@@ -21,6 +21,8 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended
         public FromBranch from_branch { get; set; }
 
         public ToBranch to_branch { get; set; }
+
+        public object section { get; set; }
     }
 
     public class FromBranch

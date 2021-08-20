@@ -43,6 +43,8 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             ObjDbAccess = new DBAccess();
 
+            recieveInvoiceCommand = new RelayCommand(RecieveInvoiceAsync);
+
         }
 
         #endregion
@@ -133,13 +135,24 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return openInvoiceItemCommand; }
         }
 
+        /// <summary>
+        /// The command to cancel invoice 
+        /// </summary>
         private RelayCommand cancelInvoiceCommand;
-
-
-
+        
         public RelayCommand CancelInvoiceCommand
         {
             get { return cancelInvoiceCommand; }
+        }
+
+        /// <summary>
+        /// The command to recieve invoice
+        /// </summary>
+        private RelayCommand recieveInvoiceCommand;
+
+        public RelayCommand RecieveInvoiceCommand
+        {
+            get { return recieveInvoiceCommand; }
         }
 
         #endregion
@@ -251,76 +264,99 @@ namespace DomStroyB2C_MVVM.ViewModels
             }
         }
 
-        public async void RevieveInvoiceAsync()
+        /// <summary>
+        /// The fucntion to recieve invoice
+        /// </summary>
+        public async void RecieveInvoiceAsync()
         {
             Views.ModalViews.LoadingView loading = new Views.ModalViews.LoadingView();
             try
             {
-                int id = Invoice.id;
-
-                Invoice_status model = new Invoice_status()
-                {
-                    status = "accepted"
-                };
-
                 loading.Show();
-                var response = await _invoiceService.Patch(id, model);
-                loading.Close();
 
-                // if the response status is success, we update product table
-                if (response)
+                // First we get invoice item list
+                var content = await _invoiceItemService.GetAll(Invoice.id);
+                InvoiceItemList = content.ToList();
+
+                // if the invoice item list is not null
+                if (InvoiceList.Count > 0)
                 {
-                    // First we get invoice item list
-                    var content = await _invoiceItemService.GetAll(Invoice.id);
-                    InvoiceItemList = content.ToList();
-
-                    // Variables to get product information
-                    string product_amount = string.Empty, queryToGetProduct = string.Empty;
-                    double pr_amount = 0, in_amount = 0;
-                    DataTable tbProduct = new DataTable();
-
-                    MySqlCommand cmd;
-                    foreach (var item in invoiceItemList)
+                    // now we accept invoice
+                    int id = Invoice.id;
+                    Invoice_status model = new Invoice_status()
                     {
-                        // Query to get product
-                        queryToGetProduct = $"SELECT amount, cost, selling_price, barcode FROM product WHERE barcode = '{item.product.barcode}'";
-                        tbProduct.Clear();
-                        ObjDbAccess.readDatathroughAdapter(queryToGetProduct, tbProduct);
-
-                        // if that product is exist, we update it
-                        if (tbProduct.Rows.Count > 0)
-                        {
-                            product_amount = tbProduct.Rows[0]["amount"].ToString();
-                            pr_amount = double.Parse(product_amount);
-
-                            in_amount = item.amount;
-                            pr_amount += in_amount;
-                            product_amount = DoubleToStr(pr_amount.ToString());
-
-                            // The command to update product amount, cost, selling_price
-                            cmd = new MySqlCommand($"UPDATE product set amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
-                                                   $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
-                            ObjDbAccess.executeQuery(cmd);
-                            cmd.Dispose();
-                        }
-                        // else if that product doesn't exist we insert it
-                        else
-                        {
-                            //cmd = new MySqlCommand("INSERT INTO product " +
-                            //    "(product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
-                            //    $"('{item.product.id}', '{item.product.name}', '{item.product.measurement}', '{item.amount}', '{item.product.}')")
-                        }
-                    }
-
-
-                    // now we display message do display that invoice recieved successfully
-                    MessageView message = new MessageView()
-                    {
-                        DataContext = new MessageViewModel("../../Images/message.Success.png", "Faktura muvaffaqiyatli qabul qilindi!")
+                        status = "accepted"
                     };
-                    message.ShowDialog();
+                    var response = await _invoiceService.Patch(id, model);
+                    // if accept has successfuly done, we recieve products
+                    if (response)
+                    {
+                        // Variables to get product information
+                        string product_amount = string.Empty, queryToGetProduct = string.Empty;
+                        double pr_amount = 0, in_amount = 0;
+                        DataTable tbProduct = new DataTable();
 
-                    GetInvoiceListAsync();
+                        MySqlCommand cmd;
+                        foreach (var item in invoiceItemList)
+                        {
+                            // Query to get product
+                            queryToGetProduct = $"SELECT amount, cost, selling_price, barcode FROM product WHERE barcode = '{item.product.barcode}'";
+                            tbProduct.Clear();
+                            ObjDbAccess.readDatathroughAdapter(queryToGetProduct, tbProduct);
+
+                            // if that product is exist, we update it
+                            if (tbProduct.Rows.Count > 0)
+                            {
+                                product_amount = tbProduct.Rows[0]["amount"].ToString();
+                                pr_amount = double.Parse(product_amount);
+
+                                in_amount = item.amount;
+                                pr_amount += in_amount;
+                                product_amount = DoubleToStr(pr_amount.ToString());
+
+                                // The command to update product amount, cost, selling_price
+                                cmd = new MySqlCommand($"UPDATE product set amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
+                                                       $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
+                                ObjDbAccess.executeQuery(cmd);
+                                cmd.Dispose();
+                            }
+                            // else if that product doesn't exist we insert it
+                            else
+                            {
+                                string section = "1", expire_date = "";
+                                if (Invoice.section != null) { section = Invoice.section.ToString(); }
+                                if (item.product.expire_date != null) { expire_date = item.product.expire_date.ToString(); }
+                                cmd = new MySqlCommand("INSERT INTO product " +
+                                    "(product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
+                                    $"('{item.product.id}', '{item.product.name}', '{item.product.measurement}', '{item.amount}', '{section}', '{Invoice.to_branch.id}', '{item.product.barcode}', " +
+                                    $"'{item.product.producer}', '{Invoice.deliver}', '{item.product.currency}', '{item.product.cost}', '{item.selling_price}', '{expire_date}', '{item.product.category.id}', '{item.product.ball}')");
+                                ObjDbAccess.executeQuery(cmd);
+                                cmd.Dispose();
+                            }
+                        }
+
+                        loading.Close();
+
+                        // now we display message do display that invoice recieved successfully
+                        MessageView message = new MessageView()
+                        {
+                            DataContext = new MessageViewModel("../../Images/message.Success.png", "Faktura muvaffaqiyatli qabul qilindi!")
+                        };
+                        message.ShowDialog();
+
+                        GetInvoiceListAsync();
+                    }
+                    // else if accept has not done, we display error message
+                    else
+                    {
+                        loading.Close();
+                        MessageView message = new MessageView()
+                        {
+                            DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan bog'lanishda xatolik!")
+                        };
+
+                        message.ShowDialog();
+                    }
                 }
                 // else if status is bad, we display error message
                 else

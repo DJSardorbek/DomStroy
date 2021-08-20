@@ -23,7 +23,6 @@ namespace DomStroyB2C_MVVM.API.InvoiceItem_sended
 		public int ball { get; set; }
 		public string measurement { get; set; }
 		public string producer { get; set; }
-		public double get_minimal_amout { get; set; }
 		public double cost { get; set; }
 		public string barcode { get; set; }
 		public double selling_price { get; set; }

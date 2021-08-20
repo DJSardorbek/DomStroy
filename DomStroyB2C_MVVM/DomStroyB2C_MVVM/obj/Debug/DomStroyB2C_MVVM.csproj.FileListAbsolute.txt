@@ -206,4 +206,3 @@ C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStro
 C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.CopyComplete
 C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.exe
 C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.pdb
-C:\Users\Oysha Algorithm\Documents\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.AssemblyReference.cache

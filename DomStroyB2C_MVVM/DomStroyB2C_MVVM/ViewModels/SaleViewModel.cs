@@ -793,7 +793,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 ObjDbAccess.readDatathroughAdapter(queryToSeparate, TbSeperate);
                 if (TbSeperate.Rows.Count > 0)
                 {
-                    if (currentShop != false)
+                    if (currentShop != false && countSection!=1)
                     {
                         // We set value to total_sum and total_dollar
                         using (DataTable datatable = new DataTable())

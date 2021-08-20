@@ -160,7 +160,8 @@
                             </DataGridTemplateColumn.Header>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Button Style="{StaticResource btnPlus}">
+                                    <Button Style="{StaticResource btnPlus}"
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.RecieveInvoiceCommand}">
                                         <Image Source="../Images/prRecieve.png" Width="25" Height="25"/>
                                     </Button>
                                 </DataTemplate>
