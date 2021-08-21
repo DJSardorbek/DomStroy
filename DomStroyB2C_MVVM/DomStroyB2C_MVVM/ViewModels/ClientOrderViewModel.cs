@@ -37,9 +37,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// client to choose
         /// </summary>
-        private clientDTO client;
+        private clientOrderDTO client;
 
-        public clientDTO Client
+        public clientOrderDTO Client
         {
             get { return client; }
             set { client = value; OnPropertyChanged("Client"); }

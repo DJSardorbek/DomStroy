@@ -132,11 +132,16 @@
     <Compile Include="API\InvoiceItem_sended\IInvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItemService\InvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItem_sended.cs" />
+    <Compile Include="API\Shop\CartItem\CartItemModel.cs" />
+    <Compile Include="API\Shop\CartItem\CartItemService\CartItemService.cs" />
+    <Compile Include="API\Shop\CartItem\ICartService.cs" />
     <Compile Include="API\Shop\Cart\CartModel.cs" />
+    <Compile Include="API\Shop\Cart\CartResponse.cs" />
     <Compile Include="API\Shop\Cart\CartService\CartService.cs" />
     <Compile Include="API\Shop\Cart\ICartService.cs" />
     <Compile Include="API\Shop\IShopService.cs" />
     <Compile Include="API\Shop\ShopModel.cs" />
+    <Compile Include="API\Shop\ShopResponse.cs" />
     <Compile Include="API\Shop\ShopService\ShopService.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\UpdateViewCommand.cs" />

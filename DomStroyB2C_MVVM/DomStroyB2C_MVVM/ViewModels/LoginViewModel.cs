@@ -186,6 +186,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 MainWindowViewModel.section = Employee.data.section.id;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
+                                mainWindow.StartSendShop();
                                 //LoginVisibility = false;
                             }
                         }
