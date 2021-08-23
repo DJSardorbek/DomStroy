@@ -12,6 +12,14 @@
         Background="{x:Null}" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
         BorderBrush="#C0C0C0" BorderThickness="1">
+    <Window.InputBindings>
+        <KeyBinding Key="F2"
+                    Command="{Binding HundredCashCommand}"/>
+        <KeyBinding Key="F3"
+                    Command="{Binding HundredCreditCartCommand}"/>
+        <KeyBinding Key="F4"
+                    Command="{Binding HundredTransferCommand}"/>
+    </Window.InputBindings>
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}" x:Key="txtInformation">
             <Setter Property="FontFamily" Value="Segoe UI"/>

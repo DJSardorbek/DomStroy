@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Effects;
 
@@ -18,6 +19,7 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
 
         public ClientAddViewModel(CliantAddView cliantAddView)
         {
+            LoadingVisibility = Visibility.Collapsed;
             this.cliantAddView = cliantAddView;
             _clientService = new ClientService();
             postClientCommand = new RelayCommand(PostClient);
@@ -127,6 +129,17 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
             get { return objDbAccess; }
         }
 
+        /// <summary>
+        /// The visibility variable to loadin gif animation
+        /// </summary>
+        private Visibility loadingVisibility;
+
+        public Visibility LoadingVisibility
+        {
+            get { return loadingVisibility; }
+            set { loadingVisibility = value; OnPropertyChanged("LoadingVisibility"); }
+        }
+
         #endregion
 
         #region Commands
@@ -147,48 +160,73 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
         /// </summary>
         public async void PostClient()
         {
-            ClientModel model = new ClientModel()
+            try
             {
-                _firstName = FirstName,
-                _lastName = LastName,
-                _address = Address,
-                _phone_1 = Phone_1,
-                _phone_2 = Phone_2,
-                _returnDate = DateTime.Now.ToString("yyyy-MM-dd"),
-                _birthDay = DateTimeConverter(BirthDate)
-            };
+                LoadingVisibility = Visibility.Visible;
+                myEffect.Radius = 10;
 
-            LoadAnimation();
-            string response = await clientService.Post(model);
-            System.Windows.MessageBox.Show(DateTimeConverter(BirthDate));
-            if(response != "error")
-            {
-                // The response from server
-                ClientResponseModel r = JsonConvert.DeserializeObject<ClientResponseModel>(response);
+                cliantAddView.Effect = myEffect;
 
-                // The command to add new client
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO client (id,first_name,last_name,phone_1,phone_2,address,birth_date,discount_card,return_date,loan_sum,loan_dollar,ball) " +
-                $"VALUES({r.id}, '{r.first_name}', '{r.last_name}', '{r.phone_1}', '{r.phone_2}', '{r.address}', '{r.birth_date}', 1, '{r.return_date}', '{r.loan_sum}', '{r.loan_dollar}', '{r.ball}')");
-                ObjDbAccess.executeQuery(cmd);
-                cmd.Dispose();
 
-                // Message for display client added successfully
-                MessageView message = new MessageView()
+                ClientModel model = new ClientModel()
                 {
-                    DataContext = new MessageViewModel("../../Images/message.Success.png", "Mijoz muvaffaqiyatli qo'shildi!")
+                    _firstName = FirstName,
+                    _lastName = LastName,
+                    _address = Address,
+                    _phone_1 = Phone_1,
+                    _phone_2 = Phone_2,
+                    _returnDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                    _birthDay = DateTimeConverter(BirthDate)
                 };
-                message.ShowDialog();
-                cliantAddView.Close();
-            }
 
-            else
+                string response = await clientService.Post(model);
+
+                LoadingVisibility = Visibility.Collapsed;
+                myEffect.Radius = 0;
+
+                cliantAddView.Effect = myEffect;
+
+                if (response != "error")
+                {
+                    // The response from server
+                    ClientResponseModel r = JsonConvert.DeserializeObject<ClientResponseModel>(response);
+
+                    // The command to add new client
+                    MySqlCommand cmd = new MySqlCommand("INSERT INTO client (id,first_name,last_name,phone_1,phone_2,address,birth_date,discount_card,return_date,loan_sum,loan_dollar,ball) " +
+                    $"VALUES({r.id}, '{r.first_name}', '{r.last_name}', '{r.phone_1}', '{r.phone_2}', '{r.address}', '{r.birth_date}', 1, '{r.return_date}', '{r.loan_sum}', '{r.loan_dollar}', '{r.ball}')");
+                    ObjDbAccess.executeQuery(cmd);
+                    cmd.Dispose();
+
+                    // Message for display client added successfully
+                    MessageView message = new MessageView()
+                    {
+                        DataContext = new MessageViewModel("../../Images/message.Success.png", "Mijoz muvaffaqiyatli qo'shildi!")
+                    };
+                    message.ShowDialog();
+                    cliantAddView.Close();
+                }
+
+                else
+                {
+                    // Message for display error
+                    MessageView message = new MessageView()
+                    {
+                        DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan xatolik yuz berdi!")
+                    };
+                    message.ShowDialog();
+                }
+            }
+            catch (Exception ex)
             {
+                LoadingVisibility = Visibility.Collapsed;
+                myEffect.Radius = 0;
                 // Message for display error
                 MessageView message = new MessageView()
                 {
-                    DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan xatolik yuz berdi!")
+                    DataContext = new MessageViewModel("../../Images/message.Error.png", ex.Message)
                 };
                 message.ShowDialog();
+
             }
         }
 

@@ -67,7 +67,7 @@
                     BorderThickness="1" SelectionMode="Single" 
                     SelectionUnit="FullRow"
                     AlternationCount="2"   
-                    ItemsSource="{Binding Path=InvoiceList, Mode=TwoWay}"
+                    ItemsSource="{Binding Path=InvoiceList.results, Mode=TwoWay}"
                     SelectedItem="{Binding Path=Invoice, Mode=TwoWay}"
                     >
                     <DataGrid.Resources>

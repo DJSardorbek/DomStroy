@@ -29,5 +29,10 @@ namespace DomStroyB2C_MVVM.Views.ModalViews
         {
             Close();
         }
+
+        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

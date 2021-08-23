@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views.ModalViews"
+         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         mc:Ignorable="d"
         Title="BasketView" Height="550" Width="400"
         AllowsTransparency="True" 
@@ -127,6 +128,8 @@
             <Grid Grid.Row="0">
                 <TextBlock Text="Mijoz qo'shish"/>
             </Grid>
+
+            
 
             <!--Second row for content-->
             <Grid Grid.Row="1">
@@ -310,11 +313,25 @@
 
                         <Button x:Name="btnSubmit" Grid.Column="0" Tag="Save"
                                 
-                                Command="{Binding PostClientCommand}"/>
+                                Command="{Binding PostClientCommand}" Click="btnSubmit_Click"/>
                         <Button x:Name="btnCancel" Grid.Column="1" Tag="Cancel"
                                 Click="btnCancel_Click"/>
                     </Grid>
                 </Border>
+            </Grid>
+
+            <Grid Grid.Row="1" Width="150" Height="150" Margin="0 -50 0 0"
+              Visibility="{Binding LoadingVisibility}">
+                <Grid.Background>
+                    <VisualBrush>
+                        <VisualBrush.Visual>
+                            <Image gif:ImageBehavior.AnimatedSource="/Views/Loading/loading.gif"
+                           
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Grid.Background>
             </Grid>
         </Grid>
     </Border>

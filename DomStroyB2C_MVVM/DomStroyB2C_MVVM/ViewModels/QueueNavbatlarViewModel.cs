@@ -172,7 +172,12 @@ namespace DomStroyB2C_MVVM.ViewModels
                 ObjDbAccess.executeQuery(cmd);
                 cmd.Dispose();
 
-                MessageBox.Show("Tovarlar bekor qilindi!", "Xabar", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Success.png", "Tovarlar muvaffaqiyatli bekor qilindi!")
+                };
+                message.ShowDialog();
+
                 GetQueueList();
 
             }

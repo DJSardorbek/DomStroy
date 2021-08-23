@@ -48,6 +48,9 @@ namespace DomStroyB2C_MVVM.ViewModels
             Total_loan = "0";
             ReturnDate = DateTime.Now;
             finalizePaymentCommand = new RelayCommand(FinalizePayment);
+            hundredCashCommand = new RelayCommand(HundredPersentCash);
+            hundredCreditCartCommand = new RelayCommand(HundredPersentCreditCard);
+            hundredTransferCommand = new RelayCommand(HundredPersentTransfer);
         }
 
         #endregion
@@ -448,6 +451,36 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return finalizePaymentCommand; }
         }
 
+        /// <summary>
+        /// The command to pay the payment by 100 % of cash
+        /// </summary>
+        private RelayCommand hundredCashCommand;
+
+        public RelayCommand HundredCashCommand
+        {
+            get { return hundredCashCommand; }
+        }
+
+        /// <summary>
+        /// The command to pay the payment by 100 % of credit cart
+        /// </summary>
+        private RelayCommand hundredCreditCartCommand;
+
+        public RelayCommand HundredCreditCartCommand
+        {
+            get { return hundredCreditCartCommand; }
+        }
+
+        /// <summary>
+        /// The command to pay the payment by 100 % of transfer
+        /// </summary>
+        private RelayCommand hundredTransferCommand;
+
+        public RelayCommand HundredTransferCommand
+        {
+            get { return hundredTransferCommand; }
+        }
+
         #endregion
 
         #region Helper functions
@@ -460,6 +493,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             CliantAddView cliantAddView = new CliantAddView();
             cliantAddView.DataContext = new ClientAddViewModel(cliantAddView);
             cliantAddView.ShowDialog();
+            GetClientList();
 
         }
 
@@ -871,11 +905,22 @@ namespace DomStroyB2C_MVVM.ViewModels
                         loan_dollar = DoubleToStr(loan_dollar);
                     }
                 }
+                //we check transfer if it is null
+                if(string.IsNullOrEmpty(Transfer))
+                {
+                    Transfer = "0";
+                }
+                //checking credit card if it is null
+                if (string.IsNullOrEmpty(CreditCard))
+                {
+                    CreditCard = "0";
+                }
+
                 // If the client is simple
                 if (ClientId == 1)
                 {
                     string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
+                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{DoubleToStr(CreditCard)}', transfer='{DoubleToStr(Transfer)}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
                         $"loan_sum='{loan_sum}', loan_dollar='{loan_dollar}', traded_at='{traded_at}', status_payment=1 WHERE id='{Shop}'");
                     ObjDbAccess.executeQuery(cmd);
                     cmd.Dispose();
@@ -884,7 +929,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 else
                 {
                     string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{CreditCard}', transfer='{Transfer}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
+                    cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{DoubleToStr(CreditCard)}', transfer='{DoubleToStr(Transfer)}', cash_sum='{cash_sum}', cash_dollar='{cash_dollar}', " +
                         $"loan_sum='{loan_sum}', loan_dollar='{loan_dollar}', traded_at='{traded_at}', status_payment=1, debt=1 WHERE id='{Shop}'");
                     ObjDbAccess.executeQuery(cmd);
                     cmd.Dispose();
@@ -901,6 +946,82 @@ namespace DomStroyB2C_MVVM.ViewModels
                 View.Close();
             }
         }
+
+        /// <summary>
+        /// The function to pay the payment by 100 % cash
+        /// </summary>
+        public void HundredPersentCash()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+            
+            string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+            if (CurrencyType == "So'm")
+            {
+                cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', cash_sum='{DoubleToStr(Total_sum)}', status_payment=1 WHERE id='{Shop}'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+            }
+            else
+            {
+                cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', cash_dollar='{DoubleToStr(Total_sum)}', status_payment=1 WHERE id='{Shop}'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+            }
+
+            MessageView message = new MessageView()
+            {
+                DataContext = new MessageViewModel("../../Images/message.success.png", "To'lov muvaffaqiyatli amalga oshirildi!")
+            };
+            message.ShowDialog();
+            // after finalize payment we close payment vuiew
+            View.Close();
+        }
+
+        /// <summary>
+        /// The function to pay the payment by 100 % credit_card
+        /// </summary>
+        public void HundredPersentCreditCard()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+
+            string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+            cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', card='{DoubleToStr(Total_sum)}', status_payment=1 WHERE id='{Shop}'");
+            ObjDbAccess.executeQuery(cmd);
+            cmd.Dispose();
+
+            MessageView message = new MessageView()
+            {
+                DataContext = new MessageViewModel("../../Images/message.success.png", "To'lov muvaffaqiyatli amalga oshirildi!")
+            };
+            message.ShowDialog();
+            // after finalize payment we close payment vuiew
+            View.Close();
+        }
+
+        /// <summary>
+        /// The function to pay the payment by 100 % transfer
+        /// </summary>
+        public void HundredPersentTransfer()
+        {
+            MySqlCommand cmd = new MySqlCommand();
+
+            string traded_at = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+
+            cmd = new MySqlCommand($"UPDATE shop set client='{ClientId}', transfer='{DoubleToStr(Total_sum)}', status_payment=1 WHERE id='{Shop}'");
+            ObjDbAccess.executeQuery(cmd);
+            cmd.Dispose();
+
+            MessageView message = new MessageView()
+            {
+                DataContext = new MessageViewModel("../../Images/message.success.png", "To'lov muvaffaqiyatli amalga oshirildi!")
+            };
+            message.ShowDialog();
+            // after finalize payment we close payment vuiew
+            View.Close();
+        }
+
 
         /// <summary>
         /// The function to convert double value to string

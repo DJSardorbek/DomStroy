@@ -13,6 +13,7 @@ using System;
 using DomStroyB2C_MVVM.Views.ModalViews;
 using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
 using LoadingView = DomStroyB2C_MVVM.Views.ModalViews.LoadingView;
+using System.Windows;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
@@ -22,6 +23,8 @@ namespace DomStroyB2C_MVVM.ViewModels
 
         public SeeFakturaViewModel(MainWindowViewModel viewModel, SeeFakturaView view, int Id)
         {
+            LoadingVisibility = Visibility.Collapsed;
+
             this.viewModel = viewModel;
             UpdateViewCommand = new UpdateViewCommand(viewModel);
 
@@ -30,8 +33,8 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             _invoiceItemService = new InvoiceItem_sendedService();
             GetInvoiceItemListAsync();
-            backToInvoiceCommand = new RelayCommand(ComeBackToInvoice);
 
+            backToInvoiceCommand = new RelayCommand(ComeBackToInvoice);
 
         }
 
@@ -81,6 +84,16 @@ namespace DomStroyB2C_MVVM.ViewModels
             set { invoiceItemList = value; OnPropertyChanged("InvoiceItemList"); }
         }
 
+        /// <summary>
+        /// The visibility variable to loadin gif animation
+        /// </summary>
+        private Visibility loadingVisibility;
+
+        public Visibility LoadingVisibility
+        {
+            get { return loadingVisibility; }
+            set { loadingVisibility = value; OnPropertyChanged("LoadingVisibility"); }
+        }
 
         #endregion
 
@@ -116,18 +129,19 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public async void GetInvoiceItemListAsync()
         {
-            LoadingView loading = new LoadingView();
+            //LoadingView loading = new LoadingView();
             try
             {
-                loading.Show();
+                LoadingVisibility = Visibility.Visible;
                 var content = await _invoiceItemService.GetAll(Id);
                 
                 InvoiceItemList = content.ToList();
-                loading.Close();
+                LoadingVisibility = Visibility.Collapsed;
             }
             catch(Exception ex)
             {
-                loading.Close();
+                //loading.Close();
+                LoadingVisibility = Visibility.Collapsed;
 
                 MessageView message = new MessageView()
                 {

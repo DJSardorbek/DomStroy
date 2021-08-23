@@ -66,9 +66,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// The list of invoice
         /// </summary>
-        private List<Invoice_sendedModel> invoiceList;
+        private Invoice_sendedModel invoiceList;
 
-        public List<Invoice_sendedModel> InvoiceList
+        public Invoice_sendedModel InvoiceList
         {
             get { return invoiceList; }
             set { invoiceList = value; OnPropertyChanged("InvoiceList"); }
@@ -77,9 +77,9 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <summary>
         /// The selected invoice
         /// </summary>
-        private Invoice_sendedModel invoice;
+        private Result invoice;
 
-        public Invoice_sendedModel Invoice
+        public Result Invoice
         {
             get { return invoice; }
             set { invoice = value; OnPropertyChanged("Invoice"); }
@@ -113,8 +113,6 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return loadingVisibility; }
             set { loadingVisibility = value; OnPropertyChanged("LoadingVisibility"); }
         }
-
-
 
         #endregion
 
@@ -173,10 +171,10 @@ namespace DomStroyB2C_MVVM.ViewModels
                 var response = await _invoiceService.GetAll();
                 LoadingVisibility = Visibility.Collapsed;
                 //loading.Close();
-                InvoiceList = response.ToList();
+                InvoiceList = response;
 
                 // if the invoice list is null
-                if(InvoiceList.Count == 0)
+                if(InvoiceList.results.Count == 0)
                 {
                     MessageView message = new MessageView()
                     {
@@ -279,7 +277,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 InvoiceItemList = content.ToList();
 
                 // if the invoice item list is not null
-                if (InvoiceList.Count > 0)
+                if (InvoiceList.results.Count > 0)
                 {
                     // now we accept invoice
                     int id = Invoice.id;
@@ -324,7 +322,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                             else
                             {
                                 string section = "1", expire_date = "";
-                                if (Invoice.section != null) { section = Invoice.section.ToString(); }
+                                if (Invoice.section.id != null) { section = Invoice.section.id.ToString(); }
                                 if (item.product.expire_date != null) { expire_date = item.product.expire_date.ToString(); }
                                 cmd = new MySqlCommand("INSERT INTO product " +
                                     "(product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +

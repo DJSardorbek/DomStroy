@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
              d:DesignHeight="730" d:DesignWidth="1250">
@@ -100,7 +101,7 @@
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#4D638C"/>
+                                    <Setter Property="Background" Value="#B6E0FF"/>
                                 </Trigger>
 
                             </Style.Triggers>
@@ -165,6 +166,21 @@
                 </DataGrid>
 
             </ScrollViewer>
+        </Grid>
+        
+        <!--second row loading animation-->
+        <Grid Grid.Row="1" Width="200" Height="200" Margin="0 -50 0 0"
+              Visibility="{Binding LoadingVisibility}">
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Image gif:ImageBehavior.AnimatedSource="/Views/Loading/loading.gif"
+                           
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
         </Grid>
     </Grid>
 </UserControl>

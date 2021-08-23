@@ -284,6 +284,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                     // The model to send server
                                     ShopModel model = new ShopModel()
                                     {
+                                        _cart_id = cart_id,
                                         _client = Convert.ToInt32(TbSendShop.Rows[i]["client"]),
                                         _traded_at = Convert.ToDateTime(TbSendShop.Rows[i]["traded_at"]),
                                         _card = Convert.ToDouble(TbSendShop.Rows[i]["card"]),

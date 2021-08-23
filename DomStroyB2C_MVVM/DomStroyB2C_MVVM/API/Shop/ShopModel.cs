@@ -5,6 +5,9 @@ namespace DomStroyB2C_MVVM.API.Shop
 {
     class ShopModel
     {
+        [JsonProperty("cart_id")]
+        public int _cart_id { get; set; }
+
         [JsonProperty("client")]
         public int _client { get; set; }
 

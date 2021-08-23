@@ -6,6 +6,9 @@ using System.Windows.Input;
 using System.Linq;
 using System;
 using DomStroyB2C_MVVM.Views;
+using MySql.Data.MySqlClient;
+using DomStroyB2C_MVVM.Views.ModalViews;
+using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
@@ -23,6 +26,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             Shop = new shopDTO();
             GetShopList();
             openPaymentCommand = new RelayCommand(OpenPaymentView);
+            cancelShopCommand = new RelayCommand(CancelShop);
         }
 
         #endregion
@@ -91,6 +95,14 @@ namespace DomStroyB2C_MVVM.ViewModels
             get { return openPaymentCommand; }
         }
 
+        private RelayCommand cancelShopCommand;
+
+        public RelayCommand CancelShopCommand
+        {
+            get { return cancelShopCommand; }
+        }
+
+
         #endregion
 
         #region Helper Methods
@@ -149,6 +161,74 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             GetShopList();
         }
+
+        /// <summary>
+        /// The function to cancel shop
+        /// </summary>
+        public void CancelShop()
+        {
+            if (TbShop.Rows.Count == 0) return;
+            else
+            {
+                // Updating amount of product of product table
+                DataTable tbProduct = new DataTable();
+                MySqlCommand cmdUpdateProduct;
+                double deletedAmount = 0, productAmount = 0, changedAmount = 0;
+
+                // Getting cart list
+                DataTable tbBasket = new DataTable();
+                string queryToBasket = "select * from cart where shop='" + Shop.Id + "'";
+                ObjDbAccess.readDatathroughAdapter(queryToBasket, tbBasket);
+                int shop = 0;
+                for (int i = 0; i < tbBasket.Rows.Count; i++)
+                {
+                    deletedAmount = double.Parse(tbBasket.Rows[i]["amount"].ToString());
+                    string queryProduct = "select amount from product where product_id='" + tbBasket.Rows[i]["product"] + "'";
+                    ObjDbAccess.readDatathroughAdapter(queryProduct, tbProduct);
+                    productAmount = double.Parse(tbProduct.Rows[0]["amount"].ToString());
+                    changedAmount = deletedAmount + productAmount;
+
+                    cmdUpdateProduct = new MySqlCommand("update product set amount='" + DoubleToStr(changedAmount) + "' where product_id='" + tbBasket.Rows[i]["product"] + "'");
+                    ObjDbAccess.executeQuery(cmdUpdateProduct);
+                    tbProduct.Clear();
+                    cmdUpdateProduct.Dispose();
+                    shop = int.Parse(tbBasket.Rows[i]["shop"].ToString());
+                }
+
+                // The command it deletes shop from cart table
+                MySqlCommand cmd = new MySqlCommand("delete from cart where shop='" + shop + "'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+
+                // The command it deletes shop from shop table
+                cmd = new MySqlCommand("delete from shop where id='" + shop + "'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+
+                MessageView message = new MessageView()
+                {
+                    DataContext = new MessageViewModel("../../Images/message.Success.png", "Tovarlar muvaffaqiyatli bekor qilindi!")
+                };
+                message.ShowDialog();
+
+                GetShopList();
+            }
+        
+        }
+
+        /// <summary>
+        /// The function to convert double value to string
+        /// </summary>
+        /// <param name="doubleValue"></param>
+        /// <returns></returns>
+        public string DoubleToStr(double doubleValue)
+        {
+            string str = doubleValue.ToString();
+            if (str.Contains(","))
+                str.Replace(",", ".");
+            return str;
+        }
+
         #endregion
     }
 }
