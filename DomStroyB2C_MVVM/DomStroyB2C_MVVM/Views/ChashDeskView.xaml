@@ -15,6 +15,10 @@
 
         <!-- First row for searching -->
         <Grid Grid.Row="0" Background="#4D638C">
+            <Button Width="200" HorizontalAlignment="Left"
+                    Content="Print" Click="Button_Click">
+                
+            </Button>
             <TextBox x:Name="txtSearch" Tag="Izlash..." Style="{StaticResource txtSearch}" 
                      Width="564" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
                      Margin="0 0 20 0" >
