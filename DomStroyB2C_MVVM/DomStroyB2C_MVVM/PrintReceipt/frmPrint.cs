@@ -55,7 +55,7 @@ namespace DomStroyB2C_MVVM.PrintReceipt
 
         private void frmPrint_Load(object sender, EventArgs e)
         {
-            bindingSource1.DataSource = _list;
+            //bindingSource1.DataSource = _list;
             Microsoft.Reporting.WinForms.ReportParameter[] para = new Microsoft.Reporting.WinForms.ReportParameter[]
             {
                 new Microsoft.Reporting.WinForms.ReportParameter("pDate",_traded_at),
@@ -69,35 +69,26 @@ namespace DomStroyB2C_MVVM.PrintReceipt
 
             ReportDataSource reportDataSource = new ReportDataSource();
 
-            string query = "select cart.* , product.name from cart inner join product on cart.product = product.product_id";
-            try
-            {
-                if (connection.State == 0)
-                {
-                    createConn();
-                }
-                adapter.SelectCommand.CommandText = "select cart.* , product.name from cart inner join product on cart.product = product.product_id";
-                adapter.SelectCommand.CommandType = CommandType.Text;
-                MySqlCommandBuilder DbCommandBuilder = new MySqlCommandBuilder(adapter);
-                DbCommandBuilder.ConflictOption = ConflictOption.OverwriteChanges;
+            string query = "select cart.* , product.name, product.selling_price from cart inner join product on cart.product = product.product_id";
+            DataTable tb = new DataTable();
+            ObjDbAccess.readDatathroughAdapter(query, tb);
 
-                adapter.Fill(ds);
+            List<ReceiptModel> list = (from DataRow dr in tb.Rows
+                                       select new ReceiptModel()
+                                       {
+                                           product_name = dr["name"].ToString(),
+                                           selling_price = Convert.ToDouble(dr["selling_price"]),
+                                           amount = Convert.ToDouble(dr["amount"])
+                                       }).ToList();
 
-                DataTable tb = ds.Tables[0];
+            reportDataSource.Name = "Receipt";
+            reportDataSource.Value = list;
 
-                reportDataSource.Name = "DataSet1";
-                reportDataSource.Value = ds.Tables[0];
-
-                this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            this.reportViewer1.LocalReport.DataSources.Add(reportDataSource);
 
             this.reportViewer1.LocalReport.SetParameters(para);
 
-            this.reportViewer1.RefreshReport();
+            ////////////////this.reportViewer1.RefreshReport();
         }
     }
 }

@@ -145,7 +145,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                     //Checking a user if he is not work in this branch
                     using (DataTable tbCheckBranch = new DataTable())
                     {
-                        string queryCheckBranch = "select * from branch where id='" + Employee.data.branch.id + "'";
+                        string queryCheckBranch = "SELECT * FROM branch WHERE id='" + Employee.data.branch.id + "'";
                         ObjDbContext.readDatathroughAdapter(queryCheckBranch, tbCheckBranch);
                         if (tbCheckBranch.Rows.Count == 0)
                         {
@@ -158,14 +158,19 @@ namespace DomStroyB2C_MVVM.ViewModels
                             using (DataTable tbStaff = new DataTable())
                             {
                                 // Query to get data from local staff table
-                                string queryStaff = "select * from staff where password='" + Password + "'";
+                                string queryStaff = "SELECT * FROM staff WHERE password='" + Password + "'";
                                 objDbContext.readDatathroughAdapter(queryStaff, tbStaff);
 
+                                int section = 1;
                                 // If this staff is new, we insert him to local Db
                                 if (tbStaff.Rows.Count == 0)
                                 {
-                                    MySqlCommand cmdInsert = new MySqlCommand("insert into staff (id,first_name,token,password,role,section) " +
-                                        "values('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "','"+Employee.data.section.id+"')");
+                                    if (Employee.data.section != null)
+                                    {
+                                        section = Employee.data.section.id;
+                                    }
+                                    MySqlCommand cmdInsert = new MySqlCommand("INSERT INTO staff (id,first_name,token,password,role,section) " +
+                                        "VALUES('" + Employee.data.id + "', '" + Employee.data.first_name + "', '" + Employee.token + "', '" + Password + "' ,'" + Employee.data.role + "','"+ section + "')");
                                     ObjDbContext.executeQuery(cmdInsert);
                                     cmdInsert.Dispose();
                                 }
@@ -173,9 +178,14 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 // If this staff is already inserted, We update his information
                                 if (tbStaff.Rows.Count == 1)
                                 {
-                                    MySqlCommand cmdUpdate = new MySqlCommand("update staff set first_name='" + Employee.data.first_name + "', " +
-                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "', section= '"+Employee.data.section.id+"' " +
-                                                                "where password='"+Password+"'");
+                                    if (Employee.data.section != null)
+                                    {
+                                        section = Employee.data.section.id;
+                                    }
+                                    
+                                    MySqlCommand cmdUpdate = new MySqlCommand("UPDATE staff SET first_name='" + Employee.data.first_name + "', " +
+                                                                "token='" + Employee.token + "', role='" + Employee.data.role + "', section= '"+section+"' " +
+                                                                "WHERE password='"+Password+"'");
                                     ObjDbContext.executeQuery(cmdUpdate);
                                     cmdUpdate.Dispose();
                                 }
@@ -183,7 +193,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 MainWindowViewModel.user_password = Password;
                                 MainWindowViewModel.user_id = Employee.data.id;
                                 MainWindowViewModel.user_token = Employee.token;
-                                MainWindowViewModel.section = Employee.data.section.id;
+                                MainWindowViewModel.section = section;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
                                 mainWindow.StartSendShop();

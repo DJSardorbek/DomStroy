@@ -198,7 +198,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         #endregion
 
         #region Commands
-        
+
         /// <summary>
         /// The command for inserting new product
         /// </summary>
@@ -793,7 +793,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 ObjDbAccess.readDatathroughAdapter(queryToSeparate, TbSeperate);
                 if (TbSeperate.Rows.Count > 0)
                 {
-                    if (currentShop != false && countSection!=1)
+                    if (currentShop != false && countSection != 1)
                     {
                         // We set value to total_sum and total_dollar
                         using (DataTable datatable = new DataTable())
@@ -802,7 +802,6 @@ namespace DomStroyB2C_MVVM.ViewModels
                             queryToSeparate = "SELECT SUM(cart.sum) FROM cart " +
                                               "INNER JOIN product ON cart.product = product.product_id " +
                                               $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
-                            MessageBox.Show(queryToSeparate);
 
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
                             MessageBox.Show(datatable.Rows[0]["SUM(cart.sum)"].ToString());
@@ -855,10 +854,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                             queryToSeparate = "SELECT SUM(cart.sum) FROM cart " +
                                               "INNER JOIN product ON cart.product = product.product_id " +
                                               $"WHERE product.currency='{"sum"}' AND product.section='" + section + "' AND cart.shop='" + Currentshop + "'";
-                            MessageBox.Show(queryToSeparate);
 
                             ObjDbAccess.readDatathroughAdapter(queryToSeparate, datatable);
-                            MessageBox.Show(datatable.Rows[0]["SUM(cart.sum)"].ToString());
                             if (!string.IsNullOrEmpty(datatable.Rows[0]["SUM(cart.sum)"].ToString()))
                             {
                                 total_som = double.Parse(datatable.Rows[0]["SUM(cart.sum)"].ToString());
@@ -910,7 +907,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             {
                 // We will open ClientOrderView to move shop to order
                 mainWindow.SelectedViewModel = new ClientOrderViewModel(mainWindow);
-                
+
 
                 // If the shop is moved to order we will access to start a new shop
                 if (GetShop() == 0)

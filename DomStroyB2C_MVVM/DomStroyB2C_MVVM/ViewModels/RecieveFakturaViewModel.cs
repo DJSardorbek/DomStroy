@@ -116,6 +116,12 @@ namespace DomStroyB2C_MVVM.ViewModels
 
         #endregion
 
+        #region Public fields
+
+        public static string Expanse { get; set; }
+
+        #endregion 
+
         #region Commands
 
         /// <summary>
@@ -283,7 +289,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                     int id = Invoice.id;
                     Invoice_status model = new Invoice_status()
                     {
-                        status = "accepted"
+                        status = "accepted",
+                        expense = Convert.ToDouble(Expanse)
                     };
                     var response = await _invoiceService.Patch(id, model);
                     // if accept has successfuly done, we recieve products
@@ -313,7 +320,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 product_amount = DoubleToStr(pr_amount.ToString());
 
                                 // The command to update product amount, cost, selling_price
-                                cmd = new MySqlCommand($"UPDATE product set amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
+                                cmd = new MySqlCommand($"UPDATE product SET amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
                                                        $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
                                 ObjDbAccess.executeQuery(cmd);
                                 cmd.Dispose();
@@ -325,9 +332,11 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 if (Invoice.section.id != null) { section = Invoice.section.id.ToString(); }
                                 if (item.product.expire_date != null) { expire_date = item.product.expire_date.ToString(); }
                                 cmd = new MySqlCommand("INSERT INTO product " +
-                                    "(product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
-                                    $"('{item.product.id}', '{item.product.name}', '{item.product.measurement}', '{item.amount}', '{section}', '{Invoice.to_branch.id}', '{item.product.barcode}', " +
-                                    $"'{item.product.producer}', '{Invoice.deliver}', '{item.product.currency}', '{item.product.cost}', '{item.selling_price}', '{expire_date}', '{item.product.category.id}', '{item.product.ball}')");
+                                    "(id, product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
+                                    $"('{SetProductId()}', '{item.product.id}', '{item.product.name}', '{item.product.measurement}', '{item.amount}', '{section}', '{Invoice.to_branch.id}', " +
+                                    $"'{item.product.barcode}', " +
+                                    $"'{item.product.producer}', '{Invoice.deliver}', '{item.product.currency}', '{item.product.cost}', '{item.selling_price}', '{expire_date}', " +
+                                    $"'{SetCategoryId(item.product.category.id, item.product.category.name)}', '{item.product.ball}')");
                                 ObjDbAccess.executeQuery(cmd);
                                 cmd.Dispose();
                             }
@@ -380,6 +389,11 @@ namespace DomStroyB2C_MVVM.ViewModels
             }
         }
 
+        /// <summary>
+        /// The function to convert double to string
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public string DoubleToStr(string s)
         {
             if(s.Contains(','))
@@ -387,6 +401,56 @@ namespace DomStroyB2C_MVVM.ViewModels
                 s = s.Replace(',', '.');
             }
             return s;
+        }
+
+        /// <summary>
+        /// The function to set id to product table
+        /// </summary>
+        /// <returns></returns>
+        public int SetProductId()
+        {
+            int id = 1;
+            string query = "SELECT id FROM product ORDER BY id DESC LIMIT 1";
+            using(DataTable tb = new DataTable())
+            {
+                ObjDbAccess.readDatathroughAdapter(query, tb);
+                //if table contains a row
+                if(tb.Rows.Count == 1)
+                {
+                    id = Convert.ToInt32(tb.Rows[0]["id"].ToString());
+                }
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// The function to set category to product
+        /// </summary>
+        /// <param name="category_id"></param>
+        /// <param name="category_name"></param>
+        /// <returns></returns>
+        public int SetCategoryId(int category_id, string category_name)
+        {
+            int id = 1;
+            string query = $"SELECT id FROM category WHERE id = '{category_id}'";
+            using(DataTable tb = new DataTable())
+            {
+                ObjDbAccess.readDatathroughAdapter(query, tb);
+                //if table contains a row
+                if(tb.Rows.Count == 1)
+                {
+                    id = category_id;
+                }
+                //else if table doesn't exist a row
+                else
+                {
+                    MySqlCommand cmd = new MySqlCommand($"INSERT INTO category (id, name) VALUES('{category_id}', '{category_name}')");
+                    ObjDbAccess.executeQuery(cmd);
+                    cmd.Dispose();
+                    id = category_id;
+                }
+            }
+            return id;
         }
 
         #endregion
