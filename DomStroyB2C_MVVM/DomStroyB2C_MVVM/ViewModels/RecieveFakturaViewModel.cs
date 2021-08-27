@@ -273,10 +273,10 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// </summary>
         public async void RecieveInvoiceAsync()
         {
-            Views.ModalViews.LoadingView loading = new Views.ModalViews.LoadingView();
             try
             {
-                loading.Show();
+                loadingVisibility = Visibility.Visible;
+                //loading.Show();
 
                 // First we get invoice item list
                 var content = await _invoiceItemService.GetAll(Invoice.id);
@@ -285,6 +285,9 @@ namespace DomStroyB2C_MVVM.ViewModels
                 // if the invoice item list is not null
                 if (InvoiceList.results.Count > 0)
                 {
+                    InvoiceExpanseView expanseView = new InvoiceExpanseView();
+                    expanseView.ShowDialog();
+                    MessageBox.Show(Expanse);
                     // now we accept invoice
                     int id = Invoice.id;
                     Invoice_status model = new Invoice_status()
@@ -302,34 +305,92 @@ namespace DomStroyB2C_MVVM.ViewModels
                         DataTable tbProduct = new DataTable();
 
                         MySqlCommand cmd;
-                        foreach (var item in invoiceItemList)
+                        foreach (var item in InvoiceItemList)
                         {
                             // Query to get product
-                            queryToGetProduct = $"SELECT amount, cost, selling_price, barcode FROM product WHERE barcode = '{item.product.barcode}'";
+                            queryToGetProduct = $"SELECT amount, cost, selling_price, barcode, expire_date FROM product WHERE barcode = '{item.product.barcode}'";
                             tbProduct.Clear();
                             ObjDbAccess.readDatathroughAdapter(queryToGetProduct, tbProduct);
 
                             // if that product is exist, we update it
                             if (tbProduct.Rows.Count > 0)
                             {
-                                product_amount = tbProduct.Rows[0]["amount"].ToString();
-                                pr_amount = double.Parse(product_amount);
+                                //first we check the product if it's expire_date is not equal to new one
+                                if(item.product.expire_date != null)
+                                {
+                                    //if expire_date is equal to new one, we update product amount, selling_price, cost
+                                    if(item.product.expire_date == tbProduct.Rows[0]["expire_date"])
+                                    {
+                                        product_amount = tbProduct.Rows[0]["amount"].ToString();
+                                        pr_amount = double.Parse(product_amount);
 
-                                in_amount = item.amount;
-                                pr_amount += in_amount;
-                                product_amount = DoubleToStr(pr_amount.ToString());
+                                        in_amount = item.amount;
+                                        pr_amount += in_amount;
+                                        product_amount = DoubleToStr(pr_amount.ToString());
 
-                                // The command to update product amount, cost, selling_price
-                                cmd = new MySqlCommand($"UPDATE product SET amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
-                                                       $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
-                                ObjDbAccess.executeQuery(cmd);
-                                cmd.Dispose();
+                                        // The command to update product amount, cost, selling_price
+                                        cmd = new MySqlCommand($"UPDATE product SET amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
+                                                               $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
+                                        ObjDbAccess.executeQuery(cmd);
+                                        cmd.Dispose();
+                                    }
+                                    //else if expire_date is not equal, but amount 0 we update product
+                                    else if(item.product.expire_date != tbProduct.Rows[0]["expire_date"] && double.Parse(tbProduct.Rows[0]["amount"].ToString()) == 0)
+                                    {
+                                        product_amount = tbProduct.Rows[0]["amount"].ToString();
+                                        pr_amount = double.Parse(product_amount);
+
+                                        in_amount = item.amount;
+                                        pr_amount += in_amount;
+                                        product_amount = DoubleToStr(pr_amount.ToString());
+
+                                        // The command to update product amount, cost, selling_price
+                                        cmd = new MySqlCommand($"UPDATE product SET amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
+                                                               $"selling_price = '{DoubleToStr(item.selling_price.ToString())}', expire_date = '{item.product.expire_date}' " +
+                                                               $"WHERE barcode = '{item.product.barcode}'");
+                                        ObjDbAccess.executeQuery(cmd);
+                                        cmd.Dispose();
+                                    }
+                                    //else if expire_date is not equal and amount is not 0 we insert new product
+                                    else
+                                    {
+                                        string section = "1", expire_date = "";
+                                        int outInt;
+                                        if (int.TryParse(Invoice.section.id.ToString(), out outInt)) { section = Invoice.section.id.ToString(); }
+                                        if (item.product.expire_date != null) { expire_date = item.product.expire_date.ToString(); }
+                                        cmd = new MySqlCommand("INSERT INTO product " +
+                                            "(id, product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
+                                            $"('{SetProductId()}', '{item.product.id}', '{item.product.name}', '{item.product.measurement}', '{item.amount}', '{section}', '{Invoice.to_branch.id}', " +
+                                            $"'{item.product.barcode}', " +
+                                            $"'{item.product.producer}', '{Invoice.deliver}', '{item.product.currency}', '{item.product.cost}', '{item.selling_price}', '{expire_date}', " +
+                                            $"'{SetCategoryId(item.product.category.id, item.product.category.name)}', '{item.product.ball}')");
+                                        ObjDbAccess.executeQuery(cmd);
+                                        cmd.Dispose();
+                                    }
+                                }
+                                //else if expire_date doesn't exist we update product
+                                else
+                                {
+                                    product_amount = tbProduct.Rows[0]["amount"].ToString();
+                                    pr_amount = double.Parse(product_amount);
+
+                                    in_amount = item.amount;
+                                    pr_amount += in_amount;
+                                    product_amount = DoubleToStr(pr_amount.ToString());
+
+                                    // The command to update product amount, cost, selling_price
+                                    cmd = new MySqlCommand($"UPDATE product SET amount = '{product_amount}', cost = '{DoubleToStr(item.product.cost.ToString())}', " +
+                                                           $"selling_price = '{DoubleToStr(item.selling_price.ToString())}' WHERE barcode = '{item.product.barcode}'");
+                                    ObjDbAccess.executeQuery(cmd);
+                                    cmd.Dispose();
+                                }
                             }
                             // else if that product doesn't exist we insert it
                             else
                             {
                                 string section = "1", expire_date = "";
-                                if (Invoice.section.id != null) { section = Invoice.section.id.ToString(); }
+                                int outInt;
+                                if (int.TryParse(Invoice.section.id.ToString(), out outInt)) { section = Invoice.section.id.ToString(); }
                                 if (item.product.expire_date != null) { expire_date = item.product.expire_date.ToString(); }
                                 cmd = new MySqlCommand("INSERT INTO product " +
                                     "(id, product_id, name, measurement, amount, section, branch, barcode, producer, deliver, currency, cost, selling_price, expire_date, category, ball) VALUES " +
@@ -342,8 +403,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                             }
                         }
 
-                        loading.Close();
-
+                        //loading.Close();
+                        LoadingVisibility = Visibility.Collapsed;
                         // now we display message do display that invoice recieved successfully
                         MessageView message = new MessageView()
                         {
@@ -356,7 +417,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                     // else if accept has not done, we display error message
                     else
                     {
-                        loading.Close();
+                        //loading.Close();
+                        LoadingVisibility = Visibility.Collapsed;
                         MessageView message = new MessageView()
                         {
                             DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan bog'lanishda xatolik!")
@@ -368,7 +430,8 @@ namespace DomStroyB2C_MVVM.ViewModels
                 // else if status is bad, we display error message
                 else
                 {
-                    loading.Close();
+                    //loading.Close();
+                    LoadingVisibility = Visibility.Collapsed;
                     MessageView message = new MessageView()
                     {
                         DataContext = new MessageViewModel("../../Images/message.Error.png", "Server bilan bog'lanishda xatolik!")
@@ -379,7 +442,8 @@ namespace DomStroyB2C_MVVM.ViewModels
             }
             catch (Exception ex)
             {
-                loading.Close();
+                //loading.Close();
+                LoadingVisibility = Visibility.Collapsed;
                 MessageView message = new MessageView()
                 {
                     DataContext = new MessageViewModel("../../Images/message.Error.png", ex.Message)

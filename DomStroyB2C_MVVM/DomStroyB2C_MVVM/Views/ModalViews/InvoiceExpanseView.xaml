@@ -137,16 +137,8 @@
 
                 <!--First row product-->
                 <Grid Grid.Row="0" Background="White">
-                    <TextBox  x:Name="txtComment" Width="324" Height="125" Tag="Summa...">
-                        <TextBox.Text>
-                            <Binding Path="Comment"
-                                     UpdateSourceTrigger="PropertyChanged"/>
-                        </TextBox.Text>
-                        <TextBox.InputBindings>
-                            <KeyBinding
-                                Key="Return"
-                                Command="{Binding SubmitOrderCommand}"/>
-                        </TextBox.InputBindings>
+                    <TextBox  x:Name="txtComment" Width="324" Height="125" 
+                              Tag="Summa..." KeyDown="txtComment_KeyDown">
                     </TextBox>
                 </Grid>
 

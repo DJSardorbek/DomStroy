@@ -1,17 +1,6 @@
 ﻿using DomStroyB2C_MVVM.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace DomStroyB2C_MVVM.Views.ModalViews
 {
@@ -27,7 +16,24 @@ namespace DomStroyB2C_MVVM.Views.ModalViews
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            RecieveFakturaViewModel.Expanse = txtComment.Text;
+            if(string.IsNullOrEmpty(txtComment.Text))
+            {
+                RecieveFakturaViewModel.Expanse = "0";
+            }
+            else
+            {
+                RecieveFakturaViewModel.Expanse = txtComment.Text;
+            }
+            Close();
+        }
+
+        private void txtComment_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                btnSubmit_Click(sender, e);
+                
+            }
         }
     }
 }

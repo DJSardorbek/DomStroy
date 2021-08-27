@@ -153,7 +153,7 @@
                         <DataGridTextColumn Header="Kod" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
                         <DataGridTextColumn Header="Nomi" Binding="{Binding product.name}" IsReadOnly="True" Width="150*"/>
                         <DataGridTextColumn Header="Mahsulot grupasi" Binding="{Binding product.category.name}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer.name}" IsReadOnly="True" Width="200*"/>
                         <DataGridTextColumn Header="Miqdor" Binding="{Binding amount}" IsReadOnly="False" Width="100"/>
                         <DataGridTextColumn Header="O'lchov" Binding="{Binding product.measurement}" IsReadOnly="True" Width="100"/>
                         <DataGridTextColumn Header="Ball" Binding="{Binding product.ball}" IsReadOnly="True" Width="100"/>
