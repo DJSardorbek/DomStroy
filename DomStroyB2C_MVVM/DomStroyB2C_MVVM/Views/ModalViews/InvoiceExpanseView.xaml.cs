@@ -12,6 +12,7 @@ namespace DomStroyB2C_MVVM.Views.ModalViews
         public InvoiceExpanseView()
         {
             InitializeComponent();
+            txtComment.Focus();
         }
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)

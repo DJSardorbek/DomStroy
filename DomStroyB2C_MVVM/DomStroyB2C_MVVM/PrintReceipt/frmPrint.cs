@@ -90,5 +90,7 @@ namespace DomStroyB2C_MVVM.PrintReceipt
 
             ////////////////this.reportViewer1.RefreshReport();
         }
+
+        
     }
 }

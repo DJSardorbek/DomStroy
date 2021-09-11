@@ -163,6 +163,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         public static int user_id = 0;
         public static string user_token = string.Empty;
         public static int section = 0;
+        public static int branch = 0;
 
         DispatcherTimer sendShopTimer;
 

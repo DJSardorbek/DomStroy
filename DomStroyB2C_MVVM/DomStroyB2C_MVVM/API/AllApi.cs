@@ -19,5 +19,7 @@ namespace DomStroyB2C_MVVM.API
         public static readonly string CART = BASE_URL + "/cart/";
         
         public static readonly string CARTITEM = BASE_URL + "/cart-item/";
+
+        public static readonly string PRODUCT = BASE_URL + "/product/branch_product/";
     }
 }

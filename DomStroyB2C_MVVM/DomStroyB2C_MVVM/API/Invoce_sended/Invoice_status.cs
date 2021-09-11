@@ -3,7 +3,6 @@
     class Invoice_status
     {
         public string status { get; set; }
-
         public double expense { get; set; }
     }
 }

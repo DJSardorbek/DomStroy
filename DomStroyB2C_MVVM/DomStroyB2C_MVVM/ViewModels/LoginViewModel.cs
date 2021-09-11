@@ -194,6 +194,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                 MainWindowViewModel.user_id = Employee.data.id;
                                 MainWindowViewModel.user_token = Employee.token;
                                 MainWindowViewModel.section = section;
+                                MainWindowViewModel.branch = Employee.data.branch.id;
                                 mainWindow.SelectedViewModel = new MainViewModel(mainWindow, Window);
                                 mainWindow.GridVisibility = true;
                                 mainWindow.StartSendShop();

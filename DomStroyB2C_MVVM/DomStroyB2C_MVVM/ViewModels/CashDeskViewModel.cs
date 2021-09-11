@@ -104,7 +104,7 @@ namespace DomStroyB2C_MVVM.ViewModels
 
 
         #endregion
-
+        
         #region Helper Methods
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             _invoiceService = new Invoice_sendedService();
 
-            
+
             _invoiceItemService = new InvoiceItem_sendedService();
 
 
@@ -143,7 +143,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// The command to cancel invoice 
         /// </summary>
         private RelayCommand cancelInvoiceCommand;
-        
+
         public RelayCommand CancelInvoiceCommand
         {
             get { return cancelInvoiceCommand; }
@@ -180,7 +180,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 InvoiceList = response;
 
                 // if the invoice list is null
-                if(InvoiceList.results.Count == 0)
+                if (InvoiceList.results.Count == 0)
                 {
                     MessageView message = new MessageView()
                     {
@@ -316,10 +316,10 @@ namespace DomStroyB2C_MVVM.ViewModels
                             if (tbProduct.Rows.Count > 0)
                             {
                                 //first we check the product if it's expire_date is not equal to new one
-                                if(item.product.expire_date != null)
+                                if (item.product.expire_date != null)
                                 {
                                     //if expire_date is equal to new one, we update product amount, selling_price, cost
-                                    if(item.product.expire_date == tbProduct.Rows[0]["expire_date"])
+                                    if (item.product.expire_date == tbProduct.Rows[0]["expire_date"])
                                     {
                                         product_amount = tbProduct.Rows[0]["amount"].ToString();
                                         pr_amount = double.Parse(product_amount);
@@ -335,7 +335,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                         cmd.Dispose();
                                     }
                                     //else if expire_date is not equal, but amount 0 we update product
-                                    else if(item.product.expire_date != tbProduct.Rows[0]["expire_date"] && double.Parse(tbProduct.Rows[0]["amount"].ToString()) == 0)
+                                    else if (item.product.expire_date != tbProduct.Rows[0]["expire_date"] && double.Parse(tbProduct.Rows[0]["amount"].ToString()) == 0)
                                     {
                                         product_amount = tbProduct.Rows[0]["amount"].ToString();
                                         pr_amount = double.Parse(product_amount);
@@ -460,7 +460,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <returns></returns>
         public string DoubleToStr(string s)
         {
-            if(s.Contains(','))
+            if (s.Contains(','))
             {
                 s = s.Replace(',', '.');
             }
@@ -475,11 +475,11 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             int id = 1;
             string query = "SELECT id FROM product ORDER BY id DESC LIMIT 1";
-            using(DataTable tb = new DataTable())
+            using (DataTable tb = new DataTable())
             {
                 ObjDbAccess.readDatathroughAdapter(query, tb);
                 //if table contains a row
-                if(tb.Rows.Count == 1)
+                if (tb.Rows.Count == 1)
                 {
                     id = Convert.ToInt32(tb.Rows[0]["id"].ToString());
                 }
@@ -497,11 +497,11 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             int id = 1;
             string query = $"SELECT id FROM category WHERE id = '{category_id}'";
-            using(DataTable tb = new DataTable())
+            using (DataTable tb = new DataTable())
             {
                 ObjDbAccess.readDatathroughAdapter(query, tb);
                 //if table contains a row
-                if(tb.Rows.Count == 1)
+                if (tb.Rows.Count == 1)
                 {
                     id = category_id;
                 }
