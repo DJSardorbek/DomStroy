@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              d:DesignHeight="730" d:DesignWidth="1250">
     <Grid Background="#EDEDED">
         <Grid.RowDefinitions>
@@ -59,6 +60,10 @@
         <!--Row 2 for datagridviews-->
         <Grid Grid.Row="1" Margin="10 -42 0 0">
             <TabControl Background="#EDEDED" BorderThickness="0">
+                <TabControl.SelectedIndex>
+                    <Binding Path="TabIndex"
+                             Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
+                </TabControl.SelectedIndex>
                 <TabItem  Width="160" Height="42">
                     <TabItem.Style>
                         <Style TargetType="TabItem">
@@ -179,18 +184,7 @@
                     <local:FiliallarBazasiView/>
                 </TabItem>
             </TabControl>
-            <Grid VerticalAlignment="Top" HorizontalAlignment="Right">
-                <TextBox x:Name="txtSearch" Tag="Izlash..." Style="{StaticResource txtSearch}" 
-                     Width="454" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
-                     Margin="0 0 20 0" >
-
-                </TextBox>
-
-                <Image Source="../Images/search.png" Height="20" Width="20"
-                   VerticalAlignment="Center" HorizontalAlignment="Right"
-                   Margin="0 0 35 0"/>
-                
-            </Grid>
+            
         </Grid>
     </Grid>
 </UserControl>

@@ -1,26 +1,26 @@
 ﻿using DomStroyB2C_MVVM.API.Product_residue;
 using DomStroyB2C_MVVM.API.Product_residue.ProductService;
 using DomStroyB2C_MVVM.Commands;
-using System.Collections.Generic;
+using DomStroyB2C_MVVM.ViewModels.ModalViewModels;
+using DomStroyB2C_MVVM.Views.ModalViews;
 using System.Windows;
 
 namespace DomStroyB2C_MVVM.ViewModels
 {
-    class TovarQoldiqViewModel : BaseViewModel
+    class QoldiqSozlamalarViewModel : BaseViewModel
     {
         #region Constructor
 
-        public TovarQoldiqViewModel()
+        public QoldiqSozlamalarViewModel()
         {
             LoadingVisibility = Visibility.Collapsed;
             _branchProductService = new BranchProductService();
             PaginationByDefault();
             GetBranchProductListAsync();
-            FilterCommand = new RelayCommand(FilterBranchProductAsync);
             SearchCommand = new RelayCommand(SearchBranchProductAsync);
             NextCommand = new RelayCommand(NextPageAsync);
             PreviousCommand = new RelayCommand(PreviousPageAsync);
-            Index = -1;
+            OpenResidueSettingCommand = new RelayCommand(OpenResidueSetting);
         }
 
         #endregion
@@ -60,14 +60,6 @@ namespace DomStroyB2C_MVVM.ViewModels
         {
             get { return loadingVisibility; }
             set { loadingVisibility = value; OnPropertyChanged("LoadingVisibility"); }
-        }
-
-        private int index;
-
-        public int Index
-        {
-            get { return index; }
-            set { index = value; OnPropertyChanged("Index"); }
         }
 
         /// <summary>
@@ -162,13 +154,13 @@ namespace DomStroyB2C_MVVM.ViewModels
 
         #region Commands
 
-        public RelayCommand FilterCommand { get; set; }
-
         public RelayCommand SearchCommand { get; set; }
 
         public RelayCommand NextCommand { get; set; }
+
         public RelayCommand PreviousCommand { get; set; }
 
+        public RelayCommand OpenResidueSettingCommand { get; set; }
 
         #endregion
 
@@ -190,34 +182,12 @@ namespace DomStroyB2C_MVVM.ViewModels
         }
 
         /// <summary>
-        /// The function to filter branch product
-        /// </summary>
-        public async void FilterBranchProductAsync()
-        {
-            LoadingVisibility = Visibility.Visible;
-            string status = string.Empty;
-            switch(Index)
-            {
-                case 0: status = "tugagan"; break;
-                case 1: status = "kam qolgan"; break;
-                case 2: status = "yetarli"; break;
-            }
-            ProductList = await _branchProductService.FilterProduct(status);
-            Next = ProductList.next;
-            Previous = ProductList.previous;
-            if (Next == null) { Next = ""; }
-            if (Previous == null) { Previous = ""; }
-            CheckPaginationIsItIsNull(Next.ToString());
-            LoadingVisibility = Visibility.Collapsed;
-        }
-
-        /// <summary>
         /// The function to search branch product
         /// </summary>
         public async void SearchBranchProductAsync()
         {
             //if the text of search is not null, we search product
-            if(!string.IsNullOrEmpty(Search) && Search.Length > 2)
+            if (!string.IsNullOrEmpty(Search) && Search.Length > 2)
             {
                 LoadingVisibility = Visibility.Visible;
                 ProductList = await _branchProductService.SearchProduct(Search);
@@ -226,16 +196,7 @@ namespace DomStroyB2C_MVVM.ViewModels
             //else we show the list of products
             else
             {
-                //if filter is not null, we filter branch product 
-                if(Index != -1)
-                {
-                    FilterBranchProductAsync();
-                }
-                //else we get product list
-                else
-                {
-                    GetBranchProductListAsync();
-                }
+                GetBranchProductListAsync();
             }
         }
 
@@ -245,7 +206,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <param name="next"></param>
         public void CheckPaginationIsItIsNull(string next)
         {
-            if(!string.IsNullOrEmpty(next))
+            if (!string.IsNullOrEmpty(next))
             {
                 Next = next;
                 PageVisibility = Visibility.Visible;
@@ -280,7 +241,7 @@ namespace DomStroyB2C_MVVM.ViewModels
         /// <param name="next"></param>
         public void PaginationNextPrevious(string previous, string next)
         {
-            if(!string.IsNullOrEmpty(next))
+            if (!string.IsNullOrEmpty(next))
             {
                 RightEnabled = true;
                 RightOpacity = 1;
@@ -291,7 +252,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 RightOpacity = 0.5;
             }
 
-            if(!string.IsNullOrEmpty(previous))
+            if (!string.IsNullOrEmpty(previous))
             {
                 LeftEnabled = true;
                 LeftOpacity = 1;
@@ -330,6 +291,21 @@ namespace DomStroyB2C_MVVM.ViewModels
             if (Previous == null) { Previous = ""; }
             PaginationNextPrevious(Previous.ToString(), Next.ToString());
             LoadingVisibility = Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// The function to open residue setting view
+        /// </summary>
+        public void OpenResidueSetting()
+        {
+            ResidueSettingView residueSetting = new ResidueSettingView();
+
+            ResidueSettingViewModel settingViewModel = new ResidueSettingViewModel(Product.product.id.ToString(), 
+                Product.product.name, residueSetting);
+            
+            residueSetting.DataContext = settingViewModel;
+            
+            residueSetting.ShowDialog();
         }
 
         #endregion

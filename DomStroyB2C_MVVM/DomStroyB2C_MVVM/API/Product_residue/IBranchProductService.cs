@@ -10,5 +10,10 @@ namespace DomStroyB2C_MVVM.API.Product_residue
     {
         Task<BranchProduct> GetAll();
 
+        Task<BranchProduct> FilterProduct(string status);
+
+        Task<BranchProduct> SearchProduct(string search);
+
+        Task<BranchProduct> ProductPagination(string url);
     }
 }

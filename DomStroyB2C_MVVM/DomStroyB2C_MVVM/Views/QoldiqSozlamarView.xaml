@@ -5,19 +5,50 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="650" d:DesignWidth="1200">
     <Grid Background="#EDEDED">
-        <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
-            <ScrollViewer.Style>
-                <Style TargetType="ScrollViewer">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
-                            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ScrollViewer.Style>
-            <DataGrid x:Name="dataGridBasket" Visibility="Visible"
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Right">
+            <TextBox x:Name="txtSearch" Tag="Izlash..." Style="{StaticResource txtSearch}" 
+                     Width="454" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                     Margin="0 10 20 0" >
+                <TextBox.Text>
+                    <Binding Path="Search" Mode="OneWayToSource"
+                                 UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+
+            <Image Source="../Images/search.png" Height="20" Width="20"
+                   VerticalAlignment="Center" HorizontalAlignment="Right"
+                   Margin="0 0 35 0"/>
+
+        </Grid>
+        <!--second row for datagrid-->
+        <Grid Grid.Row="1">
+            <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridBasket" Visibility="Visible"
                               HorizontalScrollBarVisibility="Auto" 
                     Width="Auto"
                     HorizontalGridLinesBrush="#E3E2E2"
@@ -30,95 +61,192 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                              Margin="10"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          >
-                <DataGrid.Resources>
-                    <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
-                        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-                    </Style>
-                    <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
-                        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        <!--<Setter Property="Background" Value="#FF17223B"/>-->
-                        <Setter Property="Foreground" Value="#7A7979"/>
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="Height" Value="50"/>
-                        <!--<Setter Property="BorderBrush" Value="#263859"/>-->
-                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
-                        <Setter Property="VerticalAlignment" Value="Center"/>
-                        <Style.Triggers>
-                            <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#4D638C"/>
-                            </Trigger>
+                    Margin="10"
+                    BorderThickness="1" SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"   
+                    ItemsSource="{Binding ProductList.results, Mode=TwoWay}"
+                    SelectedItem="{Binding Product, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding OpenResidueSettingCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <!--<Setter Property="Background" Value="#FF17223B"/>-->
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="50"/>
+                            <!--<Setter Property="BorderBrush" Value="#263859"/>-->
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                </Trigger>
 
-                        </Style.Triggers>
-                    </Style>
-
-
-                    <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <Trigger Property="AlternationIndex" Value="0">
-                                <Setter Property="Background" Value="#FFFFFF"/>
-                            </Trigger>
-                            <Trigger Property="AlternationIndex" Value="1">
-                                <Setter Property="Background" Value="#E3E2E2"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
+                            </Style.Triggers>
+                        </Style>
 
 
-                    <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
-                        <Setter Property="Background" Value="#283654"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="Height" Value="55"/>
-                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                        <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Padding" Value="30 0 0 0"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGridColumnHeader">
-                                    <Border
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Setter Property="Padding" Value="30 0 0 0"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="DataGridColumnHeader">
+                                        <Border
                                             CornerRadius="10 10 0 0"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}">
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 0 0"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kod" Binding="{Binding product.id}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Maxsulot nomi" Binding="{Binding product.name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Miqdor" Binding="{Binding get_amount}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="O'lchov" Binding="{Binding product.measurement}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer.name}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Kelish narxi" Binding="{Binding product.cost}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Sotish narxi" Binding="{Binding selling_price}" Width="100" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Valyuta" Binding="{Binding product.currency}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="Gurux" Binding="{Binding product.category.name}" IsReadOnly="True" Width="120"/>
+                        <DataGridTextColumn Header="Shtrix kod" Binding="{Binding product.barcode}" IsReadOnly="True" Width="100"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+
+        <!--second row loading animation-->
+        <Grid Grid.Row="1" Width="200" Height="200" Margin="0 -50 0 0"
+              Visibility="{Binding LoadingVisibility}">
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Image gif:ImageBehavior.AnimatedSource="/Views/Loading/loading.gif"
+                           
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
+        </Grid>
+        <!--third row pagination-->
+        <Grid x:Name="GridPage" Grid.Row="2" Width="200" 
+              Margin="0 0 0 5"
+              Visibility="{Binding PageVisibility, Mode=TwoWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnPrevius"
+                            IsEnabled="{Binding LeftEnabled, Mode=TwoWay}"
+                            Opacity="{Binding LeftOpacity, Mode=TwoWay}"
+                            Command="{Binding PreviousCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
                                         <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
                         <Style.Triggers>
-
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
                         </Style.Triggers>
                     </Style>
-                    <!--Scrolbar uchun style-->
-                    <Style TargetType="ScrollBar">
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="1" x:Name="btnNext"
+                            IsEnabled="{Binding RightEnabled, Mode=TwoWay}"
+                            Opacity="{Binding RightOpacity, Mode=TwoWay}"
+                            Command="{Binding NextCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
                         <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
+                        </Style.Triggers>
                     </Style>
-                </DataGrid.Resources>
-
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
-                    <DataGridTextColumn Header="Maxsulot nomi" Binding="{Binding name}" IsReadOnly="True" Width="150*"/>
-                    <DataGridTextColumn Header="O'lchov" Binding="{Binding measurement}" IsReadOnly="True" Width="100"/>
-                    <DataGridTextColumn Header="Miqdor" Binding="{Binding quantity}" IsReadOnly="False" Width="100"/>
-                    <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding name}" IsReadOnly="True" Width="150"/>
-                    <DataGridTextColumn Header="Yetkazib beruvchi" Binding="{Binding name}" IsReadOnly="True" Width="150"/>
-                    <DataGridTextColumn Header="Valyuta" Binding="{Binding valyuta}" IsReadOnly="True" Width="100"/>
-                    <DataGridTextColumn Header="Kelish narxi" Binding="{Binding price}" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Sotish narxi" Binding="{Binding price}" Width="100" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Gurux" Binding="{Binding summa}" IsReadOnly="True" Width="100"/>
-                    <DataGridTextColumn Header="Minimal" Binding="{Binding summa}" IsReadOnly="True" Width="100"/>
-                    <DataGridTextColumn Header="Shtrix kod" Binding="{Binding summa}" IsReadOnly="True" Width="100"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.Header>
-                            <TextBlock />
-                        </DataGridTemplateColumn.Header>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-
-            </DataGrid>
-
-        </ScrollViewer>
+                </Button.Style>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

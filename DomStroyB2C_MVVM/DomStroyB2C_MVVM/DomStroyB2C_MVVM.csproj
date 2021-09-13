@@ -203,6 +203,10 @@
     <Compile Include="API\InvoiceItem_sended\IInvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItemService\InvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItem_sended.cs" />
+    <Compile Include="API\Minimal\IMinimalService.cs" />
+    <Compile Include="API\Minimal\MinimalPost.cs" />
+    <Compile Include="API\Minimal\MinimalService\MinimalService.cs" />
+    <Compile Include="API\Minimal\ProductMinimal.cs" />
     <Compile Include="API\Product_residue\BranchProduct.cs" />
     <Compile Include="API\Product_residue\BranchProductService\BranchProductService.cs" />
     <Compile Include="API\Product_residue\IBranchProductService.cs" />
@@ -259,11 +263,13 @@
     <Compile Include="ViewModels\ModalViewModels\ClientAddViewModel.cs" />
     <Compile Include="ViewModels\ModalViewModels\ComentViewModel.cs" />
     <Compile Include="ViewModels\ModalViewModels\MessageViewModel.cs" />
+    <Compile Include="ViewModels\ModalViewModels\ResidueSettingViewModel.cs" />
     <Compile Include="ViewModels\OrdersViewModel.cs" />
     <Compile Include="ViewModels\PaymentViewModel.cs" />
     <Compile Include="ViewModels\ProductMovementViewModel.cs" />
     <Compile Include="ViewModels\ProductResidueViewModel.cs" />
     <Compile Include="ViewModels\ProductReturnViewModel.cs" />
+    <Compile Include="ViewModels\QoldiqSozlamalarViewModel.cs" />
     <Compile Include="ViewModels\QueueBuyurtmalarViewModel.cs" />
     <Compile Include="ViewModels\QueueNavbatlarViewModel.cs" />
     <Compile Include="ViewModels\QueueViewModel.cs" />
@@ -349,6 +355,9 @@
     </Compile>
     <Compile Include="Views\ModalViews\MessageView.xaml.cs">
       <DependentUpon>MessageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalViews\ResidueSettingView.xaml.cs">
+      <DependentUpon>ResidueSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NewProductMovementView.xaml.cs">
       <DependentUpon>NewProductMovementView.xaml</DependentUpon>
@@ -539,6 +548,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModalViews\MessageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalViews\ResidueSettingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -878,9 +891,7 @@
   <ItemGroup>
     <Resource Include="Views\Loading\loading.gif" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="API\Product_residue\Product\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

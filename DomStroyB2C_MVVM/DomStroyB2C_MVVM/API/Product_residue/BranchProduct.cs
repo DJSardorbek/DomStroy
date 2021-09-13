@@ -23,6 +23,7 @@ namespace DomStroyB2C_MVVM.API.Product_residue
     public class Product
     {
         public int id { get; set; }
+        public Category category { get; set; }
         public int deliver { get; set; }
         public Producer producer { get; set; }
         public string currency { get; set; }
@@ -33,6 +34,11 @@ namespace DomStroyB2C_MVVM.API.Product_residue
         public double cost { get; set; }
         public string barcode { get; set; }
         public DateTime created_at { get; set; }
+    }
+    public class Category
+    {
+        public int id { get; set; }
+        public string name { get; set; }
     }
     public class Producer
     {
