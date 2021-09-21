@@ -102,10 +102,5 @@ namespace DomStroyB2C_MVVM
         }
         #endregion
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            LoadingView view = new LoadingView();
-            view.ShowDialog();
-        }
     }
 }

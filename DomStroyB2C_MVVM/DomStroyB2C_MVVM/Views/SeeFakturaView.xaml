@@ -5,11 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="730" d:DesignWidth="1250">
+   
     <Grid Background="#E5E5E5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
@@ -45,6 +48,10 @@
                 </Button.Style>
                 <Image Source="../Images/imageback.png" Width="30" Height="30"/>
             </Button>
+            <TextBlock Text="{Binding Recieve_name}" 
+                       FontFamily="Segoe UI" Foreground="White"
+                       FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Margin="100 0 0 0"/>
             <TextBox Style="{StaticResource txtSearch}" 
                      Width="564" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
                      Margin="0 0 20 0" Padding="30 5 50 5"/>
@@ -54,8 +61,16 @@
                    Margin="0 0 35 0"/>
         </Grid>
 
+        <Button Grid.Row="1" Width="150" Height="40"
+                HorizontalAlignment="Right"
+                Style="{StaticResource btnHeader}"
+                Command="{Binding RecieveInvoiceCommand}"
+                Margin="0 10 10 0">
+            <TextBlock Text="Qabul qilish" FontSize="16"/>
+        </Button>
+
         <!-- second row for datagrid -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
                 <ScrollViewer.Style>
                     <Style TargetType="ScrollViewer">
@@ -84,7 +99,7 @@
                     SelectionUnit="FullRow"
                     AlternationCount="2"
                     ItemsSource="{Binding Path=InvoiceItemList, Mode=TwoWay}"
-                    SelectedItem="{Binding Path=Invoice, Mode=TwoWay}"
+                    SelectedItem="{Binding Path=InvoiceItem, Mode=TwoWay}"
                     >
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
@@ -151,16 +166,50 @@
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Kod" Binding="{Binding id}" IsReadOnly="True" Width="80"/>
-                        <DataGridTextColumn Header="Nomi" Binding="{Binding product.name}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Mahsulot grupasi" Binding="{Binding product.category.name}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer.name}" IsReadOnly="True" Width="200*"/>
-                        <DataGridTextColumn Header="Miqdor" Binding="{Binding amount}" IsReadOnly="False" Width="100"/>
+                        <DataGridTextColumn Header="Maxsulot nomi" Binding="{Binding product.name}" IsReadOnly="True" Width="180*"/>
+                        <DataGridTextColumn Header="Guruxi" Binding="{Binding product.category.name}" IsReadOnly="True" Width="100"/>
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding product.producer.name}" IsReadOnly="True" Width="125"/>
+                        <DataGridTextColumn Header="Miqdor" Binding="{Binding amount}" IsReadOnly="True" Width="100"/>
                         <DataGridTextColumn Header="O'lchov" Binding="{Binding product.measurement}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Ball" Binding="{Binding product.ball}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Yuborilgan narxi" Binding="{Binding selling_price}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Umumiy summa" Binding="{Binding get_summa}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Valyuta" Binding="{Binding product.currency}" IsReadOnly="True" Width="100*"/>
-                        
+                        <DataGridTextColumn Header="Ball" Binding="{Binding product.ball}" IsReadOnly="True" Width="60"/>
+                        <DataGridTextColumn Header="Yuborilgan narxi" Binding="{Binding selling_price}" IsReadOnly="True" Width="120"/>
+                        <DataGridTextColumn Header="Umumiy summa" Binding="{Binding get_summa}" IsReadOnly="True" Width="120"/>
+                        <DataGridTextColumn Header="Valyuta" Binding="{Binding product.currency}" IsReadOnly="True" Width="70"/>
+                        <DataGridTemplateColumn Width="120">
+                            <!--IsChecked="{Binding accept_all, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                            <DataGridTemplateColumn.Header>
+                                <CheckBox 
+                                              Width="100" OverridesDefaultStyle="True"
+                                              BorderBrush="Blue"
+                                              BorderThickness="1"
+                                              Background="Blue" VerticalContentAlignment="Center"
+                                              Command="{Binding SelectAllCommand}"
+                                              CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}">
+                                    <!--<i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Checked">
+                                            <i:InvokeCommandAction Command="{Binding SelectAllCommand}"/>
+                                        </i:EventTrigger>
+                                        <i:EventTrigger EventName="Unchecked">
+                                            <i:InvokeCommandAction Command="{Binding UnSelectAllCommand}"/>
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>-->
+                                    Hammasi.bel
+                                </CheckBox>
+
+                            </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding Path=accepted, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                              IsEnabled="{Binding Path=enabled, Mode=OneTime}"
+                                              Width="100" OverridesDefaultStyle="True"
+                                              BorderBrush="Blue"
+                                              BorderThickness="1"
+                                              Background="Blue">
+                                        belgilash
+                                    </CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                     </DataGrid.Columns>
 
                 </DataGrid>
@@ -169,7 +218,7 @@
         </Grid>
         
         <!--second row loading animation-->
-        <Grid Grid.Row="1" Width="200" Height="200" Margin="0 -50 0 0"
+        <Grid Grid.Row="2" Width="200" Height="200" Margin="0 -50 0 0"
               Visibility="{Binding LoadingVisibility}">
             <Grid.Background>
                 <VisualBrush>
@@ -182,5 +231,6 @@
                 </VisualBrush>
             </Grid.Background>
         </Grid>
+        
     </Grid>
 </UserControl>

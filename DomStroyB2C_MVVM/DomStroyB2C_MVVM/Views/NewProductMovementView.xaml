@@ -16,6 +16,7 @@
     <Grid Background="#E5E5E5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
@@ -61,8 +62,110 @@
                    Margin="0 0 35 0"/>
         </Grid>
 
+        <!--Row 2 for searching products-->
+        <Grid x:Name="GridSearch" Grid.Row="1" Height="405" Width="1000" Visibility="Visible" HorizontalAlignment="Right"
+              Margin="0 9 25 0" Background="#FFFFFF" Panel.ZIndex="1">
+            <ScrollViewer x:Name="scrollViewer1" VerticalScrollBarVisibility="Disabled">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, ElementName=dataGrid}" Value="False">
+                                <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <DataGrid x:Name="dataGridProduct" Visibility="Visible"
+                              HorizontalScrollBarVisibility="Auto" 
+                    Width="Auto"
+                    HorizontalGridLinesBrush="#E3E2E2"
+                    AutoGenerateColumns="False"
+                    GridLinesVisibility="Horizontal"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    IsReadOnly="False"
+                    CanUserReorderColumns="False"
+                    CanUserResizeColumns="False"
+                    CanUserResizeRows="False"
+                    CanUserSortColumns="False"
+                    Background="#FFFFFF"
+                    SelectedItem="{Binding Path=Product, Mode=TwoWay}" 
+                    BorderThickness="1" BorderBrush="#C0C0C0" SelectionMode="Single" SelectionUnit="FullRow"
+                        AlternationCount="2"   
+                          ItemsSource="{Binding Path=ProductList, Mode=TwoWay}">
+                    <DataGrid.InputBindings>
+                        <KeyBinding
+                            Key="Enter"
+                            Command="{Binding MoveBasket}"/>
+                    </DataGrid.InputBindings>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
+                            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+                        </Style>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                            <Setter Property="Foreground" Value="#7A7979"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Height" Value="38"/>
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#B6E0FF"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+                            <Style.Triggers>
+                                <Trigger Property="AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="#FFFFFF"/>
+                                </Trigger>
+                                <Trigger Property="AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#E3E2E2"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+
+
+                        <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="Background" Value="#283654"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Height" Value="55"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                            <Style.Triggers>
+
+                            </Style.Triggers>
+                        </Style>
+                        <!--Scrolbar uchun style-->
+                        <Style TargetType="ScrollBar">
+                            <Setter Property="Background" Value="#263859"/>
+                        </Style>
+                    </DataGrid.Resources>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Kod" Binding="{Binding Path=Product_id}"  IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Maxsulot nomi" Binding="{Binding Path=Name}" IsReadOnly="True" Width="110*"/>
+                        <DataGridTextColumn Header="Ishlab chiqaruvchi" Binding="{Binding Path=Producer}" IsReadOnly="True" Width="140"/>
+                        <DataGridTextColumn Header="O'lchov" Binding="{Binding Path=Measurement}" IsReadOnly="True" Width="77"/>
+                        <DataGridTextColumn Header="Miqdori" Binding="{Binding Path=Amount}" IsReadOnly="True"  Width="103"/>
+                        <DataGridTextColumn Header="Narxi" Binding="{Binding Path=Selling_price}" IsReadOnly="True" Width="110"/>
+                        <DataGridTextColumn Header="Valyuta" Binding="{Binding Path=Currency}" IsReadOnly="True" Width="76"/>
+                        <DataGridTextColumn Header="Guruh" Binding="{Binding Path=Category}" IsReadOnly="True" Width="80"/>
+                        <DataGridTextColumn Header="Ball" Binding="{Binding Path=Ball}" IsReadOnly="True" Width="54"/>
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </ScrollViewer>
+        </Grid>
+
+
         <!--third row for saqlash button-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2" VerticalAlignment="Top" Margin="0 -400 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="300"/>
@@ -88,7 +191,7 @@
         </Grid>
         
         <!-- third row for datagrid -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3" Margin="0 -425 0 0">
             <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Disabled">
                 <ScrollViewer.Style>
                     <Style TargetType="ScrollViewer">
@@ -196,8 +299,5 @@
 
             </ScrollViewer>
         </Grid>
-        
-        
-        
     </Grid>
 </UserControl>

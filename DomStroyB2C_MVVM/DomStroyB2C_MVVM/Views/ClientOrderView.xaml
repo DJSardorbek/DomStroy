@@ -725,9 +725,14 @@
                      >
                 
             </TextBox>-->
-            <wpfx:MaskedTextBox Grid.Column="1" Height="40" Width="90" Style="{StaticResource txtLogin}"
+            <!--<wpfx:MaskedTextBox Grid.Column="1" Height="40" Width="90" Style="{StaticResource txtLogin}"
              Mask="00:00" Margin="0 10 0 0"
-             Text="{Binding ArrivalTime, Mode=TwoWay}"/>
+             Text="{Binding ArrivalTime, Mode=TwoWay}"/>-->
+            <TextBox Grid.Column="1" Height="40" Width="90" Style="{StaticResource txtLogin}"
+                     Margin="0 10 0 0"
+             Text="{Binding ArrivalTime, Mode=TwoWay}">
+                
+            </TextBox>
             <Button x:Name="btnClientAdd"
                     Command="{Binding AddClientCommand}"
                     Grid.Column="2">

@@ -423,7 +423,6 @@ D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\pt\Microsoft
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
-D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.csproj.AssemblyReference.cache
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\ResourceDictionaries\MainResourceDictionary.baml
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\MainWindow.g.cs
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\PrintReceipt\ForPrinting.g.cs
@@ -542,3 +541,7 @@ D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\DomStroyB2C_MVVM.pdb
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\ResidueSettingView.g.cs
 D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\ResidueSettingView.baml
+D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\AddProductToMovement.g.cs
+D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\CreateMovementView.g.cs
+D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\AddProductToMovement.baml
+D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\Views\ModalViews\CreateMovementView.baml

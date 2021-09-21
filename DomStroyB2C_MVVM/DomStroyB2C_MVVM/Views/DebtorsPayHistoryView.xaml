@@ -5,18 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              d:DesignHeight="730" d:DesignWidth="1250">
     <Grid Background="#E5E5E5">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <!-- First row for searching -->
         <Grid Grid.Row="0" Background="#4D638C">
-            <Button Command="{Binding UpdateViewCommand}" CommandParameter="Debtors">
+            <Button Command="{Binding BackToDebtorsCommand}" >
                 <Button.Style>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property="Width" Value="40"/>
@@ -47,10 +50,6 @@
             </Button>
             <TextBlock Text="To'lov tarixi" Foreground="White" FontFamily="Segoe UI" FontSize="20px"
                        VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100 0 0 0"/>
-        </Grid>
-
-        <!--Second row for date-->
-        <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="47 0 0 0">
             <Button x:Name="ButtonOpenCalendar" Visibility="Visible"
                                 >
                 <Grid Width="308">
@@ -87,8 +86,9 @@
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Width" Value="328"/>
-                        <Setter Property="Height" Value="44"/>
-                        <Setter Property="Margin" Value="0 -2 0 0 "/>
+                        <Setter Property="Height" Value="40"/>
+                        <Setter Property="Margin" Value="0 -2 30 0 "/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
@@ -105,11 +105,16 @@
                 </Button.Style>
             </Button>
         </Grid>
+
+        <!--Second row for space-->
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="47 0 0 0">
+            
+        </Grid>
         
         <!--Third row for displayin client information-->
         <Grid Grid.Row="2">
             <DataGrid x:Name="dataGridClient" Visibility="Visible"
-                              HorizontalScrollBarVisibility="Auto" 
+                    HorizontalScrollBarVisibility="Auto" 
                     Width="Auto"
                     HorizontalGridLinesBrush="#E3E2E2"
                     AutoGenerateColumns="False"
@@ -121,23 +126,27 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          Margin="25 0 25 20">
+                    BorderThickness="1" 
+                    SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"   
+                    Margin="25 0 25 20"
+                    ItemsSource="{Binding ClientDetail1, Mode=OneWay}"
+                      SelectedItem="{Binding ClientDetail1, Mode=OneWay}">
                 <DataGrid.Resources>
                     <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
                     </Style>
                     <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
                         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                        <Setter Property="Background" Value="#FF17223B"/>
                         <Setter Property="Foreground" Value="#7A7979"/>
+                        <Setter Property="Height" Value="50"/>
                         <Setter Property="BorderThickness" Value="0"/>
                         <Setter Property="BorderBrush" Value="#263859"/>
                         <Setter Property="TextBlock.TextAlignment" Value="Center" />
                         <Style.Triggers>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#4D638C"/>
+                                <Setter Property="Background" Value="#B6E0FF"/>
                             </Trigger>
 
                         </Style.Triggers>
@@ -185,9 +194,9 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mijoz" Binding="{Binding client}" IsReadOnly="True" Width="200*"/>
-                    <DataGridTextColumn Header="Telefon raqami" Binding="{Binding phone}" IsReadOnly="True" Width="200*"/>
-                    <DataGridTextColumn Header="Karta raqami" Binding="{Binding cart_number}" IsReadOnly="True" Width="200*" />
+                    <DataGridTextColumn Header="Mijoz" Binding="{Binding first_name}" IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Telefon raqami" Binding="{Binding phone_1}" IsReadOnly="True" Width="200*"/>
+                    <DataGridTextColumn Header="Karta raqami" Binding="{Binding discount_card}" IsReadOnly="True" Width="200*" />
                     <DataGridTextColumn Header="Manzili" Binding="{Binding address}" IsReadOnly="True" Width="200*"/>
                 </DataGrid.Columns>
 
@@ -219,9 +228,12 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          Margin="25 0 25 20">
+                    BorderThickness="1" 
+                    SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"   
+                    Margin="25 0 25 20"
+                    ItemsSource="{Binding PaymentList.results, Mode=TwoWay}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -235,7 +247,7 @@
                             <Setter Property="TextBlock.TextAlignment" Value="Center" />
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#4D638C"/>
+                                    <Setter Property="Background" Value="#B6E0FF"/>
                                 </Trigger>
 
                             </Style.Triggers>
@@ -284,19 +296,116 @@
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Sana" Binding="{Binding id}" IsReadOnly="True" Width="200"/>
-                        <DataGridTextColumn Header="Naqd so'm" Binding="{Binding client}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Naqd dollar" Binding="{Binding phone}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Plastik" Binding="{Binding address}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Pul o'tkazish" Binding="{Binding cart_number}" IsReadOnly="True" Width="150*" />
-                        <DataGridTextColumn Header="Balldan" Binding="{Binding bonus_sum}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Diskount so'm" Binding="{Binding bonus_dollar}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Diskount dollar" Binding="{Binding bonus_dollar}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Sana" Binding="{Binding paid_at}" IsReadOnly="True" Width="200"/>
+                        <DataGridTextColumn Header="Naqd so'm" Binding="{Binding cash_sum}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Naqd dollar" Binding="{Binding cash_dollar}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Plastik" Binding="{Binding card}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Pul o'tkazish" Binding="{Binding transfer}" IsReadOnly="True" Width="150*" />
+                        <DataGridTextColumn Header="Balldan" Binding="{Binding from_ball}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Diskount so'm" Binding="{Binding discount_sum}" IsReadOnly="True" Width="150*"/>
+                        <DataGridTextColumn Header="Diskount dollar" Binding="{Binding discount_dollar}" IsReadOnly="True" Width="150*"/>
                     </DataGrid.Columns>
 
                 </DataGrid>
 
             </ScrollViewer>
+        </Grid>
+
+        <!--third row loading animation-->
+        <Grid Grid.Row="3" Width="200" Height="200" Margin="0 0 0 0"
+              Visibility="{Binding LoadingVisibility}">
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Image gif:ImageBehavior.AnimatedSource="/Views/Loading/loading.gif"
+                           
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
+        </Grid>
+
+        <!--4th row pagination-->
+        <Grid x:Name="GridPage" Grid.Row="4" Width="200" 
+              Margin="0 0 0 5"
+              Visibility="{Binding PageVisibility, Mode=TwoWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnPrevius"
+                            IsEnabled="{Binding LeftEnabled, Mode=TwoWay}"
+                            Opacity="{Binding LeftOpacity, Mode=TwoWay}"
+                            Command="{Binding PreviousCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="1" x:Name="btnNext"
+                            IsEnabled="{Binding RightEnabled, Mode=TwoWay}"
+                            Opacity="{Binding RightOpacity, Mode=TwoWay}"
+                            Command="{Binding NextCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

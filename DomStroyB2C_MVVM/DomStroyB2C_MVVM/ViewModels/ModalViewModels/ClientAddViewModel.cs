@@ -163,13 +163,10 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
             try
             {
                 LoadingVisibility = Visibility.Visible;
-                myEffect.Radius = 10;
-
-                cliantAddView.Effect = myEffect;
-
 
                 ClientModel model = new ClientModel()
                 {
+                    _branch = MainWindowViewModel.branch,
                     _firstName = FirstName,
                     _lastName = LastName,
                     _address = Address,
@@ -182,9 +179,6 @@ namespace DomStroyB2C_MVVM.ViewModels.ModalViewModels
                 string response = await clientService.Post(model);
 
                 LoadingVisibility = Visibility.Collapsed;
-                myEffect.Radius = 0;
-
-                cliantAddView.Effect = myEffect;
 
                 if (response != "error")
                 {

@@ -77,10 +77,6 @@ namespace DomStroyB2C_MVVM.Commands
             {
                 viewModel.SelectedViewModel = new DebtorsViewModel(viewModel);
             }
-            if (parameter.ToString() == "DebtorsPayHistory")
-            {
-                viewModel.SelectedViewModel = new DebtorsPayHistoryViewModel(viewModel);
-            }
             if (parameter.ToString() == "FakturaReport")
             {
                 viewModel.SelectedViewModel = new FakturaReportViewModel(viewModel);

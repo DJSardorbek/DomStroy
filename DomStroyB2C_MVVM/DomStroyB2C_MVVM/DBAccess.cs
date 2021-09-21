@@ -11,7 +11,7 @@ namespace DomStroyB2C_MVVM
         private static MySqlDataReader DbReader;
         private static MySqlDataAdapter adapter = new MySqlDataAdapter();
         public MySqlTransaction DbTran;
-        //public static string ip_address = "";//;;;;//Persist Security Info=False;server=192.168.10.149
+        //public static string ip_address = "";//;;;;//Persist Security Info=False;server=192.168.1.114//
 
         public string strConnString = "datasource=127.0.0.1;port=3306;username=domstroy;password=2427651701;database=domstroy";
 

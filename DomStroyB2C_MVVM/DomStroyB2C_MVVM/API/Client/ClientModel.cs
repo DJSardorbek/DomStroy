@@ -4,6 +4,9 @@ namespace DomStroyB2C_MVVM.API.Client
 {
     class ClientModel
     {
+        [JsonProperty("branch")]
+        public int _branch { get; set; }
+
         [JsonProperty("first_name")]
         public string _firstName { get; set; }
 

@@ -191,10 +191,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="API\AllApi.cs" />
+    <Compile Include="API\Branch\Branch.cs" />
+    <Compile Include="API\Branch\BranchService\BranchService.cs" />
+    <Compile Include="API\Branch\IBrachService.cs" />
     <Compile Include="API\Client\ClientModel.cs" />
     <Compile Include="API\Client\ClientResponseModel.cs" />
     <Compile Include="API\Client\ClientService\ClientService.cs" />
     <Compile Include="API\Client\IClientService.cs" />
+    <Compile Include="API\Debtor\Debtor.cs" />
+    <Compile Include="API\Debtor\DebtorService\DebtorService.cs" />
+    <Compile Include="API\Debtor\DoingPayment\DoingPayment.cs" />
+    <Compile Include="API\Debtor\DoingPayment\DoingPaymentService\DoingPaymentService.cs" />
+    <Compile Include="API\Debtor\DoingPayment\IDoingPaymentService.cs" />
+    <Compile Include="API\Debtor\IDebtorService.cs" />
+    <Compile Include="API\Debtor\ClientDetail.cs" />
+    <Compile Include="API\Debtor\PaymentHistory\IPaymentService.cs" />
+    <Compile Include="API\Debtor\PaymentHistory\PaymentHistory.cs" />
+    <Compile Include="API\Debtor\PaymentHistory\PaymentService\PaymentService.cs" />
     <Compile Include="API\InvoceReport\Invoice.cs" />
     <Compile Include="API\Invoce_sended\IInvoice_sendedService.cs" />
     <Compile Include="API\Invoce_sended\Invoice_sendedModel.cs" />
@@ -203,6 +216,7 @@
     <Compile Include="API\InvoiceItem_sended\IInvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItemService\InvoiceItem_sendedService.cs" />
     <Compile Include="API\InvoiceItem_sended\InvoiceItem_sended.cs" />
+    <Compile Include="API\InvoiceItem_sended\Invoice_accept.cs" />
     <Compile Include="API\Minimal\IMinimalService.cs" />
     <Compile Include="API\Minimal\MinimalPost.cs" />
     <Compile Include="API\Minimal\MinimalService\MinimalService.cs" />
@@ -212,6 +226,7 @@
     <Compile Include="API\Product_residue\IBranchProductService.cs" />
     <Compile Include="API\Shop\CartItem\CartItemModel.cs" />
     <Compile Include="API\Shop\CartItem\CartItemService\CartItemService.cs" />
+    <Compile Include="API\Shop\CartItem\CartItemWithExpireDateModel.cs" />
     <Compile Include="API\Shop\CartItem\ICartService.cs" />
     <Compile Include="API\Shop\Cart\CartModel.cs" />
     <Compile Include="API\Shop\Cart\CartResponse.cs" />
@@ -251,8 +266,10 @@
     <Compile Include="ViewModels\DebtorsPayHistoryViewModel.cs" />
     <Compile Include="ViewModels\DebtorsProductViewModel.cs" />
     <Compile Include="ViewModels\DebtorsViewModel.cs" />
+    <Compile Include="ViewModels\DebtPaymentViewModel.cs" />
     <Compile Include="ViewModels\DoingInventoryViewModel.cs" />
     <Compile Include="ViewModels\FakturaReportViewModel.cs" />
+    <Compile Include="ViewModels\FiliallarBazasiViewModel.cs" />
     <Compile Include="ViewModels\InventoryViewModel.cs" />
     <Compile Include="ViewModels\LoadingViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
@@ -338,6 +355,9 @@
     <Compile Include="Views\MissedProductsView.xaml.cs">
       <DependentUpon>MissedProductsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModalViews\AddProductToMovement.xaml.cs">
+      <DependentUpon>AddProductToMovement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModalViews\BasketView.xaml.cs">
       <DependentUpon>BasketView.xaml</DependentUpon>
     </Compile>
@@ -346,6 +366,9 @@
     </Compile>
     <Compile Include="Views\ModalViews\ComentView.xaml.cs">
       <DependentUpon>ComentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModalViews\CreateMovementView.xaml.cs">
+      <DependentUpon>CreateMovementView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ModalViews\InvoiceExpanseView.xaml.cs">
       <DependentUpon>InvoiceExpanseView.xaml</DependentUpon>
@@ -527,6 +550,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ModalViews\AddProductToMovement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ModalViews\BasketView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -536,6 +563,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ModalViews\ComentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModalViews\CreateMovementView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -891,7 +922,9 @@
   <ItemGroup>
     <Resource Include="Views\Loading\loading.gif" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\plus.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.1.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

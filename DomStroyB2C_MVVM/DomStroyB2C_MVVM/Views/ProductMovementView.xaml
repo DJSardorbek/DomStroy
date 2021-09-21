@@ -43,12 +43,65 @@
         <Grid Grid.Row="0" Background="#4D638C">
 
             <TextBox Style="{StaticResource txtSearch}" Tag="Izlash..."
-                     Width="564" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                     Width="520" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
                      Margin="0 0 20 0" Padding="30 5 50 5"/>
 
             <Image Source="../Images/search.png" Height="20" Width="20"
                    VerticalAlignment="Center" HorizontalAlignment="Right"
                    Margin="0 0 35 0"/>
+            <Button>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0" Text="Yangi yaratish">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="FontFamily" Value="Segoe UI"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="Margin" Value="26 0 0 0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="FontSize" Value="20px"/>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <Border Grid.Column="1" CornerRadius="20"
+                            Width="38" Height="36"
+                            Background="White">
+                        <Image Source="../Images/plus.png" 
+                               Width="15" Height="15"/>
+                    </Border>
+                </Grid>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Width" Value="240"/>
+                        <Setter Property="Height" Value="38"/>
+                        <Setter Property="HorizontalAlignment" Value="Right"/>
+                        <Setter Property="Margin" Value="0 0 560 0"/>
+                        <Setter Property="Background" Value="#ABB8D4"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderThickness="1" 
+                                            CornerRadius="20"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                
+            </Button>
         </Grid>
 
         <!--second row for calendar and filter for branches-->
@@ -351,7 +404,7 @@
             <!--Third column for button-->
             <Button Grid.Column="2" Style="{StaticResource btnSell}" Width="205" Height="42" VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" Margin="0 0 20 0">
-                <TextBlock Text="Yaratish" FontSize="15px"/>
+                <TextBlock Text="Tasdiqlash" FontSize="15px"/>
             </Button>
         </Grid>
 

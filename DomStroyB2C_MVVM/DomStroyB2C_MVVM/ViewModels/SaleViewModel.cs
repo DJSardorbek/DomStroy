@@ -667,6 +667,23 @@ namespace DomStroyB2C_MVVM.ViewModels
 
             GetBasketList();
             SumSomDollar();
+
+            if(tbBasket.Rows.Count == 0)
+            {
+                // The command it deletes shop from shop table
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM shop WHERE id='" + GetShop() + "'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+
+                // The command it updates shop of shopid table
+                cmd = new MySqlCommand("UPDATE shopid SET shop=0 WHERE password='" + MainWindowViewModel.user_password + "'");
+                ObjDbAccess.executeQuery(cmd);
+                cmd.Dispose();
+
+                started_shop = false;
+                GetBasketList();
+                SumSomDollar();
+            }
         }
 
         /// <summary>
@@ -907,7 +924,6 @@ namespace DomStroyB2C_MVVM.ViewModels
             {
                 // We will open ClientOrderView to move shop to order
                 mainWindow.SelectedViewModel = new ClientOrderViewModel(mainWindow);
-
 
                 // If the shop is moved to order we will access to start a new shop
                 if (GetShop() == 0)

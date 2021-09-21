@@ -137,8 +137,8 @@
                         <DataGridTextColumn Header="Faktura nomi" Binding="{Binding name}" IsReadOnly="True" Width="180*"/>
                         <DataGridTextColumn Header="Filial/ Ombor" Binding="{Binding from_branch.name}" IsReadOnly="True" Width="180*"/>
                         <DataGridTextColumn Header="Sana" Binding="{Binding created_at}" IsReadOnly="True" Width="180*"/>
-                        <DataGridTextColumn Header="Summa so'mda" Binding="{Binding get_item_sum}" IsReadOnly="True" Width="120*"/>
-                        <DataGridTextColumn Header="Summa dollarda" Binding="{Binding get_item_dollar}"  IsReadOnly="True" Width="120*"/>
+                        <DataGridTextColumn Header="Summa so'mda" Binding="{Binding summa_sum}" IsReadOnly="True" Width="120*"/>
+                        <DataGridTextColumn Header="Summa dollarda" Binding="{Binding summa_dollar}"  IsReadOnly="True" Width="120*"/>
 
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
@@ -154,7 +154,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn>
+                        <!--<DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
                                 <TextBlock Text="Qabul" Width="100 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center" Margin="-15 0 0 0"/>
                             </DataGridTemplateColumn.Header>
@@ -166,7 +166,7 @@
                                     </Button>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
 
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>

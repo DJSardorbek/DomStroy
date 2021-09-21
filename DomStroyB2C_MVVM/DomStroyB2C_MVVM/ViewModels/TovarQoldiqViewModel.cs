@@ -302,6 +302,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                 LeftOpacity = 0.5;
             }
         }
+       
         /// <summary>
         /// The function to switch page of product list
         /// </summary>

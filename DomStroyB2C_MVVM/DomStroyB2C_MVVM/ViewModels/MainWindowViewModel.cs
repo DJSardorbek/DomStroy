@@ -256,6 +256,7 @@ namespace DomStroyB2C_MVVM.ViewModels
 
                                 // the query to get cart list
                                 queryToGetCartList = $"SELECT product, amount FROM cart WHERE shop = '{TbSendShop.Rows[i]["id"]}'";
+                                                     
                                 TbSendCartItem.Clear();
                                 ObjDbAccess.readDatathroughAdapter(queryToGetCartList, TbSendCartItem);
 
@@ -278,6 +279,7 @@ namespace DomStroyB2C_MVVM.ViewModels
                                     DataContext = new MessageViewModel("../../Images/message.Error.png", sa)
                                 };
                                 message.ShowDialog();
+
                                 bool cart_item_response = await _cartItemService.Post(cart_itemModel);
 
                                 if (cart_item_response)

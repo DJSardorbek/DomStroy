@@ -15,5 +15,8 @@ namespace DomStroyB2C_MVVM.API.Product_residue
         Task<BranchProduct> SearchProduct(string search);
 
         Task<BranchProduct> ProductPagination(string url);
+
+        Task<BranchProduct> FilterByBranch(string branch_id);
+        Task<BranchProduct> SearchProductByBranch(string branch_id,string search);
     }
 }

@@ -5,6 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DomStroyB2C_MVVM.Views"
              mc:Ignorable="d" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              d:DesignHeight="730" d:DesignWidth="1250"
              >
     <Grid Background="#EDEDED">
@@ -12,14 +15,23 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- First row for searching -->
         <Grid Grid.Row="0" Background="#4D638C">
             <TextBox x:Name="txtSearch" Tag="Izlash..." Style="{StaticResource txtSearch}" 
-                     Width="564" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
+                     Width="454" Height="34" VerticalAlignment="Center" HorizontalAlignment="Right" 
                      Margin="0 0 20 0" >
-
+                <TextBox.Text>
+                    <Binding Path="Search" Mode="OneWayToSource"
+                                 UpdateSourceTrigger="PropertyChanged"/>
+                </TextBox.Text>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding SearchCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </TextBox>
 
             <Image Source="../Images/search.png" Height="20" Width="20"
@@ -30,8 +42,25 @@
         
         <!-- Second row for filtering -->
         <Grid Grid.Row="1">
-            <ComboBox Width="250" Height="35" Style="{StaticResource ComboBoxTest2}" HorizontalAlignment="Left" 
-                      Margin="20 10 0 0"/>
+            <ComboBox Width="250" Height="35" Style="{StaticResource ComboBoxTest1}" HorizontalAlignment="Left" 
+                      Margin="10 10 0 0">
+                <ComboBox.SelectedIndex>
+                    <Binding Path="Index" Mode="TwoWay"
+                     UpdateSourceTrigger="PropertyChanged"/>
+                </ComboBox.SelectedIndex>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding FilterCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBoxItem>
+                    <TextBlock Text="to'lovi yaqinlashib qolganlar"/>
+                </ComboBoxItem>
+
+                <ComboBoxItem>
+                    <TextBlock Text="to'lovi o'tib ketganlar"/>
+                </ComboBoxItem>
+            </ComboBox>
         </Grid>
         
         <!-- Third row for datagrid -->
@@ -59,10 +88,12 @@
                     CanUserResizeColumns="False"
                     CanUserResizeRows="False"
                     Background="#FFFFFF"
-                              Margin="20 10 20 20"
-                    BorderThickness="1" SelectionMode="Single" SelectionUnit="FullRow"
-                        AlternationCount="2"   
-                          >
+                    Margin="20 10 20 20"
+                    BorderThickness="1" SelectionMode="Single" 
+                    SelectionUnit="FullRow"
+                    AlternationCount="2"   
+                    ItemsSource="{Binding Debtors.results, Mode=TwoWay}"
+                    SelectedItem="{Binding Debtor, Mode=TwoWay}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGrid" BasedOn="{StaticResource MaterialDesignDataGrid}">
                             <Setter Property="GridLinesVisibility" Value="Horizontal"/>
@@ -74,7 +105,7 @@
                             <Setter Property="BorderThickness" Value="0"/>
                             <Setter Property="Height" Value="50"/>
                             <!--<Setter Property="BorderBrush" Value="#263859"/>-->
-                            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                            <Setter Property="TextBlock.TextAlignment" Value="Left" />
                             <Setter Property="VerticalAlignment" Value="Center"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
@@ -111,7 +142,7 @@
                                             CornerRadius="10 10 0 0"
                                             Background="{TemplateBinding Background}"
                                             BorderBrush="{TemplateBinding BorderBrush}">
-                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left" Margin="15 0 0 0"/>
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -127,13 +158,13 @@
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Mijozlar" Binding="{Binding client}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Telefon raqam" Binding="{Binding phone}" IsReadOnly="True" Width="150*"/>
-                        <DataGridTextColumn Header="Karta raqam" Binding="{Binding card}" IsReadOnly="False" Width="150"/>
+                        <DataGridTextColumn Header="Mijoz" Binding="{Binding first_name}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Telefon raqam" Binding="{Binding phone_1}" IsReadOnly="True" Width="200*"/>
+                        <DataGridTextColumn Header="Karta raqam" Binding="{Binding discount_card.card}" IsReadOnly="True" Width="150"/>
                         <DataGridTextColumn Header="Ball" Binding="{Binding ball}" IsReadOnly="True" Width="100"/>
-                        <DataGridTextColumn Header="Qarzdorlik so'm" Binding="{Binding debtsom}" IsReadOnly="True" Width="140"/>
-                        <DataGridTextColumn Header="Qarzdorlik dollar" Binding="{Binding debtdollar}" IsReadOnly="True" Width="140"/>
-                        <DataGridTextColumn Header="Ohirgi qarzdorlik sana" Binding="{Binding lastdate}" IsReadOnly="True" Width="150*" />
+                        <DataGridTextColumn Header="Qarzdorlik so'm" Binding="{Binding loan_sum}" IsReadOnly="True" Width="140"/>
+                        <DataGridTextColumn Header="Qarzdorlik dollar" Binding="{Binding loan_dollar}" IsReadOnly="True" Width="140"/>
+                        <DataGridTextColumn Header="Oxirgi qarzdorlik sana" Binding="{Binding return_date}" IsReadOnly="True" Width="150*" />
                         <DataGridTemplateColumn>
                             <DataGridTemplateColumn.Header>
                                 <TextBlock Text="To'lov" Width="120 " Foreground="White" FontFamily="Segoe UI" FontSize="15" TextAlignment="Center"/>
@@ -141,7 +172,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Style="{StaticResource btnPlus}" Width="100"
-                                            Click="OpenPayment">
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DoingPaymentCommand}">
                                         <Image Source="../Images/Pay.png" Width="20" Height="20"/>
                                     </Button>
                                 </DataTemplate>
@@ -155,7 +186,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button  Style="{StaticResource btnCancel}" Width="100"
-                                            Command="{Binding UpdateViewCommand}" CommandParameter="DebtorsPayHistory">
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type UserControl}}, Path=DataContext.DisplayPaymentHistoryCommand}">
                                         <Image Source="../Images/PayHistory.png" Width="20" Height="20"/>
                                     </Button>
                                 </DataTemplate>
@@ -167,6 +198,103 @@
                 </DataGrid>
 
             </ScrollViewer>
+        </Grid>
+        
+        <!--third row loading animation-->
+        <Grid Grid.Row="2" Width="200" Height="200" Margin="0 0 0 0"
+              Visibility="{Binding LoadingVisibility}">
+            <Grid.Background>
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <Image gif:ImageBehavior.AnimatedSource="/Views/Loading/loading.gif"
+                           
+                   gif:ImageBehavior.AutoStart="True"
+                   gif:ImageBehavior.RepeatBehavior="1"/>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </Grid.Background>
+        </Grid>
+        
+        <!--4th row pagination-->
+        <Grid x:Name="GridPage" Grid.Row="3" Width="200" 
+              Margin="0 0 0 5"
+              Visibility="{Binding PageVisibility, Mode=TwoWay}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="btnPrevius"
+                            IsEnabled="{Binding LeftEnabled, Mode=TwoWay}"
+                            Opacity="{Binding LeftOpacity, Mode=TwoWay}"
+                            Command="{Binding PreviousCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button Grid.Column="1" x:Name="btnNext"
+                            IsEnabled="{Binding RightEnabled, Mode=TwoWay}"
+                            Opacity="{Binding RightOpacity, Mode=TwoWay}"
+                            Command="{Binding NextCommand}">
+                <StackPanel>
+                    <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                </StackPanel>
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Width" Value="50"/>
+                        <Setter Property="Height" Value="50"/>
+                        <Setter Property="Background" Value="#263859"/>
+                        <Setter Property="BorderBrush" Value="#263859"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border
+                                                CornerRadius="50"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}">
+                                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderThickness" Value="2"/>
+                                <Setter Property="BorderBrush" Value="#455A64"/>
+                                <Setter Property="Background" Value="#455A64"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

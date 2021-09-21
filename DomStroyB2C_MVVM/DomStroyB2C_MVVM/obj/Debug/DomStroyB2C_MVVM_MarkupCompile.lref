@@ -1,4 +1,4 @@
-﻿
+﻿D:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\obj\Debug\GeneratedInternalTypeHelper.g.cs
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\App.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\MainWindow.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\PrintReceipt\ForPrinting.xaml;;
@@ -21,12 +21,15 @@ FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\Loading\Loading
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\LoginView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\MainView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\MissedProductsView.xaml;;
+FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\AddProductToMovement.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\BasketView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\CliantAddView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\ComentView.xaml;;
+FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\CreateMovementView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\InvoiceExpanseView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\LoadingView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\MessageView.xaml;;
+FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\ResidueSettingView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\NewProductMovementView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\OrdersView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\PaymentView.xaml;;
@@ -51,5 +54,4 @@ FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\SettingsView.xa
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\TovarAnalizChartView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\TovarAnalizView.xaml;;
 FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\TovarQoldiqView.xaml;;
-FD:\C# Projects\DomStroy\DomStroyB2C_MVVM\DomStroyB2C_MVVM\Views\ModalViews\ResidueSettingView.xaml;;
 

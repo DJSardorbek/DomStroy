@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomStroyB2C_MVVM.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace DomStroyB2C_MVVM.Views
         public FiliallarBazasiView()
         {
             InitializeComponent();
+            this.DataContext = new FiliallarBazasiViewModel();
         }
     }
 }

@@ -19,11 +19,11 @@ namespace DomStroyB2C_MVVM.Views.ModalViews
         {
             if(string.IsNullOrEmpty(txtComment.Text))
             {
-                RecieveFakturaViewModel.Expanse = "0";
+                SeeFakturaViewModel.Expanse = "0";
             }
             else
             {
-                RecieveFakturaViewModel.Expanse = txtComment.Text;
+                SeeFakturaViewModel.Expanse = txtComment.Text;
             }
             Close();
         }

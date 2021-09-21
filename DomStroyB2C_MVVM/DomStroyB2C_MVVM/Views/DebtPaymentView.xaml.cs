@@ -22,6 +22,7 @@ namespace DomStroyB2C_MVVM.Views
         public DebtPaymentView()
         {
             InitializeComponent();
+            comboCurrency.SelectedIndex = 0;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -29,20 +30,15 @@ namespace DomStroyB2C_MVVM.Views
             Close();
         }
 
-        private void btnMaxsimaze_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Height == 700)
-            {
-                Height = 850;
-                Top -= 75;
-                return;
-            }
-            else
-            {
-                Height = 700;
-                Top += 75;
-                return;
-            }
+
+        }
+
+        private void comboCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            txtPayedSumma.Focus();
         }
     }
 }

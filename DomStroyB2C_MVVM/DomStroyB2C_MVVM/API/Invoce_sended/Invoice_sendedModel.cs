@@ -16,8 +16,9 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended
         public int id { get; set; }
         public Staff staff { get; set; }
         public int deliver { get; set; }
-        public double get_item_sum { get; set; }
-        public double get_item_dollar { get; set; }
+        public double expense { get; set; }
+        public double summa_sum { get; set; }
+        public double summa_dollar { get; set; }
         public string name { get; set; }
         public string status { get; set; }
         public DateTime created_at { get; set; }

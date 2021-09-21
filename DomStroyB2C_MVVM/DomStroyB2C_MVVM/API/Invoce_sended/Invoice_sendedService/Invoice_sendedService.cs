@@ -28,7 +28,7 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended.Invoice_sendedService
         public async Task<bool> Patch(int id, Invoice_status model)
         {
             var result = false;
-            using(HttpClient client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri(AllApi.INVOICEITEM_SENDED + id.ToString() + '/');
                 client.DefaultRequestHeaders.Add("Authorization", AllApi.AUTH_TOKEN);
@@ -42,9 +42,9 @@ namespace DomStroyB2C_MVVM.API.Invoce_sended.Invoice_sendedService
                     Content = content
                 };
 
-                using(HttpResponseMessage response = await client.SendAsync(request)) 
+                using (HttpResponseMessage response = await client.SendAsync(request))
                 {
-                    if(response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
                         result = true;
                     }
